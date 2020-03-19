@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -20,15 +19,14 @@ public enum ConnectionsPool {
     INSTANCE;
 
     private static final Logger logger = LogManager.getLogger(ConnectionsPool.class);
-    private static Properties AIRLINE_DB_PROPERTiES = new Properties();
+    private static Properties AIRLINE_DB_PROPERTIES = new Properties();
 
     private static final int MAX_POOL_SIZE = 32;
-    private static final int TIME_OUT = 500;
     private static String AIRLINE_DB_PROPERTY_FILE = "AirlineDB.properties";
     private static String URL;
 
     private BlockingQueue<ProxyConnection> availableConnections = new ArrayBlockingQueue<>(MAX_POOL_SIZE);
-    private Set<ProxyConnection> usedConnections = new HashSet<>();
+    private List<ProxyConnection> usedConnections = new ArrayList<>();
 
     private boolean isInitialised = false;
 
@@ -49,12 +47,12 @@ public enum ConnectionsPool {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(AIRLINE_DB_PROPERTY_FILE);
         logger.debug("property file was red");
         try {
-            AIRLINE_DB_PROPERTiES.load(inputStream);
+            AIRLINE_DB_PROPERTIES.load(inputStream);
         } catch (IOException e) {
             logger.debug("Can't initialise data base. " + e.getMessage());
         }
 
-        URL = AIRLINE_DB_PROPERTiES.getProperty("url");
+        URL = AIRLINE_DB_PROPERTIES.getProperty("url");
     }
 
     public Connection getConnection() throws AirlineDataBaseConnectionException {
@@ -66,7 +64,7 @@ public enum ConnectionsPool {
 
         ProxyConnection connection = null;
         try {
-            connection = availableConnections.poll(TIME_OUT, TimeUnit.MILLISECONDS);
+            connection = availableConnections.take();
             if (connection != null) {
                 usedConnections.add(connection);
             }
@@ -90,8 +88,6 @@ public enum ConnectionsPool {
 
     public void closePool() {
 
-        isInitialised = false;
-
             for (Connection c : availableConnections) {
                 ((ProxyConnection) c).closePoolConnection();
             }
@@ -100,7 +96,7 @@ public enum ConnectionsPool {
     private void addNewConnectionIntoPool() {
 
         try {
-            ProxyConnection connection = new ProxyConnection(DriverManager.getConnection(URL, AIRLINE_DB_PROPERTiES));
+            ProxyConnection connection = new ProxyConnection(DriverManager.getConnection(URL, AIRLINE_DB_PROPERTIES));
             availableConnections.add(connection);
         } catch (SQLException e) {
             logger.warn("Can't connect with data base. " + e.getMessage());
