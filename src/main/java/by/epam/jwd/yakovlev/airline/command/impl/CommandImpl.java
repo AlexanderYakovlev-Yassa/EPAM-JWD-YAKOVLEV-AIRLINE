@@ -6,7 +6,6 @@ import by.epam.jwd.yakovlev.airline.command.LocalisationEnum;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -58,14 +57,19 @@ public class CommandImpl implements Command {
                         LocalisationEnum.valueOf(request.getParameter("language").toUpperCase()).getLocalisation());
                 break;
             }
-            case LOGIN: {
+            case GOTO_LOGIN_PAGE: {
                 nextPage = PageEnum.LOGIN.getPage();
                 break;
             }
-            default: {
-                //I don't know yet whether redirect into the same page or into an error page
-            }
+            case GOTO_REGISTRATION_PAGE: {
+                nextPage = PageEnum.REGISTRATION.getPage();
 
+                break;
+            }
+            case REGISTER_USER: {
+                nextPage = PageEnum.REGISTRATION_SUCCESS.getPage();
+                break;
+            }
         }
 
         return nextPage;
