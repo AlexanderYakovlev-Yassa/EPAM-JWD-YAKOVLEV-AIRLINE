@@ -17,53 +17,40 @@
 </head>
 
 <body>
-
+<c:set var="current_page" value="index" scope="request"/>
 <fmt:bundle basename="ui">
 
     <div class="main-background">
 
-        <nav class="navbar navbar-dark bg-primary justify-content-end">
-            <form action="" method="post">
-                <div class="dropdown">
-                    <button class="btn btn-primary btn-sm" type="submit" name="command" value="login">
-                        <fmt:message key="button.login"/>
-                    </button>
-                </div>
-            </form>
-            <form action="" method="post">
-                <input type="hidden" name="command" value="set_language"/>
-                <input type="hidden" name="page" value="index"/>
-                <div class="dropdown">
-                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu2"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            ${sessionScope.localisation}
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button class="dropdown-item btn-sm" type="submit" id="b-1" name="language"
-                                value="ru">Русский
-                        </button>
-                        <button class="dropdown-item btn-sm" type="submit" id="b-2" name="language"
-                                value="us">English
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </nav>
+        <c:import url="Header.jsp" />
 
         <div>
-            <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-            <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+            <br/> <br/> <br/> <br/>
         </div>
 
-        <footer class="page-footer font-small blue">
-
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post">
+                            <h3 class="text-center text-info"><fmt:message key="label.welcome"/></h3>
+                            <div class="form-group">
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary" name="command" value="goto_login_page">
+                                        <fmt:message key="button.login"/>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary" name="command" value="goto_registration_page">
+                                        <fmt:message key="button.register"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <!-- Copyright -->
+        </div>
 
-        </footer>
+        <c:import url="Footer.jsp" />
 
     </div>
 </fmt:bundle>
