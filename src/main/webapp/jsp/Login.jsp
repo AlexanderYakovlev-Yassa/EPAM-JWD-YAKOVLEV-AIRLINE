@@ -1,63 +1,72 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page errorPage="ErrorPage.jsp" %>
 
-<fmt:setLocale value="${pageContext.request.getSession(false).getAttribute('localisation')}" />
+<fmt:setLocale value="${sessionScope.localisation}"/>
 
-<%--<fmt:setLocale value="${sessionScope.localisation}"/>--%>
-<%--${pageContext.request.setAttribute("next-page", "login")}--%>
-
-<!DOCTYPE html>
-<html lang="ru" dir="ltr">
+<html>
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <title>Airline login page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="sources/css/maket.css">
+    <link rel="stylesheet" type="text/css" href="sources/css/bootstrap.min.css">
+    <link rel="icon" href="sources/images/logo-airline.png" type="image/icon type">
+    <title>Airline</title>
 </head>
 
 <body>
+
 <c:set var="current_page" value="login" scope="request"/>
 
 <fmt:bundle basename="ui">
 
-    <c:import url="Header.jsp" />
+    <%--HEADER--%>
+    <c:import url="Header.jsp"/>
 
-    <h3 class="text-center text-white pt-5"><fmt:message key="label.login_form"/></h3>
-    <div class="container">
-        <div id="login-row" class="row justify-content-center align-items-center">
-            <div id="login-column" class="col-md-6">
-                <div id="login-box" class="col-md-12">
-                    <form id="login-form" class="form" action="" method="post">
-                        <h3 class="text-center text-info"><fmt:message key="label.login_form"/></h3>
-                        <div class="form-group">
-                            <label for="userfirstname" class="text-info">
-                                <fmt:message key="label.user_first_name"/>
-                            </label><br>
-                            <input type="text" name="userfirstname" id="userfirstname" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="usersecondname" class="text-info"><fmt:message
-                                    key="label.user_last_name"/></label><br>
-                            <input type="text" name="usersecondname" id="usersecondname" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="text-info"><fmt:message key="label.password"/></label><br>
-                            <input type="text" name="password" id="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <div class="d-flex justify-content-between">
-                                <button type="submit" class="btn btn-primary" name="command" value="login_user">
-                                    <fmt:message key="button.login"/>
-                                </button>
-                                <button type="submit" class="btn btn-primary" name="command" value="GOTO_REGISTRATION_PAGE">
-                                    <fmt:message key="button.register"/>
-                                </button>
+    <div class="d-flex justify-content-center">
+        <div class="card mb-5 border-primary" style="max-width: 920px;">
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><fmt:message key="label.login_form"/></h5>
+                        <form id="login-form" class="form" action="" method="post">
+                            <div class="form-group">
+                                <label for="usernicname" class="text-primary">
+                                    <fmt:message key="label.user_nickname"/>
+                                </label><br>
+                                <input type="text" name="employee_nickname" id="usernicname"
+                                       class="form-control border-primary">
                             </div>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label for="password" class="text-primary">
+                                    <fmt:message key="label.password"/>
+                                </label><br>
+                                <input type="password" name="employee_password" id="password"
+                                       class="form-control border-primary">
+                            </div>
+                            <div class="form-group">
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-outline-primary" name="command"
+                                            value="login_user">
+                                        <fmt:message key="button.login"/>
+                                    </button>
+                                    <button type="submit" class="btn btn-outline-primary" name="command"
+                                            value="GOTO_REGISTRATION_PAGE">
+                                        <fmt:message key="button.register"/>
+                                    </button>
+                                    <button type="submit" class="btn btn-outline-primary" name="command"
+                                            value="GOTO_PAGE">
+                                        <input type="hidden" name="page" value="index"/>
+                                        <fmt:message key="button.home"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="sources/images/them-picture-light.jpg" class="card-img mt-5">
                 </div>
             </div>
         </div>
@@ -67,15 +76,16 @@
         <br/><br/><br/><br/>
     </div>
 
-    <c:import url="Footer.jsp" />
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+    <c:import url="Footer.jsp"/>
 
 </fmt:bundle>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="sources/css/bootstrap.min.js"></script>
+<script src="sources/css/bootstrap.bundle.min.js"></script>
+
 </body>
 
+</html>
