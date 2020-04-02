@@ -4,9 +4,13 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 public class HashGenerator {
 
-    public String getMD5Hash(String password) {
+    public String getMD5Hash(char[] password) {
 
-        String hash = DigestUtils.md5Hex(password);
+        String hash = "";
+
+        for (char ch : password) {
+            hash = DigestUtils.md5Hex(hash + ch);
+        }
 
         return hash;
     }
