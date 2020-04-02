@@ -4,10 +4,10 @@ public class Employee {
 
     int id;
     String firstName;
-    String secondName;
-    String nicName;
-    int systemRole;
-    int crewRole;
+    String lastName;
+    String nickname;
+    SystemRole systemRole;
+    CrewRole crewRole;
 
     public Employee() {
     }
@@ -28,35 +28,35 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String secondName) {
+        this.lastName = secondName;
     }
 
-    public String getNicName() {
-        return nicName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNicName(String nicName) {
-        this.nicName = nicName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public int getSystemRole() {
+    public SystemRole getSystemRole() {
         return systemRole;
     }
 
-    public void setSystemRole(int systemRole) {
+    public void setSystemRole(SystemRole systemRole) {
         this.systemRole = systemRole;
     }
 
-    public int getCrewRole() {
+    public CrewRole getCrewRole() {
         return crewRole;
     }
 
-    public void setCrewRole(int crewRole) {
+    public void setCrewRole(CrewRole crewRole) {
         this.crewRole = crewRole;
     }
 
@@ -68,21 +68,21 @@ public class Employee {
         Employee employee = (Employee) o;
 
         if (id != employee.id) return false;
-        if (systemRole != employee.systemRole) return false;
-        if (crewRole != employee.crewRole) return false;
         if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
-        if (secondName != null ? !secondName.equals(employee.secondName) : employee.secondName != null) return false;
-        return nicName != null ? nicName.equals(employee.nicName) : employee.nicName == null;
+        if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
+        if (nickname != null ? !nickname.equals(employee.nickname) : employee.nickname != null) return false;
+        if (systemRole != null ? !systemRole.equals(employee.systemRole) : employee.systemRole != null) return false;
+        return crewRole != null ? crewRole.equals(employee.crewRole) : employee.crewRole == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
-        result = 31 * result + (nicName != null ? nicName.hashCode() : 0);
-        result = 31 * result + systemRole;
-        result = 31 * result + crewRole;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+        result = 31 * result + (systemRole != null ? systemRole.hashCode() : 0);
+        result = 31 * result + (crewRole != null ? crewRole.hashCode() : 0);
         return result;
     }
 
@@ -91,8 +91,8 @@ public class Employee {
         final StringBuffer sb = new StringBuffer("Employee{");
         sb.append("id=").append(id);
         sb.append(", firstName='").append(firstName).append('\'');
-        sb.append(", secondName='").append(secondName).append('\'');
-        sb.append(", nicName='").append(nicName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", nickname='").append(nickname).append('\'');
         sb.append(", systemRole=").append(systemRole);
         sb.append(", crewRole=").append(crewRole);
         sb.append('}');
