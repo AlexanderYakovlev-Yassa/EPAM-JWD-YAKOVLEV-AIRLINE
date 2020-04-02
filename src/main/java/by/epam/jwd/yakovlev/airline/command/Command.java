@@ -3,8 +3,9 @@ package by.epam.jwd.yakovlev.airline.command;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public interface Command {
 
-    String execute(HttpServletRequest request, HttpServletResponse response, ServletContext context);
+    String execute(HttpServletRequest request, HttpServletResponse response) throws IOException;
 }
