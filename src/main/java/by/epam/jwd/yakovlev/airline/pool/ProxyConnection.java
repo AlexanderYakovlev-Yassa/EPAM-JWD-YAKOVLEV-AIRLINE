@@ -1,16 +1,17 @@
 package by.epam.jwd.yakovlev.airline.pool;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import by.epam.jwd.yakovlev.airline.command.impl.CommandImpl;
+
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class ProxyConnection implements Connection {
+public class ProxyConnection implements Connection, AutoCloseable {
 
-    private static final Logger logger = LogManager.getLogger(ProxyConnection.class);
+    private static Logger logger = Logger.getLogger(ProxyConnection.class);
 
     private Connection connection;
     private String name;
