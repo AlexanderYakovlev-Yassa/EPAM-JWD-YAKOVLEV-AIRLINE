@@ -119,14 +119,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public List<Integer> getAllEmployeeIDList() throws DaoException {
 
-        Set<Properties> propertiesSet = DAO_UTIL.doSelectQuery(SQLQuery.GET_ALL_EMPLOYEE_ID.getQuery(), EMPTY_QUERY_PARAMETERS);
+        return getIDList(SQLQuery.GET_ALL_EMPLOYEE_ID.getQuery(), StringConstant.EMPLOYEE_ID_KEY.getValue());
+    }
 
-        List<Integer> setOfID = new ArrayList<>();
-        for (Properties p : propertiesSet) {
-            setOfID.add(Integer.valueOf(p.getProperty(StringConstant.EMPLOYEE_ID_KEY.getValue())));
-        }
+    @Override
+    public List<Integer> getAllSystemRoleIDList() throws DaoException {
 
-        return setOfID;
+        return getIDList(SQLQuery.GET_ALL_SYSTEM_ROLE_ID.getQuery(), StringConstant.SYSTEM_ROLE_ID_KEY.getValue());
+    }
+
+    @Override
+    public List<Integer> getAllCrewRoleIDList() throws DaoException {
+
+        return getIDList(SQLQuery.GET_ALL_CREW_ROLE_ID.getQuery(), StringConstant.CREW_ROLE_ID_KEY.getValue());
     }
 
     @Override
@@ -140,8 +145,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean addEmployee(Employee employee) {
-        return false;
+    public void addEmployee(Map<String, String> employee) throws DaoException {
+
+        String query = SQLQuery.ADD_EMPLOYEE.getQuery();
+        String[] queryParameters = new String[6];
+
+        queryParameters[0] = employee.get(StringConstant.EMPLOYEE_FIRST_NAME_KEY.getValue());
+        queryParameters[1] = employee.get(StringConstant.EMPLOYEE_LAST_NAME_KEY.getValue());
+        queryParameters[2] = employee.get(StringConstant.SYSTEM_ROLE_ID_KEY.getValue());
+        queryParameters[3] = employee.get(StringConstant.EMPLOYEE_NICKNAME_KEY.getValue());
+        queryParameters[4] = employee.get(StringConstant.EMPLOYEE_PASSWORD_KEY.getValue());
+        queryParameters[5] = employee.get(StringConstant.CREW_ROLE_ID_KEY.getValue());
+
+        DAO_UTIL.doAddQuery(query, queryParameters);
     }
 
     @Override
@@ -201,5 +217,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
 
         return crewRole;
+    }
+
+    private List<Integer> getIDList(String query, String propertyKey) throws DaoException {
+
+        Set<Properties> propertiesSet = DAO_UTIL.doSelectQuery(query, EMPTY_QUERY_PARAMETERS);
+
+        List<Integer> setOfID = new ArrayList<>();
+        for (Properties p : propertiesSet) {
+            setOfID.add(Integer.valueOf(p.getProperty(propertyKey)));
+        }
+
+        return setOfID;
     }
 }
