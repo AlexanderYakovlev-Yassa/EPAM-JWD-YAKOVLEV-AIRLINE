@@ -5,8 +5,8 @@ import by.epam.jwd.yakovlev.airline.entityfactory.CommandEntityfactory.impl.*;
 public enum EntityFactoryTypesEnum {
     AIRCRAFT (new CommandAircraftFactory()),
     AIRCRAFT_MODEL (new CommandAircraftModelFactory()),
-/*  AIRPORT (new CommandAirportFactory()),
-    CREW (new CommandCrewFactory()),
+    AIRPORT (new CommandAirportFactory()),
+ /*   CREW (new CommandCrewFactory()),
     CREW_ROLE (new CommandCrewRoleFactory()),*/
     EMPLOYEE (new CommandEmployeeFactory())/*,
     FLIGHT (new CommandFlightFactory()),

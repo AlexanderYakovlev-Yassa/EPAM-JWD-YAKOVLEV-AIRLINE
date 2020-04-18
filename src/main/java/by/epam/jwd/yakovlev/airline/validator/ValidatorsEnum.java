@@ -7,7 +7,8 @@ EMPLOYEE_VALIDATOR (new EmployeeValidator()),/*
 SYSTEM_ROLE_VALIDATOR,
 CREW_ROLE_VALIDATOR,*/
 AIRCRAFT_MODEL_VALIDATOR (new AircraftModelValidator()),
-AIRCRAFT_VALIDATOR (new AircraftValidator());
+AIRCRAFT_VALIDATOR (new AircraftValidator()),
+AIRPORT_VALIDATOR (new AirportValidator());
 	
 	Validator validator;
 
