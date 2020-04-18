@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib version="2.1"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+    <tlib-version>1.0</tlib-version>
+    <short-name>ctg</short-name>
+    <uri>customtags</uri>
+    <tag>
+
+        <name>populate-employee-table</name>
+        <tag-class>by.epam.jwd.yakovlev.airline.tag.EmloyeeTable</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>list</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>columns</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>styleClass</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+
+        <name>system-role-dropdown</name>
+        <tag-class>by.epam.jwd.yakovlev.airline.tag.SystemRoleDropdown</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>header</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>columns</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>styleClass</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>onclick</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>id</name>
+            <type>java.lang.String</type>
+        </attribute>
+        
+        <attribute>
+            <name>name</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+
+        <name>crew-role-dropdown</name>
+        <tag-class>by.epam.jwd.yakovlev.airline.tag.CrewRoleDropdown</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>header</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>columns</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>styleClass</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>onclick</name>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>id</name>
+            <type>java.lang.String</type>
+        </attribute>
+        
+        <attribute>
+            <name>name</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+</taglib>

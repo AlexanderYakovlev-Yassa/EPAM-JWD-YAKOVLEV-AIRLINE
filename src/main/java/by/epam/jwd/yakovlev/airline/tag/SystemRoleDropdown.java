@@ -8,21 +8,38 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Properties;
 
 public class SystemRoleDropdown extends SimpleTagSupport {
 
-    private StringWriter sw = new StringWriter();
+    //private StringWriter sw = new StringWriter();
 
     private String styleClass;
+    private String id;
+    private String name;
 
-    public void setStyleClass(String styleClass) {
-        this.styleClass = styleClass;
-    }
+    
 
-    private static final String QUOTE = "\"";
+    public SystemRoleDropdown(String styleClass, String id, String name) {
+		this.styleClass = styleClass;
+		this.id = id;
+		this.name = name;
+	}
+
+	public void setStyleClass(String styleClass) {
+		this.styleClass = styleClass;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	private static final String QUOTE = "\"";
     private static final String EMPTY = "";
     private static final String CLASS_EQUAL = "class=";
     private static final String CONTENT_NOT_FOUND_MESSAGE = "<p align=\"center\">Content not found</p>";
@@ -62,21 +79,25 @@ public class SystemRoleDropdown extends SimpleTagSupport {
         sb.append("<div class=\"dropdown-menu\">");
 
         Properties temporaryProperties;
-        String id;
+        String roleId = null;
         String systemRoleName;
 
         for (Object o : objectsList) {
             temporaryProperties = converter.convertToProperties(o);
-            id = temporaryProperties.getProperty(StringConstant.SYSTEM_ROLE_ID_KEY.getValue());
+            roleId = temporaryProperties.getProperty(StringConstant.SYSTEM_ROLE_ID_KEY.getValue());
             systemRoleName = temporaryProperties.getProperty(StringConstant.SYSTEM_ROLE_NAME_KEY.getValue());
 
             sb.append("<a class=\"dropdown-item\" href=\"#\" onclick=\"dropDownPick( 'current-employee-system-role-name', '" +
-                    systemRoleName + "', 'current-employee-system-role-id', '" + id + "')\">" + systemRoleName + "</a>");
+                    systemRoleName + "', 'current-employee-system-role-id', '" + roleId + "')\">" + systemRoleName + "</a>");
         }
 
         sb.append("<div class=\"dropdown-divider\"></div>\n" +
                 "  </div>\n" +
                 "</div>");
+		/*
+		 * sb.append("<input type=\"hidden\" id=\"" + id + "\" name=\"" + name +
+		 * "\" />");
+		 */
 
         getJspContext().getOut().println(sb.toString());
     }
