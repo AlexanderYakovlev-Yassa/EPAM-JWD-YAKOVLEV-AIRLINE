@@ -28,11 +28,13 @@ public enum SQLQuery {
     		" FROM `airlineproject`.`aircraft` \r\n" + 
     		" JOIN `airlineproject`.`aircraft_model`\r\n" + 
     		" ON `airlineproject`.`aircraft`.`aircraft_model_id` = `airlineproject`.`aircraft_model`.`aircraft_model_id`;"),
+    GET_ALL_AIRPORTS ("SELECT * FROM airport"),
     GET_ALL_SYSTEM_ROLES ("SELECT * FROM system_role"),
     GET_ALL_CREW_ROLE ("SELECT * FROM crew_role"),
     GET_ALL_EMPLOYEE ("SELECT * FROM employee"),
     GET_SYSTEM_ROLE_BY_ID ("SELECT * FROM system_role WHERE system_role_id = ?"),
     GET_CREW_ROLE_BY_ID ("SELECT * FROM crew_role WHERE crew_role_id = ?"),
+    GET_AIRPORT_BY_ID ("SELECT * FROM airport WHERE airport_id = ?"),
     GET_AIRCRAFT_MODEL_BY_ID ("SELECT * FROM aircraft_model WHERE aircraft_model_id = ?"),
     GET_AIRCRAFT_BY_ID("SELECT `aircraft`.`aircraft_id`,\r\n" + 
     		"    `aircraft`.`aircraft_model_id`,\r\n" + 
@@ -58,9 +60,12 @@ public enum SQLQuery {
     		"VALUES (?, ?)"),
     ADD_AIRCRAFT("INSERT INTO `aircraft`(`aircraft_model_id`, `aircraft_side_number`)" +
     		"VALUES (?, ?)"),
+    ADD_AIRPORT ("INSERT INTO `airport`(`airport_city`)" +
+    		"VALUES (?)"),
     DELETE_EMPLOYEE ("DELETE FROM `employee` WHERE (`employee_id` = ?);"),
     DELETE_AIRCRAFT_MODEL ("DELETE FROM `aircraft_model` WHERE (`aircraft_model_id` = ?);"),
     DELETE_AIRCRAFT ("DELETE FROM `aircraft` WHERE (`aircraft_id` = ?);"),
+    DELETE_AIRPORT ("DELETE FROM `airport` WHERE (`airport_id` = ?);"),
     UPDATE_AIRCRAFT_MODEL_INFO ("UPDATE `aircraft_model` "
 			+ "SET `aircraft_model_name` = ?, "
 			+ "`aircraft_model_capacity` = ? "
@@ -69,6 +74,7 @@ public enum SQLQuery {
 			+ "SET `aircraft_model_id` = ?, "
 			+ "`aircraft_side_number` = ? "
 			+ "WHERE `aircraft_id` = ?;"),
+    UPDATE_AIRPORT ("UPDATE `airport` SET `airport_city` = ? WHERE `airport_id` = ?;"),
     UPDATE_EMPLOYEE_PASSWORD ("UPDATE `employee` SET `employee_password` = ? WHERE `employee_id` = ?;"),
     UPDATE_EMPLOYEE_INFO ("UPDATE `employee` "
 			+ "SET `employee_nickname` = ?, "
