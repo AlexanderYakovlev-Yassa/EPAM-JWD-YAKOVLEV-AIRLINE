@@ -7,6 +7,7 @@ public enum ServiceFactory {
 
     private EmployeeService employeeService = new EmployeeServiceImpl();
     private AircraftService aircraftService = new AircraftServiceImpl();
+    private AirportService airportService = new AirportServiceImpl();
 
     public EmployeeService getEmployeeService() {
         return employeeService;
@@ -14,5 +15,9 @@ public enum ServiceFactory {
     
     public AircraftService getAircraftService() {
         return aircraftService;
+    }
+    
+    public AirportService getAirportService() {
+        return airportService;
     }
 }
