@@ -1,84 +1,138 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<fmt:setLocale value="${sessionScope.localisation}"/>
+<fmt:setLocale value="${sessionScope.localisation}" />
 
 <html>
 
 <head>
-    <title>Header</title>
+<title>Header</title>
 </head>
 
 <body>
 
-<fmt:bundle basename="ui">
+	<fmt:bundle basename="ui">
 
-    <div><br/></div>
+		<!-- Modal -->
+		<div class="modal fade" id="alertMessage" role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
 
-    <%--Top toolbar--%>
-    <div class="container">
-        <div class="row">
+				<!-- Modal content-->
+				<div class="modal-content">
 
-                <%--Logo--%>
-            <div class="col-4 d-flex justify-content-start">
-                    <%--<div class="btn logo-img"></div>--%>
-                <img src="sources/images/logo-airline-100.png" class="img-fluid" alt="Responsive image"/>
-            </div>
+					<div class="modal-body">
+						<form id="login_logout_command" class="form" action=""
+							method="post">
+							<div>
+								<label class="text text-primary" for="user_name_input">
+									<fmt:message key="label.user_nickname" />
+								</label><br /> 
+								<input type="text"
+									class="form-control border-primary" id="user_name_input"
+									name="employee_nickname" value="${sessionScope.get("current_session_user").getNickname()}"/><br /> 
+								<label class="text text-primary" for="user_password_input">
+								<fmt:message key="label.password" />
+								</label><br /> 
+								<input type="password"
+									class="form-control border-primary" id="user_password_input"
+									name="employee_password" /><br />
+							</div>
+							<div>
+								<button type="submit" class="btn btn-outline-primary" 
+								name="command" value="login_user"><fmt:message key="button.login" />						
+								</button>
+								<button type="submit" class="btn btn-outline-primary" 
+								name="command" value="logout_user"><fmt:message key="button.logout" />						
+								</button>
+								<button type="submit" class="btn btn-outline-primary" 
+								name="command" value="goto_page_cabinet"><fmt:message key="button.user_cabinet" />						
+								</button>
+								<button class="btn btn-outline-primary" data-dismiss="modal"><fmt:message key="button.close" />						
+								</button>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
 
 
-            <div class="col-8 d-flex justify-content-end">
-                    <%--Current user name--%>
-                <div class="btn btn-link">${sessionScope.get("current_session_user")}</div>
+		<div>
+			<br />
+		</div>
 
-                    <%--Form for selecting language--%>
-                <form action="" method="post">
-                    <input type="hidden" name="command" value="set_language"/>
-                    <input type="hidden" name="page" value="${requestScope.current_page}"/>
-                    <button class="btn btn-outline-primary" type="submit" name="language" value="ru">
-                        Рус
-                    </button>
-                    <button class="btn btn-outline-primary" type="submit" name="language" value="us">
-                        Eng
-                    </button>
-                </form>
+		<%--Top toolbar--%>
+		<div class="container">
+			<div class="row">
 
-            </div>
+				<%--Logo--%>
+				<div class="col-4 d-flex justify-content-start">
 
-        </div>
-    </div>
+					<img src="sources/images/logo-airline-100.png" class="img-fluid"
+						alt="Responsive image" />
+				</div>
 
-    <div><br/></div>
 
-    <%--Toolbar--%>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 pb-2">
+				<div class="col-8 d-flex justify-content-end">
 
-                <form action="" method="post">
-                    <input type="hidden" name="command" value="goto_page"/>
-                    <button class="btn btn-outline-primary" type="submit" name="page" value="index">
-                        <fmt:message key="button.home"/>
-                    </button>
-                    <button class="btn btn-outline-primary" type="submit" name="page" value="login">
-                        <fmt:message key="button.login"/>
-                    </button>
-                    <input type="hidden" name="command" value="goto_page"/>
-                    <button class="btn btn-outline-primary" type="submit" name="page" value="aircrafts">
-                        <fmt:message key="button.aircrafts"/>
-                    </button>
-                    <button class="btn btn-outline-primary" type="submit" name="page" value="employee">
-                        <fmt:message key="button.personell_management"/>
-                    </button>
-                    <div class="btn btn-outline-primary">Flights</div>
-                    <div class="btn btn-outline-primary">User cabinet</div>
-                </form>
+					<div class="btn btn-link" onclick="clickOnUser()">
 
-            </div>
-        </div>
-    </div>
+						${sessionScope.get("current_session_user").getFirstName()}
+						${sessionScope.get("current_session_user").getLastName()}</div>
 
-</fmt:bundle>
+					<%--Form for selecting language--%>
+					<form action="" method="post">
+						<input type="hidden" name="command" value="set_language" /> <input
+							type="hidden" name="page" value="${requestScope.current_page}" />
+						<button class="btn btn-outline-primary" type="submit"
+							name="language" value="ru">Рус</button>
+						<button class="btn btn-outline-primary" type="submit"
+							name="language" value="us">Eng</button>
+					</form>
+
+				</div>
+
+			</div>
+		</div>
+
+		<div>
+			<br />
+		</div>
+
+		<%--Toolbar--%>
+		<div class="container">
+			<div class="row">
+				<div class="col-12 pb-2">
+
+					<form action="" method="post">
+						<button class="btn btn-outline-primary" type="submit"
+							name="command" value="home">
+							<fmt:message key="button.home" />
+						</button>						
+						<button class="btn btn-outline-primary" type="submit"
+							name="command" value="manage_employees">
+							<fmt:message key="button.personell_management" />
+						</button>
+						<button class="btn btn-outline-primary" type="submit"
+							name="command" value="goto_page_aircraft_management">
+							<fmt:message key="button.aircrafts" />
+						</button>
+						<button class="btn btn-outline-primary" type="submit"
+							name="command" value="goto_page_cabinet">
+							<fmt:message key="button.user_cabinet" />
+						</button>
+						<div class="btn btn-outline-primary">Flights</div>
+						<button class="btn btn-outline-primary" type="submit"
+							name="command" value="user_cabinet">ERROR</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+	</fmt:bundle>
 
 </body>
 

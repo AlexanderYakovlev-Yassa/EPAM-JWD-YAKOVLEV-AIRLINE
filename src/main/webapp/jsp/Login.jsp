@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="sources/css/maket.css">
     <link rel="stylesheet" type="text/css" href="sources/css/bootstrap.min.css">
-    <link rel="icon" href="sources/images/logo-airline.png" type="image/icon type">
+    <link rel="icon"  type="image/icon type" href="sources/images/logo-airline.png">
     <title>Airline</title>
 </head>
 

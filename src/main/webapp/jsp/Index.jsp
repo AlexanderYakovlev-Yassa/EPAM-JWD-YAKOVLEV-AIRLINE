@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="sources/css/maket.css">
     <link rel="stylesheet" type="text/css" href="sources/css/bootstrap.min.css">
     <link rel="icon" href="sources/images/logo-airline.png" type="image/icon type">
+    <script type="text/javascript" src="sources/js/AllPageScript.js"></script>
     <title>Airline</title>
 </head>
 
@@ -27,6 +28,7 @@
     <div align="center">
         <h3 class="text-center text-primary pt-5"><fmt:message key="label.welcome"/></h3>
         <img src="sources/images/them-picture.jpg" class="img-fluid" alt="Responsive image"/>
+        
     </div>
 
     <c:import url="Footer.jsp"/>
