@@ -3,8 +3,8 @@ package by.epam.jwd.yakovlev.airline.command;
 import java.util.Locale;
 
 public enum LocalisationEnum {
-    RU ("ru_RU"),
-    US ("en_US");
+    RU ("ru"),
+    US ("en");
 
     String locale;
 
