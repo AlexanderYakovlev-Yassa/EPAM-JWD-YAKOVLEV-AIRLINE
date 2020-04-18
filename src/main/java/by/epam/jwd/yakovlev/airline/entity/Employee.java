@@ -1,13 +1,15 @@
 package by.epam.jwd.yakovlev.airline.entity;
 
-public class Employee {
+import java.io.Serializable;
 
-    int id;
-    String firstName;
-    String lastName;
-    String nickname;
-    SystemRole systemRole;
-    CrewRole crewRole;
+public class Employee implements Serializable {
+
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String nickname;
+    private SystemRole systemRole;
+    private CrewRole crewRole;
 
     public Employee() {
     }

@@ -1,6 +1,8 @@
 package by.epam.jwd.yakovlev.airline.entity;
 
-public class SystemRole {
+import java.io.Serializable;
+
+public class SystemRole implements Serializable {
 
     private int systemRoleID;
     private String systemRoleName;

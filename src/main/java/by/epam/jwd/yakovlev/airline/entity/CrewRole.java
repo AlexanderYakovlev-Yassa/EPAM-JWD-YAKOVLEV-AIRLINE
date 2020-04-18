@@ -1,6 +1,8 @@
 package by.epam.jwd.yakovlev.airline.entity;
 
-public class CrewRole {
+import java.io.Serializable;
+
+public class CrewRole implements Serializable {
 
     private int crewRoleID;
     private String crewRoleName;

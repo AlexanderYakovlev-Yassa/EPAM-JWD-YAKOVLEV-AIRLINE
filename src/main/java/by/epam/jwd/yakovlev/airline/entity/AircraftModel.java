@@ -1,6 +1,8 @@
 package by.epam.jwd.yakovlev.airline.entity;
 
-public class AircraftModel {
+import java.io.Serializable;
+
+public class AircraftModel implements Serializable {
 
     private int aircraftModelID;
     private String aircraftModelName;
