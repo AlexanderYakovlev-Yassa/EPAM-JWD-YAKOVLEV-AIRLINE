@@ -123,7 +123,8 @@
 							name="command" value="goto_page_cabinet">
 							<fmt:message key="button.user_cabinet" />
 						</button>
-						<div class="btn btn-outline-primary">Flights</div>
+						<button class="btn btn-outline-primary" type="submit"
+							name="command" value="goto_page_airports_management">ERROR</button>
 						<button class="btn btn-outline-primary" type="submit"
 							name="command" value="user_cabinet">ERROR</button>
 					</form>

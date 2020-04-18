@@ -14,6 +14,7 @@ public enum StringConstant {
     ALL_CREW_ROLE_LIST_KEY ("all_crew_role_list"),
     ALL_AIRCRAFTS_LIST_KEY ("all_aircrafts_list"),
     ALL_AIRCRAFT_MODELS_LIST_KEY ("all_aircraft_models_list"),
+    ALL_AIRPORTS_LIST_KEY ("all_airports_list"),
     COMMAND_KEY ("command"),
     CURRENT_SESSION_USER_KEY ("current_session_user"),
     CURRENT_SESSION_ROLE_KEY ("current_session_role"),

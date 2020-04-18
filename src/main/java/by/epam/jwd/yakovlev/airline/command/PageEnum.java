@@ -10,7 +10,8 @@ public enum PageEnum {
     EMPLOYEE ("/jsp/Employee.jsp"),
     CABINET ("/jsp/Cabinet.jsp"),
     AIRCRAFT_MANAGEMENT ("/jsp/AircraftManagement.jsp"),
-    AIRCRAFT_MODELS_MANAGEMENT ("/jsp/AircraftModelsManagement.jsp");
+    AIRCRAFT_MODELS_MANAGEMENT ("/jsp/AircraftModelsManagement.jsp"),
+    AIRPORT_MANAGEMENT ("/jsp/AirportManagement.jsp");
 
     private String pageURL;
 
