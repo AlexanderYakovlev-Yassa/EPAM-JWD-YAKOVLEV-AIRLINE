@@ -30,7 +30,6 @@ public class SetLanguage implements Command {
         session.setAttribute(StringConstant.LOCALISATION_ATTRIBUTE_NAME.getValue(),
                 LocalisationEnum.valueOf(localisation).getLocalisation());
 
-
         return nextPage;
     }
 }

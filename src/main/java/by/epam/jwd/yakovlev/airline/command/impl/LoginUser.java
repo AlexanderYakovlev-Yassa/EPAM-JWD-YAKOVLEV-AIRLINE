@@ -12,57 +12,46 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.ServiceUnavailableException;
+
 import java.io.IOException;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Set;
 
 public class LoginUser implements Command {
 
-    private static final Logger LOGGER = Logger.getLogger(LoginUser.class);
-    private static final EmployeeService EMPLOYEE_SERVICE = ServiceFactory.INSTANCE.getEmployeeService();
+	private static final Logger LOGGER = Logger.getLogger(LoginUser.class);
+	private static final EmployeeService EMPLOYEE_SERVICE = ServiceFactory.INSTANCE.getEmployeeService();
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String nickname = request.getParameter(StringConstant.EMPLOYEE_NICKNAME_KEY.getValue());
 
-        LOGGER.debug("Came to login user");
+		char[] passwordSequence = request.getParameter(StringConstant.EMPLOYEE_PASSWORD_KEY.getValue()).toCharArray();
+		
+		Optional<Employee> optionalEmployee = Optional.empty();
 
-        HttpSession session = request.getSession();
+		LOGGER.debug("User name - " + nickname);
 
-        String nickname = request.getParameter(StringConstant.EMPLOYEE_NICKNAME_KEY.getValue());
+		try {
+			optionalEmployee = EMPLOYEE_SERVICE.login(nickname, passwordSequence);
+		} catch (ServiceException e) {
+			LOGGER.debug("Service failed " + e.getMessage());
+			response.sendError(503, "Service unavailable");
+		}
 
-        char[] passwordHashSequence = request.
-                getParameter(StringConstant.EMPLOYEE_PASSWORD_KEY.getValue()).toCharArray();
+		Employee employee = optionalEmployee.orElse(null);
 
-        Optional<Employee> optionalEmployee = Optional.empty();
+		LOGGER.debug("Session employee will be - " + employee.getFirstName() + " " + employee.getLastName());
 
-        LOGGER.debug("User name - " + nickname);
+		HttpSession session = request.getSession();
+		session.invalidate();
+		session = request.getSession();
+		session.setAttribute(StringConstant.CURRENT_SESSION_USER_KEY.getValue(), employee);
 
-        try {
-            optionalEmployee = EMPLOYEE_SERVICE.login(nickname, passwordHashSequence);
-        } catch (ServiceException e) {
-            LOGGER.debug("Service failed " + e.getMessage());
-            response.sendError(503, "Service unavailable");
-        }
-
-        LOGGER.debug("Optional employee is present - " + optionalEmployee.isPresent());
-
-        if (!optionalEmployee.isPresent()) {
-            request.setAttribute("login_status", "Login fail");
-            return PageEnum.LOGIN.getPageURL();
-        }
-
-        Employee employee = optionalEmployee.get();
-
-        String name = employee.getFirstName() + " " + employee.getLastName();
-        String systemRole = String.valueOf(employee.getSystemRole());
-
-        LOGGER.debug("User name - " + name);
-        LOGGER.debug("System role - " + systemRole);
-
-        request.setAttribute("login_status", "Login success");
-
-        session.setAttribute(StringConstant.CURRENT_SESSION_USER_KEY.getValue(), name);
-        session.setAttribute(StringConstant.CURRENT_SESSION_ROLE_KEY.getValue(), systemRole);
-
-        return PageEnum.LOGIN.getPageURL();
-    }
+		return PageEnum.INDEX.getPageURL();
+	}
 }
