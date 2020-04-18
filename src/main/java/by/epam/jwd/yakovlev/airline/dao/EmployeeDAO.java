@@ -10,15 +10,15 @@ import java.util.Set;
 
 public interface EmployeeDAO {
 
-    Optional<Employee> getEmployeeByNickname(String nickname) throws DaoException;
+    Optional<Employee> getEmployeeByNicknameAndPassword(String nickname, String password) throws DaoException;
     Optional<Employee> getEmployeeByID(int ID) throws DaoException;
-    Optional<String> getEmployeePasswordByNicName(String nic) throws DaoException;
     List<Integer> getAllEmployeeIDList() throws DaoException;
     List<Integer> getAllSystemRoleIDList() throws DaoException;
     List<Integer> getAllCrewRoleIDList() throws DaoException;
-    boolean updateEmployee(Employee employee);
-    boolean deleteEmployee(Employee employee);
-    void addEmployee(Map<String, String> employee) throws DaoException;
+    boolean addEmployee(Optional<Employee> employee) throws DaoException;
+    boolean deleteEmployee(Optional<String> id) throws DaoException;
+    boolean updatePassword(Optional<String> nicknameOptional, Optional<String> passwordOptional) throws DaoException;
+    boolean updateEmployeeInfo(Optional<Employee> employeeOptional)  throws DaoException;
 
     Optional<SystemRole> getSystemRoleByID(int ID) throws DaoException;
     Optional<CrewRole> getCrewRoleByID(int ID) throws DaoException;
