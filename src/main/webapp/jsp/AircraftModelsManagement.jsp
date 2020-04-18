@@ -26,7 +26,7 @@
 
 <body>
 
-	<c:set var="current_page" value="aircraft_management" scope="request" />
+	<c:set var="current_page" value="aircraft_models_management" scope="request" />
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>
@@ -39,7 +39,7 @@
 				<div class="col-12" align="center">
 
 					<h3 class="text-center text-primary pt-5">
-						<fmt:message key="label.aircraft_management" />
+						<fmt:message key="label.aircraft_models_management" />
 					</h3>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 					<div class="col-8 card border-primary">
 						<%--B1--%>
 						<h4 class="text-center text-primary pt-5">
-							<fmt:message key="label.aircrafts" />
+							<fmt:message key="label.aircraft_models" />
 						</h4>
 						<div class="overflow-auto" style="heigth: 200px">
 							<%--C--%>
@@ -82,7 +82,7 @@
 						<%--B2--%>
 						<%--Card employee info--%>
 						<h4 class="text-center text-primary pt-5">
-							<fmt:message key="label.aircraft_info"/>
+							<fmt:message key="label.aircraft_model_info"/>
 						</h4>
 
 						<form id="add-aircraft-form" class="form" action="" method="post">

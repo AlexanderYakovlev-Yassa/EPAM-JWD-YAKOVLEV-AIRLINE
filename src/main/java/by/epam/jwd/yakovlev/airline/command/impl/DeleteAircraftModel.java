@@ -19,7 +19,7 @@ import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 public class DeleteAircraftModel implements Command{
 	
-	private static final Logger LOGGER = Logger.getLogger(DeleteAircraft.class);
+	private static final Logger LOGGER = Logger.getLogger(DeleteAircraftModel.class);
     private static final AircraftService AIRCRAFT_SERVICE = ServiceFactory.INSTANCE.getAircraftService();
     
     @Override
@@ -44,7 +44,7 @@ public class DeleteAircraftModel implements Command{
 			LOGGER.debug("delete success");
 		} catch (ServiceException e) {
 			LOGGER.debug("delete fault");
-			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Fail deete");;
+			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Fail delete");;
 			return PageEnum.AIRCRAFT_MODELS_MANAGEMENT.getPageURL();
 		}
 		

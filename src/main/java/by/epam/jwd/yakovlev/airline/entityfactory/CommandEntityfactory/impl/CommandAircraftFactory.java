@@ -23,8 +23,6 @@ public class CommandAircraftFactory implements CommandEntityFactory {
 	public Optional<Object> create(Map<String, String[]> map) throws EntityFactoryException {
 
 		Aircraft aircraft = new Aircraft();
-		
-		LOGGER.debug("*** " + (map.get(StringConstant.AIRCRAFT_ID_KEY.getValue()))[0]);
 
 		aircraft.setAircraftID(parseToIntID(map.getOrDefault(StringConstant.AIRCRAFT_ID_KEY.getValue(), DEFAULT_MAP_ATTRIBUTE_VALUE)[0]));
 		aircraft.setAircraftSideNumber(map.get(StringConstant.AIRCRAFT_SIDE_NUMBER_KEY.getValue())[0]);
@@ -38,10 +36,6 @@ public class CommandAircraftFactory implements CommandEntityFactory {
 		} catch (ServiceException e) {
 			LOGGER.debug("Fail get an aircraft model");
 		}
-		
-		LOGGER.debug("*** " + aircraft.getAircraftID());
-		LOGGER.debug("*** " + aircraft.getAircraftSideNumber());
-		LOGGER.debug("*** " + aircraft.getAircraftModel());
 		
 		return Optional.of(aircraft);
 	}

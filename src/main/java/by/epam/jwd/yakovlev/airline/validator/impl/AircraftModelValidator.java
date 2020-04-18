@@ -26,7 +26,7 @@ public class AircraftModelValidator implements Validator{
 
 		if (!(object instanceof AircraftModel)) {
 			LOGGER.debug("Aircraft model failed validation. Wrong type.");
-			throw new ValidatorException("Wrong type argument");
+			throw new ValidatorException("Wrong argument type");
 		}
 
 		AircraftModel aircraftModel = (AircraftModel) object;

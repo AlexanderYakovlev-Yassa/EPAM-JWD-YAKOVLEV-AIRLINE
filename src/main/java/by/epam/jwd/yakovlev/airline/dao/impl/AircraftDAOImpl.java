@@ -70,8 +70,6 @@ public class AircraftDAOImpl extends DAO implements AircraftDAO {
 
 	@Override
 	public boolean addAircraftModel(Optional<AircraftModel> aircraftModelOptional) throws DaoException {
-
-		LOGGER.debug("+++");
 		
 		String query = SQLQuery.ADD_AIRCRAFT_MODEL.getQuery();
 		AircraftModel aircraftModel = aircraftModelOptional
@@ -98,7 +96,7 @@ public class AircraftDAOImpl extends DAO implements AircraftDAO {
 	public boolean updateAircraftModel(Optional<AircraftModel> aircraftModelOptional) throws DaoException {
 
 		if (!aircraftModelOptional.isPresent()) {
-			throw new DaoException("There is no employee to update");
+			throw new DaoException("There is no aircraft model to update");
 		}
 
 		AircraftModel aircraftModel = aircraftModelOptional.get();

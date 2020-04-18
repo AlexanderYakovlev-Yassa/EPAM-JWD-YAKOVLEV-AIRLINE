@@ -43,11 +43,11 @@ public class UpdateAircraftModel implements Command{
 		
 		try {
 			AIRCRAFT_SERVICE.updateAircraftModel(aircraftModelOptional);
-			session.setAttribute("success_message", "The aircrat was updated successfully");
-            session.setAttribute("all_aircrafts_list", AIRCRAFT_SERVICE.getAllAircraftsList());
+			session.setAttribute("success_message", "The aircrat model was updated successfully");
+            session.setAttribute("all_aircraft_models_list", AIRCRAFT_SERVICE.getAllAircraftModelsList());
 		} catch (ServiceException e) {
-			LOGGER.debug("Fail update the aircraft because " + e.getMessage());
-			session.setAttribute("warning_message", "Fail update aircraft.");
+			LOGGER.debug("Fail update the aircraft model because " + e.getMessage());
+			session.setAttribute("warning_message", "Fail update aircraft model.");
 		}
 		
 		return PageEnum.AIRCRAFT_MODELS_MANAGEMENT.getPageURL();

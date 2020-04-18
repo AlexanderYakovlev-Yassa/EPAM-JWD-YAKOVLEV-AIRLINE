@@ -32,9 +32,7 @@ public class CommandEmployeeFactory implements CommandEntityFactory {
 			throw new EntityFactoryException("Failed to create employee due to null input parameter");
 		}
 		
-		int employeeID = map.containsKey(StringConstant.EMPLOYEE_ID_KEY.getValue()) &&
-				map.get(StringConstant.EMPLOYEE_ID_KEY.getValue())[0] != StringUtils.EMPTY ?
-				Integer.parseInt(map.get(StringConstant.EMPLOYEE_ID_KEY.getValue())[0]) : 0;
+		int employeeID = parseToIntID(map.get(StringConstant.EMPLOYEE_ID_KEY.getValue())[0]);
 				
 		String nickname = map.containsKey(StringConstant.EMPLOYEE_NICKNAME_KEY.getValue()) ?
 				map.get(StringConstant.EMPLOYEE_NICKNAME_KEY.getValue())[0] : StringUtils.EMPTY;

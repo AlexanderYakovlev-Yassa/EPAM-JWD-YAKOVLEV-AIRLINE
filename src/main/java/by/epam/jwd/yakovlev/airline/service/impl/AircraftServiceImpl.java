@@ -151,7 +151,6 @@ public class AircraftServiceImpl implements AircraftService {
 	@Override
 	public Optional<AircraftModel> getAircraftModelByID(int aircraftModelID) throws ServiceException {
 
-		LOGGER.debug("**** ");
 		Optional<AircraftModel> aircraftModelOptional = Optional.empty();
 		try {
 			aircraftModelOptional = AIRCRAFT_DAO.getAircraftModelByID(aircraftModelID);
@@ -160,8 +159,6 @@ public class AircraftServiceImpl implements AircraftService {
 			throw new ServiceException("Fail get the aircraft model");
 		}
 		
-		LOGGER.debug("*** " + aircraftModelOptional.isPresent());
-
 		return aircraftModelOptional;
 	}
 

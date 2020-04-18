@@ -18,7 +18,7 @@ public class CommandAircraftModelFactory implements CommandEntityFactory{
 		
 		AircraftModel aircraftModel = new AircraftModel();
 		
-		aircraftModel.setAircraftModelID(Integer.parseInt(map.get(StringConstant.AIRCRAFT_MODEL_ID_KEY.getValue())[0]));
+		aircraftModel.setAircraftModelID(parseToIntID(map.get(StringConstant.AIRCRAFT_MODEL_ID_KEY.getValue())[0]));
 		aircraftModel.setAircraftModelCapacity(Integer.parseInt(map.get(StringConstant.AIRCRAFT_MODEL_CAPACITY_KEY.getValue())[0]));
 		aircraftModel.setAircraftModelName(map.get(StringConstant.AIRCRAFT_MODEL_NAME_KEY.getValue())[0]);
 		
