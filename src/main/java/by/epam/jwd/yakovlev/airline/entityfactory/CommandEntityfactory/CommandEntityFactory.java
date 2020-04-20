@@ -9,7 +9,7 @@ public interface CommandEntityFactory {
 
 	Optional<Object> create(Map<String, String[]> map) throws EntityFactoryException;
 
-	default int parseToIntID(String string) throws EntityFactoryException {
+	default int parseToPositiveIntOrElseZero(String string) throws EntityFactoryException {
 
 		int result = 0;
 
@@ -22,6 +22,8 @@ public interface CommandEntityFactory {
 		} catch (NumberFormatException e) {
 			return result;
 		}
+		
+		result = result < 0 ? 0 : result;
 		
 		return result;
 	}
