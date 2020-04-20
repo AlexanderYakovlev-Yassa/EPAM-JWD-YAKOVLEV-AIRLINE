@@ -66,23 +66,80 @@ public enum SQLQuery {
     DELETE_AIRCRAFT_MODEL ("DELETE FROM `aircraft_model` WHERE (`aircraft_model_id` = ?);"),
     DELETE_AIRCRAFT ("DELETE FROM `aircraft` WHERE (`aircraft_id` = ?);"),
     DELETE_AIRPORT ("DELETE FROM `airport` WHERE (`airport_id` = ?);"),
-    UPDATE_AIRCRAFT_MODEL_INFO ("UPDATE `aircraft_model` "
+    UPDATE_AIRCRAFT_MODEL ("UPDATE `aircraft_model` "
 			+ "SET `aircraft_model_name` = ?, "
 			+ "`aircraft_model_capacity` = ? "
 			+ "WHERE `aircraft_model_id` = ?;"),
-    UPDATE_AIRCRAFT_INFO ("UPDATE `aircraft` "
+    UPDATE_AIRCRAFT ("UPDATE `aircraft` "
 			+ "SET `aircraft_model_id` = ?, "
 			+ "`aircraft_side_number` = ? "
 			+ "WHERE `aircraft_id` = ?;"),
     UPDATE_AIRPORT ("UPDATE `airport` SET `airport_city` = ? WHERE `airport_id` = ?;"),
     UPDATE_EMPLOYEE_PASSWORD ("UPDATE `employee` SET `employee_password` = ? WHERE `employee_id` = ?;"),
-    UPDATE_EMPLOYEE_INFO ("UPDATE `employee` "
+    UPDATE_EMPLOYEE ("UPDATE `employee` "
 			+ "SET `employee_nickname` = ?, "
 			+ "`employee_first_name` = ?, "
 			+ "`employee_last_name` = ?, "
 			+ "`system_role_id` = ?, "
 			+ "`crew_role_id` = ? "
-			+ "WHERE `employee_id` = ?;");
+			+ "WHERE `employee_id` = ?;"),
+    GET_FLIGHT_BY_ID ("SELECT A.`flight_id`, "
+    		+ "A.`flight_departure_time` flight_departure_time, "
+    		+ "A.`flight_landing_time` flight_landing_time, "
+    		+ "A.`flight_aircraft_id` flight_aircraft_id, "
+    		+ "D.`aircraft_side_number` flight_aircraft_side_number, "
+    		+ "D.`aircraft_model_id` flight_aircraft_model_id, "
+    		+ "E.`aircraft_model_name` flight_aircraft_model_name, "
+    		+ "E.`aircraft_model_capacity` flight_aircraft_model_capacity, "
+    		+ "A.`flight_departure_airport_id` flight_departure_airport_id, "
+    		+ "B.`airport_city` flight_departure_airport_city, "
+    		+ "A.`flight_destination_airport_id` flight_destination_airport_id, "
+    		+ "C.`airport_city` flight_destination_airport_city "
+    		+ "FROM `flight` A "
+    		+ "JOIN `airport` B "
+    		+ "ON A.`flight_departure_airport_id` = B.`airport_id` "
+    		+ "JOIN `airport` C "
+    		+ "ON A.`flight_destination_airport_id` = C.`airport_id` "
+    		+ "JOIN `aircraft` D "
+    		+ "ON A.`flight_aircraft_id` = D.`aircraft_id` "
+    		+ "JOIN `aircraft_model` E "
+    		+ "ON D.`aircraft_model_id` = E.`aircraft_model_id` "
+    		+ "WHERE A.`flight_id` = ?;"),
+	GET_ALL_FLIGHTS ("SELECT A.`flight_id`, "
+			+ "A.`flight_departure_time` flight_departure_time, "
+			+ "A.`flight_landing_time` flight_landing_time, "
+			+ "A.`flight_aircraft_id` flight_aircraft_id, "
+			+ "D.`aircraft_side_number` flight_aircraft_side_number, "
+			+ "D.`aircraft_model_id` flight_aircraft_model_id, "
+			+ "E.`aircraft_model_name` flight_aircraft_model_name, "
+			+ "E.`aircraft_model_capacity` flight_aircraft_model_capacity, "
+			+ "A.`flight_departure_airport_id` flight_departure_airport_id, "
+			+ "B.`airport_city` flight_departure_airport_city, "
+			+ "A.`flight_destination_airport_id` flight_destination_airport_id, "
+			+ "C.`airport_city` flight_destination_airport_city "
+			+ "FROM `flight` A "
+			+ "JOIN `airport` B "
+			+ "ON A.`flight_departure_airport_id` = B.`airport_id` "
+			+ "JOIN `airport` C "
+			+ "ON A.`flight_destination_airport_id` = C.`airport_id` "
+			+ "JOIN `aircraft` D "
+			+ "ON A.`flight_aircraft_id` = D.`aircraft_id` "
+			+ "JOIN `aircraft_model` E "
+			+ "ON D.`aircraft_model_id` = E.`aircraft_model_id`;"),
+    UPDATE_FLIGHT ("UPDATE `flight` "
+			+ "SET `flight_departure_time` = ?, "
+			+ "`flight_landing_time` = ?, "
+			+ "`flight_aircraft_id` = ?, "
+			+ "`flight_departure_airport_id` = ?, "
+			+ "`flight_destination_airport_id` = ? "
+			+ "WHERE `flight_id` = ?;"),
+    DELETE_FLIGHT ("DELETE FROM `flight` WHERE (`flight_id` = ?);"),
+    ADD_FLIGHT ("INSERT INTO `flight`(`flight_departure_time`, "
+    		+ "`flight_landing_time`, "
+    		+ "`flight_aircraft_id`, "
+    		+ "`flight_departure_airport_id`, "
+    		+ "`flight_destination_airport_id`)"
+    		+ "VALUES (?, ?, ?, ?, ?)");
 
     private String query;
 
