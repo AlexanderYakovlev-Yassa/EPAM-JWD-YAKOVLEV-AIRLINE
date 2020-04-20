@@ -8,8 +8,8 @@ public enum DAOEntityType {
     AIRPORT (new DAOAirportFactory()),
     /*CREW (new DAOCrewFactory()),*/
     CREW_ROLE (new DAOCrewRoleFactory()),
-    EMPLOYEE (new DAOEmployeeFactory()),/*
-    FLIGHT (new DAOFlightFactory()),*/
+    EMPLOYEE (new DAOEmployeeFactory()),
+    FLIGHT (new DAOFlightFactory()),
     SYSTEM_ROLE (new DAOSystemRoleFactory());
 
     private DAOEntityFactory entityFactory;
