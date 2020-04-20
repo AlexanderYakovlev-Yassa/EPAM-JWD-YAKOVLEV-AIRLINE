@@ -8,7 +8,8 @@ SYSTEM_ROLE_VALIDATOR,
 CREW_ROLE_VALIDATOR,*/
 AIRCRAFT_MODEL_VALIDATOR (new AircraftModelValidator()),
 AIRCRAFT_VALIDATOR (new AircraftValidator()),
-AIRPORT_VALIDATOR (new AirportValidator());
+AIRPORT_VALIDATOR (new AirportValidator()),
+FLIGHT_VALIDATOR (new FlightValidator());
 	
 	Validator validator;
 
