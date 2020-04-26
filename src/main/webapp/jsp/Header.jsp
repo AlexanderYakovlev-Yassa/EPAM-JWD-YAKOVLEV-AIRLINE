@@ -85,11 +85,11 @@
 					<%--Form for selecting language--%>
 					<form action="" method="post">
 						<input type="hidden" name="command" value="set_language" /> <input
-							type="hidden" name="page" value="${requestScope.current_page}" />
+							type="hidden" name="page" value="${sessionScope.current_page}" />
 						<button class="btn btn-outline-primary" type="submit"
 							name="language" value="ru">Рус</button>
 						<button class="btn btn-outline-primary" type="submit"
-							name="language" value="us">Eng</button>
+							name="language" value="en">Eng</button>
 					</form>
 
 				</div>
@@ -124,7 +124,9 @@
 							<fmt:message key="button.user_cabinet" />
 						</button>
 						<button class="btn btn-outline-primary" type="submit"
-							name="command" value="goto_page_airports_management">ERROR</button>
+							name="command" value="goto_page_flights_management">
+							<fmt:message key="button.flights" />
+						</button>
 						<button class="btn btn-outline-primary" type="submit"
 							name="command" value="user_cabinet">ERROR</button>
 					</form>

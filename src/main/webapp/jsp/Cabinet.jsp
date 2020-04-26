@@ -18,7 +18,7 @@
 
 <body>
 
-<c:set var="current_page" value="cabinet" scope="request"/>
+<c:set var="current_page" value="cabinet" scope="session"/>
 
 <fmt:bundle basename="ui">
 
@@ -157,6 +157,18 @@
 									<%--D2--%>
 								</div>
 							</div>
+							
+							<!-- Status message -->
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12">
+									<!-- WARNING MESSAGE -->
+									<h3 class="text-center">${sessionScope.success_message}</h3>
+									<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>
+									</div>
+								</div>
+							</div>
+							
 							<%--D--%>
 							<div class="container">
 								<div class="row">
@@ -165,12 +177,12 @@
 										<%--F--%>
 
 										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="update_employee_info">
+											name="command" value="update_employee">
 											<fmt:message key="button.update" />
 										</button>
 										<button type="submit" class="btn btn-outline-primary"
 											name="command" value="change_password">
-											<fmt:message key="buton.password_reset" />
+											<fmt:message key="button.update_password" />
 										</button>								
 									</div>
 								</div>
@@ -178,10 +190,6 @@
 							<%--F--%>
 						</form>
 					</div>
-        
-        
-        
-        
         
     </div>
 

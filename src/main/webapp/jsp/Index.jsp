@@ -18,7 +18,7 @@
 
 <body>
 
-<c:set var="current_page" value="index" scope="request"/>
+<c:set var="current_page" value="index" scope="session"/>
 
 <fmt:bundle basename="ui">
 

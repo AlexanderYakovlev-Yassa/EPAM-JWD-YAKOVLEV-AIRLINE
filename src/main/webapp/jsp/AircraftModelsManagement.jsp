@@ -26,7 +26,7 @@
 
 <body>
 
-	<c:set var="current_page" value="aircraft_models_management" scope="request" />
+	<c:set var="current_page" value="aircraft_models_management" scope="session" />
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>
@@ -97,7 +97,7 @@
 											<input type="hidden" id="current-aircraft-model-id"
 													name="aircraft_model_id" />
  
- 												<div class="form-group">
+ 											<div class="form-group">
 												<%--aircraft model name--%>
 												<label for="current-aircraft-model-name" class="text-primary"> 
 													<fmt:message key="label.aircraft_model_name" />

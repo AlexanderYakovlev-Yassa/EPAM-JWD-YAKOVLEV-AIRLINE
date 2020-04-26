@@ -27,7 +27,7 @@
 
 <body>
 
-	<c:set var="current_page" value="employee" scope="request" />
+	<c:set var="current_page" value="employee" scope="session" />
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>
@@ -72,7 +72,7 @@
 							<fmt:message key="label.employee_info" />
 						</h4>
 
-						<form id="add-aircraft-form" class="form" action="" method="post">
+						<form id="manage-employee-form" class="form" action="" method="post">
 							<%--Form--%>
 							<div class="container">
 								<div class="row">
@@ -80,8 +80,8 @@
 									<div class="col-md-6">
 										<%--D1--%>
 										<div class="card-body">
-											<%--<input type="hidden" name="page" value="employee"/>
-                                            <input type="hidden" name="command" value="ADD_AIRCRAFT"/>--%>
+											<input type="hidden" name="page" value="employee"/>
+                                            
 
 											<div class="form-group">
 												<%--login name--%>
@@ -201,9 +201,20 @@
 									<h3 class="text-danger text-center">${sessionScope.warning}</h3>
 									</div>
 							</div>
+							
+							<!-- Status message -->
 							<div class="container">
 								<div class="row">
-
+									<div class="col-md-12">
+									<!-- WARNING MESSAGE -->
+									<h3 class="text-center">${sessionScope.success_message}</h3>
+									<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>
+									</div>
+								</div>
+							</div>
+							
+							<div class="container">
+								<div class="row">
 									<div class="col-md-12">
 										<%--F--%>
 										<button type="submit" class="btn btn-outline-primary"
@@ -211,25 +222,17 @@
 											<fmt:message key="button.add" />
 										</button>
 										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="add_aircraft">
+											name="command" value="update_employee">
 											<fmt:message key="button.update" />
 										</button>
 										<button type="submit" class="btn btn-outline-primary"
 											name="command" value="change_password">
-											<fmt:message key="buton.password_reset" />
+											<fmt:message key="button.update_password" />
 										</button>
 										<button type="submit" class="btn btn-outline-primary"
 											name="command" value="delete_employee">
 											<fmt:message key="button.delete" />
 										</button>
-										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="GOTO_PAGE">
-											<input type="hidden" name="page" value="index" />
-											<fmt:message key="button.home" />
-										</button>
-										<button type="button" class="btn btn-outline-primary"
-											onclick="showMessage()">JS-alert</button>
-										
 									</div>
 								</div>
 							</div>

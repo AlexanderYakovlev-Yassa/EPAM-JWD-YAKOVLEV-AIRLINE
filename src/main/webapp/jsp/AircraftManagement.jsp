@@ -26,7 +26,7 @@
 
 <body>
 
-	<c:set var="current_page" value="aircraft_management" scope="request" />
+	<c:set var="current_page" value="aircraft_management" scope="session" />
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>
@@ -164,12 +164,13 @@
 							</div>
 							<%--D--%>
 							<div class="container">
-							<div class="row">
+								<div class="row">
 									<div class="col-md-12">
 									<!-- WARNING MESSAGE -->
 									<h3 class="text-center">${sessionScope.success_message}</h3>
 									<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>
 									</div>
+								</div>
 							</div>
 							<div class="container">
 								<div class="row">
@@ -191,8 +192,7 @@
 										
 									</div>
 								</div>
-							</div>
-							</div>
+							</div>							
 							<%--F--%>
 						</form>
 					</div>

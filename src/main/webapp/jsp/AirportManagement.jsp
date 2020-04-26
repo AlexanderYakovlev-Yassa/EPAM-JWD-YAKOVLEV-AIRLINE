@@ -26,7 +26,7 @@
 
 <body>
 
-	<c:set var="current_page" value="airport_management" scope="request" />
+	<c:set var="current_page" value="airport_management" scope="session" />
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>

@@ -17,7 +17,7 @@
 
 <body>
 
-<c:set var="current_page" value="login" scope="request"/>
+<c:set var="current_page" value="login" scope="session"/>
 
 <fmt:bundle basename="ui">
 
