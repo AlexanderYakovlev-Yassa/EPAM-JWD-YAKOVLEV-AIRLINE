@@ -3,16 +3,16 @@ package by.epam.jwd.yakovlev.airline.command;
 import java.util.Locale;
 
 public enum LocalisationEnum {
-    RU ("ru"),
-    US ("en");
+    RU (new Locale("ru", "RU")),
+    EN (new Locale("en", "EN"));
 
-    String locale;
+    Locale locale;
 
-    LocalisationEnum(String locale) {
+    LocalisationEnum(Locale locale) {
         this.locale = locale;
     }
 
-    public String getLocalisation() {
+    public Locale getLocalisation() {
         return locale;
     }
 }

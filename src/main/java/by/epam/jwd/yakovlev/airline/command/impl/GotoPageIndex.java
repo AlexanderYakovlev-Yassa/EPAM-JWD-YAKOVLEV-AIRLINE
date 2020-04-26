@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.epam.jwd.yakovlev.airline.command.Command;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
-import java.io.IOException;
 
 public class GotoPageIndex implements Command{
 

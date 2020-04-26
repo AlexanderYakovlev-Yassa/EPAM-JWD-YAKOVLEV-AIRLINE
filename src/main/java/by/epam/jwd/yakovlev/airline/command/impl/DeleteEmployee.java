@@ -1,9 +1,7 @@
 package by.epam.jwd.yakovlev.airline.command.impl;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,52 +10,42 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import by.epam.jwd.yakovlev.airline.command.Command;
-import by.epam.jwd.yakovlev.airline.command.CommandResultStatusEnum;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
+import by.epam.jwd.yakovlev.airline.entity.Employee;
+import by.epam.jwd.yakovlev.airline.exception.EntityFactoryException;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
+import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
+import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandEmployeeFactory;
 import by.epam.jwd.yakovlev.airline.service.EmployeeService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.ResourceManager;
+import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 public class DeleteEmployee implements Command{
 	
 	private static final Logger LOGGER = Logger.getLogger(DeleteEmployee.class);
-    private static final EmployeeService EMPLOYEE_SERVICE = ServiceFactory.INSTANCE.getEmployeeService();
-    private static final ResourceManager RESOURCE_MANAGER = ResourceManager.INSTANCE;
-
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		HttpSession session = request.getSession();
-		String employeeId = request.getParameter(StringConstant.EMPLOYEE_ID_KEY.getValue());					
-		
-		if (employeeId == null) {		
-			LOGGER.debug("null employee");
-			CommandResultStatusEnum.EMPLOYEE_NOT_SELECTED.setMessage(session, false);
-			return PageEnum.EMPLOYEE.getPageURL();
-		}
-		
-		Optional<String> employeeIdOptional = Optional.of(employeeId);
-		boolean successFlag = false;
+		Map<String, String[]> map = request.getParameterMap();
+		EmployeeService service = ServiceFactory.INSTANCE.getEmployeeService();
+		CommandEmployeeFactory factory = CommandEntityFactory.getInstance().getEmployeeFactory();
+		CommandUtil util = CommandUtil.getINSTANCE();
+						
+		Employee employee = null;
 			
 		try {
-			successFlag = EMPLOYEE_SERVICE.deleteEmployee(employeeIdOptional);
-			session.setAttribute(StringConstant.ALL_EMPLOYEE_LIST_KEY.getValue(),
-                    EMPLOYEE_SERVICE.getAllEmployeeList());			
-			LOGGER.debug("delete success");
-			LOGGER.debug("successFlag=" + successFlag);
-		} catch (ServiceException e) {
-			LOGGER.debug("delete fault");
-			CommandResultStatusEnum.EMPLOYEE_DELETE.setMessage(session, false);
-			return PageEnum.EMPLOYEE.getPageURL();
+			employee = factory.create(map);
+			service.deleteEmployee(employee);
+			util.refreshAllEmployeesList(session);		
+			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), "Delete success");
+		} catch (ServiceException | EntityFactoryException e) {
+			LOGGER.debug("delete fault", e);
+			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Delete fail");
 		}
-		
-		LOGGER.debug("delete final status is " + successFlag);
-		CommandResultStatusEnum.EMPLOYEE_DELETE.setMessage(session, successFlag);
 		
 		return PageEnum.EMPLOYEE.getPageURL();
 	}
-
 }

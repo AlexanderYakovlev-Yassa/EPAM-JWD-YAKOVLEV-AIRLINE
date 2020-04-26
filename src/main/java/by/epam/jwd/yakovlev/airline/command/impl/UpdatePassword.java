@@ -1,41 +1,52 @@
 package by.epam.jwd.yakovlev.airline.command.impl;
 
 import java.io.IOException;
-import java.util.Optional;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
 import by.epam.jwd.yakovlev.airline.command.Command;
-import by.epam.jwd.yakovlev.airline.command.PageEnum;
-import by.epam.jwd.yakovlev.airline.exception.CommandException;
+import by.epam.jwd.yakovlev.airline.entity.Employee;
+import by.epam.jwd.yakovlev.airline.exception.EntityFactoryException;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
+import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
+import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandEmployeeFactory;
 import by.epam.jwd.yakovlev.airline.service.EmployeeService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
+import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 public class UpdatePassword implements Command{
 	
-    private static final Logger LOGGER = Logger.getLogger(LoginUser.class);
-    private static final EmployeeService EMPLOYEE_SERVICE = ServiceFactory.INSTANCE.getEmployeeService();
+    private static final Logger LOGGER = Logger.getLogger(LoginUser.class);    
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
-		Optional<String> employeeIdOptional = Optional.ofNullable(request.getParameter(StringConstant.EMPLOYEE_ID_KEY.getValue()));
-				
-		Optional<char[]> passwordSequenceOptional = Optional.of(
-				request.getParameter(StringConstant.EMPLOYEE_PASSWORD_KEY.getValue()).toCharArray());		
+		EmployeeService service = ServiceFactory.INSTANCE.getEmployeeService();
+		HttpSession session = request.getSession();
+		Map<String, String[]> map = request.getParameterMap();
+		CommandEmployeeFactory factory = CommandEntityFactory.getInstance().getEmployeeFactory();
+		CommandUtil util = CommandUtil.getINSTANCE();
 		
-		try {
-			EMPLOYEE_SERVICE.updatePassword(employeeIdOptional, passwordSequenceOptional);
-		} catch (ServiceException e) {
+		Employee employee = null;
+		
+		try {			
+			employee = factory.create(map);
+			char[] password = request.getParameter(StringConstant.EMPLOYEE_PASSWORD_KEY.getValue()).toCharArray();
+			service.updatePassword(employee, password);
+			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(),
+					"Password updated successfully");
+		} catch (ServiceException | EntityFactoryException e) {
 			LOGGER.debug("Fail chage the password of the null login name employee");
-			throw new CommandException("Fail chage the password of the null login name employee", e);
+			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(),
+					"Faile update password");
 		}
 				
-		return PageEnum.EMPLOYEE.getPageURL();
+		return util.getNextPage(request.getSession()).getPageURL();
 	}
 }

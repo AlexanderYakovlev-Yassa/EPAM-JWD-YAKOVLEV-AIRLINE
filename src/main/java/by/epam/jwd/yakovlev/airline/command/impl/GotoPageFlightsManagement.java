@@ -10,16 +10,18 @@ import by.epam.jwd.yakovlev.airline.command.Command;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 
-public class GotoPageAirportsManagement implements Command{
+public class GotoPageFlightsManagement implements Command{
 	
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {		
 
 		CommandUtil util = CommandUtil.getINSTANCE();
 		HttpSession session = request.getSession();
 		
+		util.refreshAllFlightsList(session);
+		util.refreshAllAircraftsList(session);
 		util.refreshAllAirportsList(session);
 		
-		return PageEnum.AIRPORT_MANAGEMENT.getPageURL();
+		return PageEnum.FLIGHTS_MANAGEMENT.getPageURL();
 	}
 }

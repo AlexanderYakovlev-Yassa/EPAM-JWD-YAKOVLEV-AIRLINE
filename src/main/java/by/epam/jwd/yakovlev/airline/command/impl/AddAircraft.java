@@ -1,16 +1,15 @@
 package by.epam.jwd.yakovlev.airline.command.impl;
 
 import by.epam.jwd.yakovlev.airline.command.Command;
-import by.epam.jwd.yakovlev.airline.command.CommandResultStatusEnum;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
-import by.epam.jwd.yakovlev.airline.entityfactory.CommandEntityfactory.CommandEntityFactory;
-import by.epam.jwd.yakovlev.airline.entityfactory.CommandEntityfactory.EntityFactoryTypesEnum;
-import by.epam.jwd.yakovlev.airline.entityfactory.CommandEntityfactory.impl.CommandEmployeeFactory;
+import by.epam.jwd.yakovlev.airline.entity.Aircraft;
 import by.epam.jwd.yakovlev.airline.exception.EntityFactoryException;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
+import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
+import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandAircraftFactory;
 import by.epam.jwd.yakovlev.airline.service.AircraftService;
-import by.epam.jwd.yakovlev.airline.service.EmployeeService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
+import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,37 +20,30 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Optional;
 
 public class AddAircraft implements Command {
 	
 	private static final Logger LOGGER = Logger.getLogger(AddAircraft.class);
-	private static final CommandEntityFactory AIRCRAFT_FACTORY = EntityFactoryTypesEnum.AIRCRAFT.getConcreatEntityFactory();
-	private static final AircraftService AIRCRAFT_SERVICE = ServiceFactory.INSTANCE.getAircraftService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     	Map<String, String[]> map = request.getParameterMap();
 		HttpSession session = request.getSession();
+		AircraftService service = ServiceFactory.INSTANCE.getAircraftService();
+		CommandAircraftFactory factory = CommandEntityFactory.getInstance().getAircraftFactory();
+		CommandUtil util = CommandUtil.getINSTANCE();
 
-		Optional<Object> aircraftOptional = Optional.empty();
-
-		try {
-			aircraftOptional = AIRCRAFT_FACTORY.create(map);
-		} catch (EntityFactoryException e) {			
-			LOGGER.debug("Fail create an aircraft because " + e.getMessage());
-			session.setAttribute("warning_message", "Fail create aircraft.");
-			return PageEnum.AIRCRAFT_MANAGEMENT.getPageURL();
-		}
+		Aircraft aircraft = null;
 		
 		try {
-			AIRCRAFT_SERVICE.addAircraft(aircraftOptional);
-			session.setAttribute("success_message", "The aircrat was added successfully");
-            session.setAttribute("all_aircrafts_list", AIRCRAFT_SERVICE.getAllAircraftsList());
-		} catch (ServiceException e) {
-			LOGGER.debug("Fail add the aircraft because " + e.getMessage());
-			session.setAttribute("warning_message", "Fail add aircraft.");
+			aircraft = factory.create(map);
+			service.addAircraft(aircraft);
+			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), "The aircrat was added successfully");
+            util.refreshAllAircraftsList(session);
+		} catch (ServiceException | EntityFactoryException e) {
+			LOGGER.debug("Fail add the aircraft", e);
+			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Fail add aircraft.");
 		}
 		
 		return PageEnum.AIRCRAFT_MANAGEMENT.getPageURL();

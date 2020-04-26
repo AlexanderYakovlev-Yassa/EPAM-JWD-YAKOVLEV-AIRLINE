@@ -1,7 +1,7 @@
 package by.epam.jwd.yakovlev.airline.command.impl;
 
 import java.io.IOException;
-import java.util.Optional;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,46 +10,42 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import by.epam.jwd.yakovlev.airline.command.Command;
-import by.epam.jwd.yakovlev.airline.command.CommandResultStatusEnum;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
+import by.epam.jwd.yakovlev.airline.entity.AircraftModel;
+import by.epam.jwd.yakovlev.airline.exception.EntityFactoryException;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
-import by.epam.jwd.yakovlev.airline.service.AircraftService;
+import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
+import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandAircraftModelFactory;
+import by.epam.jwd.yakovlev.airline.service.AircraftModelService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
+import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 public class DeleteAircraftModel implements Command{
 	
 	private static final Logger LOGGER = Logger.getLogger(DeleteAircraftModel.class);
-    private static final AircraftService AIRCRAFT_SERVICE = ServiceFactory.INSTANCE.getAircraftService();
     
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	
     	HttpSession session = request.getSession();
-		String aircraftModelId = request.getParameter(StringConstant.AIRCRAFT_MODEL_ID_KEY.getValue());					
+    	Map<String, String[]> map = request.getParameterMap();
+    	AircraftModelService service = ServiceFactory.INSTANCE.getAircraftModelService();
+		CommandAircraftModelFactory factory = CommandEntityFactory.getInstance().getAircraftModelFactory();
+		CommandUtil util = CommandUtil.getINSTANCE();
 		
-		if (aircraftModelId == null) {		
-			LOGGER.debug("null aircraft model");
-			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Pick the aircraft model");
-			return PageEnum.AIRCRAFT_MODELS_MANAGEMENT.getPageURL();
-		}
-		
-		Optional<String> aircraftModelIdOptional = Optional.of(aircraftModelId);
-		boolean successFlag = false;
+		AircraftModel aircraftModel = null;
 			
 		try {
-			successFlag = AIRCRAFT_SERVICE.deleteAircraftModel(aircraftModelIdOptional);
-			session.setAttribute(StringConstant.ALL_AIRCRAFT_MODELS_LIST_KEY.getValue(),
-                    AIRCRAFT_SERVICE.getAllAircraftModelsList());
-			LOGGER.debug("delete success");
-		} catch (ServiceException e) {
-			LOGGER.debug("delete fault");
-			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Fail delete");;
-			return PageEnum.AIRCRAFT_MODELS_MANAGEMENT.getPageURL();
+			aircraftModel = factory.create(map);
+			service.deleteAircraftModel(aircraftModel);
+			util.refreshAllAircraftModelsList(session);
+			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), "Delete success");
+		} catch (ServiceException | EntityFactoryException e) {
+			LOGGER.debug("delete fault", e);
+			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Fail delete");
 		}
 		
-		session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), "Delete success");
-    	
         return PageEnum.AIRCRAFT_MODELS_MANAGEMENT.getPageURL();
     }
 }
