@@ -1,15 +1,14 @@
-package by.epam.jwd.yakovlev.airline.entityfactory.CommandEntityfactory;
+package by.epam.jwd.yakovlev.airline.factory.commandfactory;
 
 import java.util.Map;
-import java.util.Optional;
 
 import by.epam.jwd.yakovlev.airline.exception.EntityFactoryException;
 
-public interface CommandEntityFactory {
+public abstract class AbstractCommandEntityFactory<T> {
+	
+	public abstract T create(Map<String, String[]> map) throws EntityFactoryException;
 
-	Optional<Object> create(Map<String, String[]> map) throws EntityFactoryException;
-
-	default int parseToPositiveIntOrElseZero(String string) throws EntityFactoryException {
+	protected int parseToPositiveIntOrElseZero(String string) throws EntityFactoryException {
 
 		int result = 0;
 
