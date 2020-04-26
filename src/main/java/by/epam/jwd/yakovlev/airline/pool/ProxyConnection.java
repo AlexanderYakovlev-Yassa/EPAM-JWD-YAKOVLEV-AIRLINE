@@ -1,7 +1,5 @@
 package by.epam.jwd.yakovlev.airline.pool;
 
-import by.epam.jwd.yakovlev.airline.command.impl.CommandImpl;
-
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -24,7 +22,7 @@ public class ProxyConnection implements Connection, AutoCloseable {
         try {
             connection.close();
         } catch (SQLException e) {
-            logger.warn("Fail to close the connection.");
+            logger.warn("Fail to close the connection", e);
         }
     }
 

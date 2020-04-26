@@ -43,8 +43,8 @@ public enum ConnectionsPool {
         try {
             DriverManager.registerDriver(new Driver());
         } catch (SQLException e) {
-            LOGGER.warn("Can't initialise the connection pool becase " + e.getMessage());
-            throw new AirlineDataBaseConnectionException("Can't initialise the connection pool.");
+            LOGGER.warn("Can't initialise the connection pool", e);
+            throw new AirlineDataBaseConnectionException("Can't initialise the connection pool", e);
         }
 
         for (int i = 0; i < MAX_POOL_SIZE; i++) {
@@ -74,7 +74,7 @@ public enum ConnectionsPool {
                 usedConnections.add(connection);
             }
         } catch (InterruptedException e) {
-            throw new AirlineDataBaseConnectionException("Fail to get connection.");
+            throw new AirlineDataBaseConnectionException("Fail to get connection", e);
         }
 
         return connection;
@@ -106,7 +106,7 @@ public enum ConnectionsPool {
             ProxyConnection connection = new ProxyConnection(DriverManager.getConnection(URL, AIRLINE_DB_PROPERTIES));
             availableConnections.add(connection);
         } catch (SQLException e) {
-            LOGGER.warn("Can't connect with the database during add connection to the pool of connections. " + e.getMessage());
+            LOGGER.warn("Can't connect with the database during add connection to the pool of connections", e);
         }
     }
 
@@ -118,7 +118,7 @@ public enum ConnectionsPool {
         try {
             AIRLINE_DB_PROPERTIES.load(inputStream);
         } catch (IOException e) {
-            LOGGER.debug("Can't read properties " + e.getMessage());
+            LOGGER.debug("Can't read properties", e);
         }
 
         URL = AIRLINE_DB_PROPERTIES.getProperty("url");
