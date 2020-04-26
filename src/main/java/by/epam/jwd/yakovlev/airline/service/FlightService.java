@@ -8,11 +8,11 @@ import by.epam.jwd.yakovlev.airline.exception.ServiceException;
 
 public interface FlightService {
 
-	boolean addFlight(Optional<Object> flightOptional) throws ServiceException;
-	boolean deleteFlight(Optional<String> flightIDOptional) throws ServiceException;
-	boolean updateFlight(Optional<Object> flightOptional) throws ServiceException;
+	boolean addFlight(Flight flight) throws ServiceException;
+	boolean deleteFlight(Flight flight) throws ServiceException;
+	boolean updateFlight(Flight flight) throws ServiceException;
 	
-	Optional<Flight> getFlightByID(Optional<String> flightIDOptional) throws ServiceException;
+	Optional<Flight> getFlightByID(int flightID) throws ServiceException;
 	
 	List<Flight> getAllFlightsList() throws ServiceException;
 }

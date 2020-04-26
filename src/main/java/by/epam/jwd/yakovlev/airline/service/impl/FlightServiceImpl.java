@@ -1,6 +1,5 @@
 package by.epam.jwd.yakovlev.airline.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,101 +12,86 @@ import by.epam.jwd.yakovlev.airline.exception.DaoException;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
 import by.epam.jwd.yakovlev.airline.exception.ValidatorException;
 import by.epam.jwd.yakovlev.airline.service.FlightService;
-import by.epam.jwd.yakovlev.airline.validator.ValidatorsEnum;
+import by.epam.jwd.yakovlev.airline.validator.ValidatorFactory;
 
 public class FlightServiceImpl implements FlightService{
 	
-	private static final FlightDAO FLIGHT_DAO = DAOFactory.INSTANCE.getFlightDAO();
+	private static final FlightDAO FLIGHT_DAO = DAOFactory.getInstance().getFlightDAO();
+	
 	private static final Logger LOGGER = Logger.getLogger(FlightServiceImpl.class);
 
 	@Override
-	public boolean addFlight(Optional<Object> objectOptional) throws ServiceException {		
+	public boolean addFlight(Flight flight) throws ServiceException {		
 		
-		boolean successFlag = false;
+		checkFlight(flight);
 
 		try {
-			ValidatorsEnum.FLIGHT_VALIDATOR.getValidator().check(objectOptional);
-		} catch (ValidatorException e1) {
-			LOGGER.debug("The flight is not valid");
-			throw new ServiceException("The flight is not valid");
-		}
-
-		Optional<Flight> flightOptional = objectOptional.map(Flight.class::cast);
-
-		try {
-			successFlag = FLIGHT_DAO.addFlight(flightOptional);
+			return FLIGHT_DAO.addFlight(Optional.of(flight));
 		} catch (DaoException e) {
-			LOGGER.debug("Fail add the flight");
-			throw new ServiceException("Fail add the flight");
+			LOGGER.debug("Fail add the flight", e);
+			throw new ServiceException("Fail add the flight", e);
 		}
-
-		return successFlag;
 	}
 
 	@Override
-	public boolean deleteFlight(Optional<String> flightIDOptional) throws ServiceException {
+	public boolean deleteFlight(Flight flight) throws ServiceException {
 		
-		boolean successFlag = false;
-
+		checkFlight(flight);
+		
 		try {
-			successFlag = FLIGHT_DAO.deleteFlight(flightIDOptional);
+			return FLIGHT_DAO.deleteFlight(Optional.of(flight));
 		} catch (DaoException e) {
-			LOGGER.debug("Fail delete the flight");
-			throw new ServiceException("Fail delete the flight");
+			LOGGER.debug("Fail delete the flight", e);
+			throw new ServiceException("Fail delete the flight", e);
 		}
-
-		return successFlag;
 	}
 
 	@Override
-	public boolean updateFlight(Optional<Object> objectOptional) throws ServiceException {
+	public boolean updateFlight(Flight flight) throws ServiceException {
 		
-		boolean successFlag = false;
-
-		try {
-			ValidatorsEnum.FLIGHT_VALIDATOR.getValidator().check(objectOptional);
-		} catch (ValidatorException e) {
-			LOGGER.debug("Wrong flight parameters");
-			throw new ServiceException("Wrong flight parameters", e);
-		}
-
-		Optional<Flight> flightOptional = objectOptional.map(Flight.class::cast);
+		checkFlight(flight);
 		
 		try {
-			successFlag = FLIGHT_DAO.updateFlight(flightOptional);
+			return FLIGHT_DAO.updateFlight(Optional.of(flight));
 		} catch (DaoException e) {
-			LOGGER.debug("Fail update the flight");
-			throw new ServiceException("Fail update the flight");
+			LOGGER.debug("Fail update the flight", e);
+			throw new ServiceException("Fail update the flight", e);
 		}
-
-		return successFlag;
 	}
 
 	@Override
-	public Optional<Flight> getFlightByID(Optional<String> flightIDOptional) throws ServiceException {
+	public Optional<Flight> getFlightByID(int flightID) throws ServiceException {
 		
-		Optional<Flight> flightOptional = Optional.empty();
-		try {
-			flightOptional = FLIGHT_DAO.getFlightByID(flightIDOptional);
-		} catch (DaoException e) {
-			LOGGER.debug("Fail get the flight");
-			throw new ServiceException("Fail get the flight");
+		if (flightID < 1) {
+			return Optional.empty();
 		}
 		
-		return flightOptional;
+		try {
+			return FLIGHT_DAO.getFlightByID(flightID);
+		} catch (DaoException e) {
+			LOGGER.debug("Fail get the flight", e);
+			throw new ServiceException("Fail get the flight", e);
+		}
 	}
 
 	@Override
 	public List<Flight> getAllFlightsList() throws ServiceException {
 		
-		List<Flight> flightsList = new ArrayList<>();
 		try {
-			flightsList = FLIGHT_DAO.getAllFlightList();
+			return FLIGHT_DAO.getAllFlightList();
 		} catch (DaoException e) {
-			LOGGER.debug("Fail get the flights list");
-			throw new ServiceException("Fail get the flights list");
+			LOGGER.debug("Fail get the flights list", e);
+			throw new ServiceException("Fail get the flights list", e);
 		}
-
-		return flightsList;
+	}
+	
+	private void checkFlight(Flight flight) throws ServiceException {
+		
+		try {
+			ValidatorFactory.getInstance().getFlightValidator().check(flight);
+		} catch (ValidatorException e) {
+			LOGGER.debug("The flight ID is not valid", e);
+			throw new ServiceException("The flight ID is not valid", e);
+		}
 	}
 }

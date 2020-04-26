@@ -9,6 +9,9 @@ public enum ServiceFactory {
     private AircraftService aircraftService = new AircraftServiceImpl();
     private AirportService airportService = new AirportServiceImpl();
     private FlightService flightService = new FlightServiceImpl();
+    private SystemRoleService systemRoleService = new  SystemRoleServiceImpl();
+    private CrewRoleService crewRoleService = new CrewRoleServiceImpl();
+    private AircraftModelService aircraftModelService = new AircraftModelServiceImpl();
 
     public EmployeeService getEmployeeService() {
         return employeeService;
@@ -25,4 +28,16 @@ public enum ServiceFactory {
 	public FlightService getFlightService() {
 		return flightService;
 	}
+
+	public SystemRoleService getSystemRoleService() {
+		return systemRoleService;
+	}
+
+	public CrewRoleService getCrewRoleService() {
+		return crewRoleService;
+	}
+
+	public AircraftModelService getAircraftModelService() {
+		return aircraftModelService;
+	}	
 }

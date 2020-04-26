@@ -8,11 +8,11 @@ import by.epam.jwd.yakovlev.airline.exception.ServiceException;
 
 public interface AirportService {
 
-	boolean addAirpot(Optional<Object> airportOptional) throws ServiceException;
-	boolean deleteAirport(Optional<String> airportIDOptional) throws ServiceException;
-	boolean updateAirport(Optional<Object> airportOptional) throws ServiceException;
+	boolean addAirpot(Airport airport) throws ServiceException;
+	boolean deleteAirport(Airport airport) throws ServiceException;
+	boolean updateAirport(Airport airport) throws ServiceException;
 	
-	Optional<Airport> getAirportlByID(Optional<String> airportIDOptional) throws ServiceException;
+	Optional<Airport> getAirportByID(int airportID) throws ServiceException;
 	
-	List<Airport> getAllAirportList() throws ServiceException;
+	List<Airport> getAllAirportsList() throws ServiceException;
 }
