@@ -1,14 +1,14 @@
 package by.epam.jwd.yakovlev.airline.entity;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class Flight {
 
     private int flightID;
-    private Calendar departureTime;
-    private Calendar landingTime;
+    private Date departureTime;
+    private Date landingTime;
     private Aircraft aircraft;
-    private Airport depertureAirport;
+    private Airport departureAirport;
     private Airport destinationAirport;
 
     public Flight() {
@@ -22,19 +22,19 @@ public class Flight {
         this.flightID = flightID;
     }
 
-    public Calendar getDepartureTime() {
+    public Date getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(Calendar departureTime) {
+    public void setDepartureTime(Date departureTime) {
         this.departureTime = departureTime;
     }
 
-    public Calendar getLandingTime() {
+    public Date getLandingTime() {
         return landingTime;
     }
 
-    public void setLandingTime(Calendar landingTime) {
+    public void setLandingTime(Date landingTime) {
         this.landingTime = landingTime;
     }
 
@@ -46,12 +46,12 @@ public class Flight {
         this.aircraft = aircraft;
     }
 
-    public Airport getDepertureAirport() {
-        return depertureAirport;
+    public Airport getDepartureAirport() {
+        return departureAirport;
     }
 
-    public void setDepertureAirport(Airport depertureAirport) {
-        this.depertureAirport = depertureAirport;
+    public void setDepartureAirport(Airport depertureAirport) {
+        this.departureAirport = depertureAirport;
     }
 
     public Airport getDestinationAirport() {
@@ -74,7 +74,7 @@ public class Flight {
             return false;
         if (landingTime != null ? !landingTime.equals(flight.landingTime) : flight.landingTime != null) return false;
         if (aircraft != null ? !aircraft.equals(flight.aircraft) : flight.aircraft != null) return false;
-        if (depertureAirport != null ? !depertureAirport.equals(flight.depertureAirport) : flight.depertureAirport != null)
+        if (departureAirport != null ? !departureAirport.equals(flight.departureAirport) : flight.departureAirport != null)
             return false;
         return destinationAirport != null ? destinationAirport.equals(flight.destinationAirport) : flight.destinationAirport == null;
     }
@@ -85,7 +85,7 @@ public class Flight {
         result = 31 * result + (departureTime != null ? departureTime.hashCode() : 0);
         result = 31 * result + (landingTime != null ? landingTime.hashCode() : 0);
         result = 31 * result + (aircraft != null ? aircraft.hashCode() : 0);
-        result = 31 * result + (depertureAirport != null ? depertureAirport.hashCode() : 0);
+        result = 31 * result + (departureAirport != null ? departureAirport.hashCode() : 0);
         result = 31 * result + (destinationAirport != null ? destinationAirport.hashCode() : 0);
         return result;
     }
@@ -97,7 +97,7 @@ public class Flight {
         sb.append(", departureTime=").append(departureTime);
         sb.append(", landingTime=").append(landingTime);
         sb.append(", aircraft=").append(aircraft);
-        sb.append(", depertureAirport=").append(depertureAirport);
+        sb.append(", depertureAirport=").append(departureAirport);
         sb.append(", destinationAirport=").append(destinationAirport);
         sb.append('}');
         return sb.toString();

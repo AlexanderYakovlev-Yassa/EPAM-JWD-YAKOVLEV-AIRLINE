@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class SystemRole implements Serializable {
 
-    private int systemRoleID;
+	private static final long serialVersionUID = 1L;
+	private int systemRoleID;
     private String systemRoleName;
 
     public SystemRole() {

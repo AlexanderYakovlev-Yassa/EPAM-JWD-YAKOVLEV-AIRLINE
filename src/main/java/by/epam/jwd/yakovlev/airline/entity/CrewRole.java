@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class CrewRole implements Serializable {
 
-    private int crewRoleID;
+	private static final long serialVersionUID = 1L;
+	private int crewRoleID;
     private String crewRoleName;
 
     public CrewRole() {

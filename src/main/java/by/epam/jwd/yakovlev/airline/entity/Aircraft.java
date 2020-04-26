@@ -4,14 +4,21 @@ import java.io.Serializable;
 
 public class Aircraft implements Serializable {
 
-    private int aircraftID;
+	private static final long serialVersionUID = 1L;
+	private int aircraftID;
     private String aircraftSideNumber;
     private AircraftModel aircraftModel;
 
     public Aircraft() {
-    }
+    }    
+    
+    public Aircraft(int aircraftID, String aircraftSideNumber, AircraftModel aircraftModel) {
+		this.aircraftID = aircraftID;
+		this.aircraftSideNumber = aircraftSideNumber;
+		this.aircraftModel = aircraftModel;
+	}
 
-    public int getAircraftID() {
+	public int getAircraftID() {
         return aircraftID;
     }
 

@@ -7,8 +7,17 @@ public class Airport {
 
     public Airport() {
     }
+    
+    
 
-    public int getAirportID() {
+    public Airport(int airportID, String airportCity) {
+		this.airportID = airportID;
+		this.airportCity = airportCity;
+	}
+
+
+
+	public int getAirportID() {
         return airportID;
     }
 
