@@ -2,30 +2,24 @@ package by.epam.jwd.yakovlev.airline.controller;
 
 import by.epam.jwd.yakovlev.airline.command.Command;
 import by.epam.jwd.yakovlev.airline.command.CommandEnum;
-import by.epam.jwd.yakovlev.airline.entity.Employee;
 import by.epam.jwd.yakovlev.airline.exception.AirlineDataBaseConnectionException;
-import by.epam.jwd.yakovlev.airline.exception.ServiceException;
-import by.epam.jwd.yakovlev.airline.exception.ServiceIsUnavailableException;
 import by.epam.jwd.yakovlev.airline.pool.ConnectionsPool;
-import by.epam.jwd.yakovlev.airline.service.EmployeeService;
-import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Optional;
 
 @WebServlet(name = "ControllerServlet", value = "/")
 public class ControllerServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;	
 	private static final Logger LOGGER = Logger.getLogger(ControllerServlet.class);	
 
 	@Override
@@ -37,7 +31,7 @@ public class ControllerServlet extends HttpServlet {
 		try {
 			ConnectionsPool.INSTANCE.initializePool();
 		} catch (AirlineDataBaseConnectionException e) {
-			LOGGER.warn("Pool of connection is not initialise");
+			LOGGER.warn("Pool of connection is not initialise", e);
 		}
 	}
 
