@@ -1,23 +1,22 @@
-package by.epam.jwd.yakovlev.airline.entityfactory.DAOEntityfactory.impl;
+package by.epam.jwd.yakovlev.airline.factory.daofactory.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
 
 import by.epam.jwd.yakovlev.airline.entity.Airport;
-import by.epam.jwd.yakovlev.airline.entityfactory.DAOEntityfactory.DAOEntityFactory;
+import by.epam.jwd.yakovlev.airline.factory.daofactory.AbstractDAOFactory;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class DAOAirportFactory implements DAOEntityFactory{
-
+public class DAOAirportFactory extends AbstractDAOFactory<Airport>{
+	
 	@Override
-	public Optional<Object> make(ResultSet resultSet) throws SQLException {
+	public Airport create(ResultSet resultSet) throws SQLException {
 		
 		Airport airport = new Airport();
 		
 		airport.setAirportID(resultSet.getInt(StringConstant.AIRPORT_ID_KEY.getValue()));
 		airport.setAirportCity(resultSet.getString(StringConstant.AIRPORT_CITY_KEY.getValue()));
 		
-		return Optional.of(airport);		
+		return airport;
 	}
 }
