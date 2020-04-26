@@ -1,4 +1,4 @@
-package by.epam.jwd.yakovlev.airline.dao.impl;
+package by.epam.jwd.yakovlev.airline.dao;
 
 public enum SQLQuery {
     GET_PASSWORD_BY_NICKNAME("SELECT employee_password FROM employee WHERE employee_nickname = ?"),
@@ -10,15 +10,34 @@ public enum SQLQuery {
             "`employee`.`crew_role_id`" +
             "FROM `airlineproject`.`employee`" +
             "WHERE employee_nickname = ?"),
-    GET_EMPLOYEE_BY_NICKNAME_AND_PASSWORD("SELECT `employee`.`employee_id`," +
-            "`employee`.`employee_first_name`," +
-            "`employee`.`employee_last_name`," +
-            "`employee`.`system_role_id`," +
-            "`employee`.`employee_nickname`," +
-            "`employee`.`crew_role_id`" +
-            "FROM `airlineproject`.`employee`" +
-            "WHERE employee_nickname = ? AND employee_password = ?"),    
-    GET_EMPLOYEE_BY_ID ("SELECT * FROM employee WHERE employee_id = ?"),
+    GET_EMPLOYEE_BY_NICKNAME_AND_PASSWORD("SELECT `employee`.`employee_id`, " 
+    		+ "`employee`.`employee_nickname`, " 
+    		+ "`employee`.`employee_first_name`, " 
+    		+ "`employee`.`employee_last_name`, " 
+    		+ "`employee`.`system_role_id`, " 
+    		+ "`system_role`.`system_role_name`, " 
+    		+ "`employee`.`crew_role_id`, " 
+    		+ "`crew_role`.`crew_role_name` " 
+    		+ "FROM `airlineproject`.`employee` " 
+    		+ "JOIN `system_role` " 
+    		+ "ON `employee`.`system_role_id` = `system_role`.`system_role_id` " 
+    		+ "JOIN `crew_role` " 
+    		+ "ON `employee`.`crew_role_id` = `crew_role`.`crew_role_id` "
+            + "WHERE employee_nickname = ? AND employee_password = ?"),
+    GET_EMPLOYEE_BY_ID ("SELECT `employee`.`employee_id`, " 
+    		+ "`employee`.`employee_nickname`, " 
+    		+ "`employee`.`employee_first_name`, " 
+    		+ "`employee`.`employee_last_name`, " 
+    		+ "`employee`.`system_role_id`, " 
+    		+ "`system_role`.`system_role_name`, " 
+    		+ "`employee`.`crew_role_id`, " 
+    		+ "`crew_role`.`crew_role_name` " 
+    		+ "FROM `airlineproject`.`employee` " 
+    		+ "JOIN `system_role` " 
+    		+ "ON `employee`.`system_role_id` = `system_role`.`system_role_id` " 
+    		+ "JOIN `crew_role` " 
+    		+ "ON `employee`.`crew_role_id` = `crew_role`.`crew_role_id` "
+            + "WHERE employee_id = ?"),
     GET_ALL_AIRCRAFT_MODELS("SELECT * FROM aircraft_model"),
     GET_ALL_AIRCRAFTS("SELECT `aircraft`.`aircraft_id`,\r\n" + 
     		"    `aircraft`.`aircraft_model_id`,\r\n" + 
@@ -31,7 +50,19 @@ public enum SQLQuery {
     GET_ALL_AIRPORTS ("SELECT * FROM airport"),
     GET_ALL_SYSTEM_ROLES ("SELECT * FROM system_role"),
     GET_ALL_CREW_ROLE ("SELECT * FROM crew_role"),
-    GET_ALL_EMPLOYEE ("SELECT * FROM employee"),
+    GET_ALL_EMPLOYEE ("SELECT `employee`.`employee_id`, "
+    		+ "`employee`.`employee_nickname`, "
+    		+ "`employee`.`employee_first_name`, "
+    		+ "`employee`.`employee_last_name`, "
+    		+ "`employee`.`system_role_id`, "
+    		+ "`system_role`.`system_role_name`, "
+    		+ "`employee`.`crew_role_id`, "
+    		+ "`crew_role`.`crew_role_name` "
+    		+ "FROM `airlineproject`.`employee` "
+    		+ "JOIN `system_role` "
+    		+ "ON `employee`.`system_role_id` = `system_role`.`system_role_id` "
+    		+ "JOIN `crew_role` "
+    		+ "ON `employee`.`crew_role_id` = `crew_role`.`crew_role_id`;"),
     GET_SYSTEM_ROLE_BY_ID ("SELECT * FROM system_role WHERE system_role_id = ?"),
     GET_CREW_ROLE_BY_ID ("SELECT * FROM crew_role WHERE crew_role_id = ?"),
     GET_AIRPORT_BY_ID ("SELECT * FROM airport WHERE airport_id = ?"),
@@ -62,10 +93,16 @@ public enum SQLQuery {
     		"VALUES (?, ?)"),
     ADD_AIRPORT ("INSERT INTO `airport`(`airport_city`)" +
     		"VALUES (?)"),
+    ADD_SYSTEM_ROLE ("INSERT INTO `system_role`(`system_role_name`)" +
+    		"VALUES (?)"),
+    ADD_CREW_ROLE ("INSERT INTO `crew_role`(`crew_role_name`)" +
+    		"VALUES (?)"),
     DELETE_EMPLOYEE ("DELETE FROM `employee` WHERE (`employee_id` = ?);"),
     DELETE_AIRCRAFT_MODEL ("DELETE FROM `aircraft_model` WHERE (`aircraft_model_id` = ?);"),
     DELETE_AIRCRAFT ("DELETE FROM `aircraft` WHERE (`aircraft_id` = ?);"),
     DELETE_AIRPORT ("DELETE FROM `airport` WHERE (`airport_id` = ?);"),
+    DELETE_SYSTEM_ROLE ("DELETE FROM `system_role` WHERE (`system_role_id` = ?);"),
+    DELETE_CREW_ROLE ("DELETE FROM `crew_role` WHERE (`crew_role_id` = ?);"),
     UPDATE_AIRCRAFT_MODEL ("UPDATE `aircraft_model` "
 			+ "SET `aircraft_model_name` = ?, "
 			+ "`aircraft_model_capacity` = ? "
@@ -75,6 +112,8 @@ public enum SQLQuery {
 			+ "`aircraft_side_number` = ? "
 			+ "WHERE `aircraft_id` = ?;"),
     UPDATE_AIRPORT ("UPDATE `airport` SET `airport_city` = ? WHERE `airport_id` = ?;"),
+    UPDATE_SYSTEM_ROLE ("UPDATE `system_role` SET `system_role_name` = ? WHERE `system_role_id` = ?;"),
+    UPDATE_CREW_ROLE ("UPDATE `crew_role` SET `crew_role_name` = ? WHERE `crew_role_id` = ?;"),
     UPDATE_EMPLOYEE_PASSWORD ("UPDATE `employee` SET `employee_password` = ? WHERE `employee_id` = ?;"),
     UPDATE_EMPLOYEE ("UPDATE `employee` "
 			+ "SET `employee_nickname` = ?, "

@@ -10,9 +10,9 @@ public interface AirportDAO {
 
 	boolean addAirport(Optional<Airport> airportOptional) throws DaoException;
 	boolean updateAirport(Optional<Airport> airportOptional) throws DaoException;
-	boolean deleteAirport(Optional<String> airportIDOptional) throws DaoException;
+	boolean deleteAirport(Optional<Airport> airportOptional) throws DaoException;
 	
-	Optional<Airport> getAirportByID(Optional<String> airportIDOptional) throws DaoException;
+	Optional<Airport> getAirportByID(int airportID) throws DaoException;
 	
 	List<Airport> getAllAirportsList() throws DaoException;
 }
