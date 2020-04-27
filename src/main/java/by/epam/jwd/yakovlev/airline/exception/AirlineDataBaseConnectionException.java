@@ -2,7 +2,9 @@ package by.epam.jwd.yakovlev.airline.exception;
 
 public class AirlineDataBaseConnectionException extends Exception{
 
-    public AirlineDataBaseConnectionException() {
+	private static final long serialVersionUID = 1L;
+
+	public AirlineDataBaseConnectionException() {
     }
 
     public AirlineDataBaseConnectionException(String message) {

@@ -2,7 +2,9 @@ package by.epam.jwd.yakovlev.airline.exception;
 
 public class EntityFactoryException extends Exception {
 
-    public EntityFactoryException() {
+	private static final long serialVersionUID = 1L;
+
+	public EntityFactoryException() {
     }
 
     public EntityFactoryException(String message) {

@@ -2,7 +2,9 @@ package by.epam.jwd.yakovlev.airline.exception;
 
 public class DaoNoDataException extends Exception{
 
-    public DaoNoDataException() {
+	private static final long serialVersionUID = 1L;
+
+	public DaoNoDataException() {
     }
 
     public DaoNoDataException(String message) {

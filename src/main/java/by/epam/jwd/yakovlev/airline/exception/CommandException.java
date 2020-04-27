@@ -2,6 +2,8 @@ package by.epam.jwd.yakovlev.airline.exception;
 
 public class CommandException extends Error{
 
+	private static final long serialVersionUID = 1L;
+
 	public CommandException() {
     }
 

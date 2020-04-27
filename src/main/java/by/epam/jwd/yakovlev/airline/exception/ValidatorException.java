@@ -2,7 +2,9 @@ package by.epam.jwd.yakovlev.airline.exception;
 
 public class ValidatorException extends Exception {
 
-    public ValidatorException() {
+	private static final long serialVersionUID = 1L;
+
+	public ValidatorException() {
     }
 
     public ValidatorException(String message) {
