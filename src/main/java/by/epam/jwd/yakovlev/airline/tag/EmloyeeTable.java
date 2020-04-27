@@ -1,22 +1,17 @@
 package by.epam.jwd.yakovlev.airline.tag;
 
-import by.epam.jwd.yakovlev.airline.controller.ControllerServlet;
 import by.epam.jwd.yakovlev.airline.tag.util.Converter;
 import by.epam.jwd.yakovlev.airline.tag.util.impl.EmployeeConverter;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
-import org.apache.log4j.Logger;
-
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Properties;
 
 public class EmloyeeTable extends SimpleTagSupport {
 
-    private static final Logger LOGGER = Logger.getLogger(ControllerServlet.class);
     private static final String WHITE_SPACE_REGEX = "[\\s]+";
 
     private static final String QUOTE = "\"";
@@ -35,8 +30,6 @@ public class EmloyeeTable extends SimpleTagSupport {
     private static final String CLOSE_TD_TAG = "</td>";
     private static final String CLOSE_TR_TAG = "</tr>";
     private static final String CLOSE_TABLE_TAG = "</table>";
-
-    private StringWriter sw = new StringWriter();
 
     private String columns;
     private String styleClass;
@@ -72,7 +65,8 @@ public class EmloyeeTable extends SimpleTagSupport {
             return;
         }
 
-        ArrayList<Object> objectsList = (ArrayList<Object>)object;
+        @SuppressWarnings("unchecked")
+		ArrayList<Object> objectsList = (ArrayList<Object>)object;
 
         if (columns == null) {
             sb.append(NO_COLUMNS_PICKED_MESSAGE);
