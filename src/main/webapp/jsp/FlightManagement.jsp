@@ -158,6 +158,13 @@
 													</c:forEach>
 												</div>												
 											</div>
+											<div>
+												<button type="submit" id="goto-airport-page"
+													class="btn btn-outline-primary"
+													name="command" value="goto_page_airports_management">
+													Airport management
+												</button>
+											</div>
 											<br/>
 											<label for="current-flight-aircraft" class="text-primary"> 
 												<fmt:message key="label.flight_aircraft" />
