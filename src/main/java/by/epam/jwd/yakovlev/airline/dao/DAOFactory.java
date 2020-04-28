@@ -13,6 +13,7 @@ public class DAOFactory {
 	private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 	private FlightDAO flightDAO = new FlightDAOImpl();
 	private SystemRoleDAO systemRoleDAO = new SystemRoleDAOImpl();
+	private CrewDAO crewDAO = new CrewDAOImpl();
 	
 	private DAOFactory() {
 		
@@ -48,5 +49,9 @@ public class DAOFactory {
 
 	public SystemRoleDAO getSystemRoleDAO() {
 		return systemRoleDAO;
+	}
+
+	public CrewDAO getCrewDAO() {
+		return crewDAO;
 	}
 }

@@ -38,6 +38,22 @@ public enum SQLQuery {
     		+ "JOIN `crew_role` " 
     		+ "ON `employee`.`crew_role_id` = `crew_role`.`crew_role_id` "
             + "WHERE employee_id = ?"),
+    GET_CREW_BY_FLIGHT_ID ("SELECT `employee`.`employee_id`,"
+    		+ " `employee`.`employee_nickname`,"
+    		+ " `employee`.`employee_first_name`,"
+    		+ " `employee`.`employee_last_name`,"
+    	    + " `employee`.`system_role_id`,"
+    	    + " `system_role`.`system_role_name`,"
+    	    + " `employee`.`crew_role_id`,"
+    	    + " `crew_role`.`crew_role_name`"
+    	+ " FROM `airlineproject`.`employee`"
+    	+ " JOIN `system_role`"
+    	+ " ON `employee`.`system_role_id` = `system_role`.`system_role_id`"
+    	+ " JOIN `crew_role`"
+    	+ " ON `employee`.`crew_role_id` = `crew_role`.`crew_role_id`"
+    	+ " JOIN `crew`"
+    	+ " ON `crew`.`employee_id` = `employee`.`employee_id`"
+    	+ " WHERE `crew`.`flight_id` = ?"),
     GET_ALL_AIRCRAFT_MODELS("SELECT * FROM aircraft_model"),
     GET_ALL_AIRCRAFTS("SELECT `aircraft`.`aircraft_id`,\r\n" + 
     		"    `aircraft`.`aircraft_model_id`,\r\n" + 
@@ -97,12 +113,15 @@ public enum SQLQuery {
     		"VALUES (?)"),
     ADD_CREW_ROLE ("INSERT INTO `crew_role`(`crew_role_name`)" +
     		"VALUES (?)"),
+    ADD_CREW_MEMBER ("INSERT INTO `crew`(`flight_id`, `employee_id`)" +
+    		"VALUES (?, ?)"),
     DELETE_EMPLOYEE ("DELETE FROM `employee` WHERE (`employee_id` = ?);"),
     DELETE_AIRCRAFT_MODEL ("DELETE FROM `aircraft_model` WHERE (`aircraft_model_id` = ?);"),
     DELETE_AIRCRAFT ("DELETE FROM `aircraft` WHERE (`aircraft_id` = ?);"),
     DELETE_AIRPORT ("DELETE FROM `airport` WHERE (`airport_id` = ?);"),
     DELETE_SYSTEM_ROLE ("DELETE FROM `system_role` WHERE (`system_role_id` = ?);"),
     DELETE_CREW_ROLE ("DELETE FROM `crew_role` WHERE (`crew_role_id` = ?);"),
+    DELETE_CREW_MEMBER ("DELETE FROM `crew` WHERE (`flight_id` = ? AND `employee_id` = ?);"),
     UPDATE_AIRCRAFT_MODEL ("UPDATE `aircraft_model` "
 			+ "SET `aircraft_model_name` = ?, "
 			+ "`aircraft_model_capacity` = ? "

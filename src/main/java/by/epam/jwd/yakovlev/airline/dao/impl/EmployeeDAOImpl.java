@@ -36,6 +36,15 @@ public class EmployeeDAOImpl extends AbstractDAO<Employee> implements EmployeeDA
 	}
 	
 	@Override
+	public List<Employee> getCrewByFlightID(int flightID) throws DaoException {
+		
+		String query = SQLQuery.GET_CREW_BY_FLIGHT_ID.getQuery();
+		String[] queryParameters = { String.valueOf(flightID) };
+		
+		return getEntitiesList(DAOFactoryEnum.EMPLOYEE, query, queryParameters);
+	}
+	
+	@Override
 	public boolean addEmployee(Optional<Employee> employeeOptional) throws DaoException {
 
 		String query = SQLQuery.ADD_EMPLOYEE.getQuery();

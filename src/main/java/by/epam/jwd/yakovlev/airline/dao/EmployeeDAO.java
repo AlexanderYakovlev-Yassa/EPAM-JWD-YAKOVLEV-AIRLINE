@@ -12,6 +12,7 @@ public interface EmployeeDAO {
     Optional<Employee> getEmployeeByID(int id) throws DaoException;
     
     List<Employee> getAllEmployeesList() throws DaoException;
+    List<Employee> getCrewByFlightID(int flightID) throws DaoException;
     
     boolean addEmployee(Optional<Employee> employeeOptional) throws DaoException;
     boolean deleteEmployee(Optional<Employee> employeeOptional) throws DaoException;
