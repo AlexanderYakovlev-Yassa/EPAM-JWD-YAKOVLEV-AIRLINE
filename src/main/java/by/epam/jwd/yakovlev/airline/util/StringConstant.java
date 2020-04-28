@@ -60,6 +60,7 @@ public enum StringConstant {
     SYSTEM_ROLE_NAME_KEY ("system_role_name"),
     SUCCESS("success"),
     UNREGISTERED ("Unregistered"),
+    UNRECOGNIZED_COMMAND_KEY ("unrecognized_command"),
     USER ("user"),
     WHITE_SPACE (" "),
     WARNING_MESSAGE_KEY ("warning_message"),
