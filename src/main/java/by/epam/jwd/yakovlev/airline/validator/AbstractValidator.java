@@ -6,13 +6,12 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
-import by.epam.jwd.yakovlev.airline.command.impl.UpdateEmployee;
 import by.epam.jwd.yakovlev.airline.exception.ValidatorException;
 
 public abstract class AbstractValidator {
 
 	private static final String NAME = "^[A-ZА-ЯЁ][a-zа-яё]*$";
-	private static final String WORD = "^[A-Z][a-z_-]*$";
+	private static final String WORD = "^[A-Za-z\\-А-ЯЁа-яё]+$";
 	private static final String AIRCRAFT_SIDE_NUMBER = "^[A][\\d]{4}[A-Z]$";
 	private static final int ZERO = 0;
 	
