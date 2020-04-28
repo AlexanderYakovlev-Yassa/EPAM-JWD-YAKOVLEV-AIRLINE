@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "ControllerServlet", value = "/")
@@ -47,15 +46,9 @@ public class ControllerServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		LOGGER.debug("doGet is started");
-
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("utf-8");
-
+		
 		Command command = getCommand(request, response);
-
-		LOGGER.debug("doGet got command " + command.getClass());
+		
 		request.getRequestDispatcher(command.execute(request, response)).forward(request, response);
 	}
 
@@ -63,42 +56,26 @@ public class ControllerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		LOGGER.debug("doPost is started");
-
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("utf-8");
-
 		Command command = getCommand(request, response);
-		LOGGER.debug("doPost got command " + command.getClass());
 		request.getRequestDispatcher(command.execute(request, response)).forward(request, response);
-	}
+	}	
 
 	private Command getCommand(HttpServletRequest request, HttpServletResponse response) {
 		
-		LOGGER.debug("getCommand is started");
-		LOGGER.debug(
-				"Controller servlet got the command " + request.getParameter(StringConstant.COMMAND_KEY.getValue()));
-		
 		String commandName = request.getParameter(StringConstant.COMMAND_KEY.getValue());
+		
 		if (commandName == null) {
-			LOGGER.debug("command name is null. Return GOTO_PAGE_INDEX");
-			return CommandEnum.INITIALISE.getCommand();
+			return CommandEnum.INITIALISE_SESSION.getCommand();
 		}
-
-		HttpSession session = request.getSession();
-
-		session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), 
-				StringConstant.EMPTY_STRING.getValue());
-		session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), 
-				StringConstant.EMPTY_STRING.getValue());
-
-		Command command = null;
-		for (CommandEnum c : CommandEnum.values()) {
-			if (c.name().equals(commandName.toUpperCase())) {
-				command = c.getCommand();
-			}
+		
+		Command command;
+		
+		try {
+			command = CommandEnum.valueOf(commandName.toUpperCase()).getCommand();
+		} catch (IllegalArgumentException e) {
+			command = CommandEnum.GOTO_PAGE_UNRECOGNIZED_COMMAND.getCommand();
 		}
-
+		
 		return command;
 	}
 }

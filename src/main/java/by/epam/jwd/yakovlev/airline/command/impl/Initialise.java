@@ -21,19 +21,19 @@ public class Initialise implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    	CommandDefaultEmployeeFactory factory = CommandEntityFactory.getInstance().getDefaultEmployeeFactory();
+    	Employee unregisteredUser = factory.getDefaultEmployee();
     	
     	LOGGER.debug("INITIALISATION");
 
         HttpSession session = request.getSession();
-        CommandDefaultEmployeeFactory defaultEmployeeFactory = CommandEntityFactory.getInstance().getDefaultEmployeeFactory();
-		
-		Employee defaultEmployee = defaultEmployeeFactory.getDefaultEmployee();
         
-        session.setAttribute(StringConstant.CURRENT_SESSION_USER_KEY.getValue(), defaultEmployee);
+        if (session.getAttribute(StringConstant.CURRENT_SESSION_USER_KEY.getValue()) == null) {
+		session.setAttribute(StringConstant.CURRENT_SESSION_USER_KEY.getValue(), unregisteredUser);
+        }
+        
         session.setAttribute(StringConstant.LANGUAGE_KEY.getValue(), LocalisationEnum.EN.getLocalisation());
-		
-        String nextPage = PageEnum.INDEX.getPageURL();
 
-        return nextPage;
+        return PageEnum.INDEX.getPageURL();
     }
 }
