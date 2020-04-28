@@ -30,7 +30,7 @@
 
     </tag>
 
-    <tag>
+<!--     <tag>
 
         <name>system-role-dropdown</name>
         <tag-class>by.epam.jwd.yakovlev.airline.tag.SystemRoleDropdown</tag-class>
@@ -102,5 +102,5 @@
             <name>name</name>
             <type>java.lang.String</type>
         </attribute>
-    </tag>
+    </tag> -->
 </taglib>
