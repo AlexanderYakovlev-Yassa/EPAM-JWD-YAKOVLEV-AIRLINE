@@ -11,8 +11,10 @@ public enum PageEnum {
     CABINET ("/jsp/Cabinet.jsp"),
     AIRCRAFT_MANAGEMENT ("/jsp/AircraftManagement.jsp"),
     AIRCRAFT_MODELS_MANAGEMENT ("/jsp/AircraftModelsManagement.jsp"),
-    AIRPORT_MANAGEMENT ("/jsp/AirportManagement.jsp"),
-    FLIGHTS_MANAGEMENT ("/jsp/FlightManagement.jsp");
+    AIRPORT_MANAGEMENT ("/jsp/AirportsManagement.jsp"),
+    FLIGHTS_MANAGEMENT ("/jsp/FlightManagement.jsp"),
+    SECURITY_ALERT_PAGE ("/jsp/SecurityAlertPage.jsp"),
+    UNRECOGNIZED_COMMAND_PAGE ("/jsp/UnrecognizedCommandPage.jsp");
 
     private String pageURL;
 
