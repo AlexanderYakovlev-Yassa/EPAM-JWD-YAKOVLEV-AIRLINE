@@ -49,6 +49,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
+	public List<Employee> getCrewByFlightID(int flightID) throws ServiceException {
+	
+		try {
+			return EMPLOYEE_DAO.getCrewByFlightID(flightID);
+		} catch (DaoException e) {
+			LOGGER.warn("Fail to get employee", e);
+			throw new ServiceException("Fail to get employee.", e);
+		}
+	}
+
+	@Override
 	public boolean addEmployee(Employee employee) throws ServiceException {
 
 		checkEmployee(employee);
@@ -127,13 +138,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	private void checkEmployee(Employee employee) throws ServiceException{
 		
-		//LOGGER.debug("***");
-		//EmployeeValidator validator = new EmployeeValidator();
-		//LOGGER.debug("****");
 		try {
 			ValidatorFactory.getInstance().getEmployeeValidator().check(employee);
-			//ValidatorFactoryEnum.INSTANCE.getEmployeeValidator().check(employee);
-			//validator.check(employee);
 		} catch (ValidatorException e) {
 			LOGGER.debug("Wrong employee parameters", e);
 			throw new ServiceException("Wrong employee parameters", e);
