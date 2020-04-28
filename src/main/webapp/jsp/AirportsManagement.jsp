@@ -21,12 +21,12 @@
 	<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
 	<link rel="icon" href="sources/images/logo-airline.png"
 		type="image/icon type" />
-	<title>Employee</title>
+	<title>Airports</title>
 </head>
 
 <body>
 
-	<c:set var="current_page" value="airport_management" scope="session" />
+	<c:set var="current_page" value="airport_management" scope="request" />
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>
