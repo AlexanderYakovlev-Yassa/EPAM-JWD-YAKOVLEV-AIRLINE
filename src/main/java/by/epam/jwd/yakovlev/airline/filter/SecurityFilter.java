@@ -27,15 +27,10 @@ public class SecurityFilter implements Filter {
 		int defaultUserSecurityIndex = 3;
 		int defaultCommandSecurityIndex = 3;
 
-		System.out.println("SecurityFilter");
-
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpSession session = httpRequest.getSession();
-		System.out.println("Security 1");
 		Employee currentUser = (Employee) session.getAttribute(StringConstant.CURRENT_SESSION_USER_KEY.getValue());
-		System.out.println("Security 2");
 		String commandName = httpRequest.getParameter(StringConstant.COMMAND_KEY.getValue());
-		System.out.println("Security 3");
 
 		int currentUserSecurityIndex = currentUser != null
 				? SystemRoleEnum.valueOf(currentUser.getSystemRole().getSystemRoleName().toUpperCase())
@@ -46,18 +41,13 @@ public class SecurityFilter implements Filter {
 				? CommandEnum.valueOf(commandName.toUpperCase()).getSecurityIndex()
 				: defaultCommandSecurityIndex;
 
-		System.out.println("security currentUserSecurityIndex - " + currentUserSecurityIndex);
-		System.out.println("security commandSecurityIndex - " + commandSecurityIndex);
-
 		if (currentUserSecurityIndex > commandSecurityIndex) {
-			System.out.println("security redirect");
 			ServletContext servletContext = request.getServletContext();
 			RequestDispatcher dispatcher = servletContext
 					.getRequestDispatcher(PageEnum.SECURITY_ALERT_PAGE.getPageURL());
 			dispatcher.forward(request, response);
 			return;
 		}
-		System.out.println("Security 5");
 		chain.doFilter(request, response);
 	}
 
