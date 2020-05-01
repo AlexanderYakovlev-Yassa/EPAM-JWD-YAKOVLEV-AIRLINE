@@ -30,7 +30,7 @@
 								</label><br /> 
 								<input type="text"
 									class="form-control border-primary" id="user_name_input"
-									name="employee_nickname" value="${sessionScope.get("current_session_user").getNickname()}"/><br /> 
+									name="employee_nickname" value="${sessionScope.get('current_session_user').getNickname()}"/><br /> 
 								<label class="text text-primary" for="user_password_input">
 								<fmt:message key="label.password" />
 								</label><br /> 
@@ -110,7 +110,11 @@
 						<button class="btn btn-outline-primary" type="submit"
 							name="command" value="home">
 							<fmt:message key="button.home" />
-						</button>						
+						</button>	
+						<button class="btn btn-outline-primary" type="submit"
+							name="command" value="goto_page_flight_schedule">
+							<fmt:message key="button.flight_schedule" />
+						</button>					
 						<button class="btn btn-outline-primary" type="submit"
 							name="command" value="manage_employees">
 							<fmt:message key="button.personell_management" />
@@ -128,7 +132,9 @@
 							<fmt:message key="button.flights" />
 						</button>
 						<button class="btn btn-outline-primary" type="submit"
-							name="command" value="user_cabinet">ERROR</button>
+							name="command" value="goto_page_select_crew">
+							<fmt:message key="button.crew_selection" />
+						</button>
 					</form>
 
 				</div>
