@@ -15,13 +15,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<link rel="stylesheet" type="text/css" href="sources/css/maket.css" />
+	<link rel="stylesheet" type="text/css" href="sources/css/main.css" />
 	<link rel="stylesheet" type="text/css"
 		href="sources/css/bootstrap.min.css" />
 	<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
 	<link rel="icon" href="sources/images/logo-airline.png"
 		type="image/icon type" />
-	<title>Employee</title>
+	<title>Flight Manager</title>
 </head>
 
 <body>
@@ -48,14 +48,12 @@
 				<div class="row">
 					<%--A--%>
 					<div class="col-12 card border-primary">
-						<%--B1--%>
-						<h4 class="text-center text-primary pt-5">
-							<fmt:message key="label.flights" />
-						</h4>
-						<div class="overflow-auto" style="heigth: 200px">
+					
+						<div class="table-wrapper-scroll-y my-custom-scrollbar">
 							<%--C--%>
 
-							<table class="table table-hover">
+							<table  class="table table-hover table-striped table-bordered table-sm my-custom-scrollbar" 
+							cellspacing="0" width="100%">
 								<tr>
 									<th><fmt:message key="column.flight_departure_airport" /></th>
 									<th><fmt:message key="column.flight_destination_airport" /></th>
@@ -239,7 +237,8 @@
 									<div class="col-md-12">
 									<!-- WARNING MESSAGE -->
 									<h3 class="text-center">${sessionScope.success_message}</h3>
-									<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>
+									<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>									
+
 									</div>
 							</div>
 							<div class="container">
