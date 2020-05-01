@@ -18,10 +18,9 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandFlightFactory;
 import by.epam.jwd.yakovlev.airline.service.FlightService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class AddFlight implements Command{
+public class AddFlight extends Command{
 	
 	private static final Logger LOGGER = Logger.getLogger(AddFlight.class);
 
@@ -32,7 +31,6 @@ public class AddFlight implements Command{
 		HttpSession session = request.getSession();
 		FlightService service = ServiceFactory.INSTANCE.getFlightService();
 		CommandFlightFactory factory = CommandEntityFactory.getInstance().getFlightFactory();
-		CommandUtil util = CommandUtil.getINSTANCE();
 		
 		Flight flight = null;
 		
@@ -41,7 +39,7 @@ public class AddFlight implements Command{
 			service.addFlight(flight);
 			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(),
 				"The flight added successfully");
-			util.refreshAllFlightsList(session);
+			refreshAllFlightsList(session);
 		} catch (ServiceException | EntityFactoryException e) {
 			LOGGER.debug("Fail add the flight", e);
 			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(),

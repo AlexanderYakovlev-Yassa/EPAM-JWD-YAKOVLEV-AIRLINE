@@ -19,7 +19,7 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandAircraftM
 import by.epam.jwd.yakovlev.airline.service.AircraftModelService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
 
-public class UpdateAircraftModel implements Command{
+public class UpdateAircraftModel extends Command{
 
 	private static final Logger LOGGER = Logger.getLogger(UpdateAircraftModel.class);
 	

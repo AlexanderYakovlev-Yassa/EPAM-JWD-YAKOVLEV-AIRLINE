@@ -18,10 +18,9 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandAirportFactory;
 import by.epam.jwd.yakovlev.airline.service.AirportService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class UpdateAirport implements Command{
+public class UpdateAirport extends Command{
 
 	private static final Logger LOGGER = Logger.getLogger(UpdateAirport.class);
 	
@@ -32,7 +31,6 @@ public class UpdateAirport implements Command{
 		HttpSession session = request.getSession();
 		AirportService service = ServiceFactory.INSTANCE.getAirportService();
 		CommandAirportFactory factory = CommandEntityFactory.getInstance().getAirportFactory();
-		CommandUtil util = CommandUtil.getINSTANCE();
 
 		Airport airport = null;
 		
@@ -41,7 +39,7 @@ public class UpdateAirport implements Command{
 			service.updateAirport(airport);
 			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(),
 					"The airport was updated successfully");
-            util.refreshAllAirportsList(session);
+            refreshAllAirportsList(session);
 		} catch (ServiceException | EntityFactoryException e) {
 			LOGGER.debug("Fail update the airport", e);
 			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(),

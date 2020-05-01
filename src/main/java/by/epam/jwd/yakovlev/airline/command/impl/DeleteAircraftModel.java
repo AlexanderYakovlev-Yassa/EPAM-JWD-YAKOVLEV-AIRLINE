@@ -18,10 +18,9 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandAircraftModelFactory;
 import by.epam.jwd.yakovlev.airline.service.AircraftModelService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class DeleteAircraftModel implements Command{
+public class DeleteAircraftModel extends Command{
 	
 	private static final Logger LOGGER = Logger.getLogger(DeleteAircraftModel.class);
     
@@ -32,14 +31,13 @@ public class DeleteAircraftModel implements Command{
     	Map<String, String[]> map = request.getParameterMap();
     	AircraftModelService service = ServiceFactory.INSTANCE.getAircraftModelService();
 		CommandAircraftModelFactory factory = CommandEntityFactory.getInstance().getAircraftModelFactory();
-		CommandUtil util = CommandUtil.getINSTANCE();
 		
 		AircraftModel aircraftModel = null;
 			
 		try {
 			aircraftModel = factory.create(map);
 			service.deleteAircraftModel(aircraftModel);
-			util.refreshAllAircraftModelsList(session);
+			refreshAllAircraftModelsList(session);
 			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), "Delete success");
 		} catch (ServiceException | EntityFactoryException e) {
 			LOGGER.debug("delete fault", e);

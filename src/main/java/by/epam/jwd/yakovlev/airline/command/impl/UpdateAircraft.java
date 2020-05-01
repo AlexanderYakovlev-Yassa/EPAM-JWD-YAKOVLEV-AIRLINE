@@ -18,10 +18,9 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandAircraftFactory;
 import by.epam.jwd.yakovlev.airline.service.AircraftService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class UpdateAircraft implements Command{
+public class UpdateAircraft extends Command{
 	
 	private static final Logger LOGGER = Logger.getLogger(AddAircraft.class);
 
@@ -32,7 +31,6 @@ public class UpdateAircraft implements Command{
 		HttpSession session = request.getSession();
 		AircraftService service = ServiceFactory.INSTANCE.getAircraftService();
 		CommandAircraftFactory factory = CommandEntityFactory.getInstance().getAircraftFactory();
-		CommandUtil util = CommandUtil.getINSTANCE();
 
 		Aircraft aircraft = null;
 		
@@ -41,7 +39,7 @@ public class UpdateAircraft implements Command{
 			service.updateAircraft(aircraft);
 			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(),
 					"The aircrat was updated successfully");
-            util.refreshAllAircraftsList(session);
+            refreshAllAircraftsList(session);
 		} catch (ServiceException | EntityFactoryException e) {
 			LOGGER.debug("Fail update the aircraft", e);
 			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Fail update aircraft.");

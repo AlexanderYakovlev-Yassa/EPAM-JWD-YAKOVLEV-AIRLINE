@@ -20,7 +20,7 @@ import by.epam.jwd.yakovlev.airline.service.AirportService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class DeleteAirport implements Command{
+public class DeleteAirport extends Command{
 	
 	private static final Logger LOGGER = Logger.getLogger(DeleteAirport.class);
     

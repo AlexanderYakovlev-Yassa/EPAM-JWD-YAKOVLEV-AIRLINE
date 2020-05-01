@@ -8,18 +8,15 @@ import javax.servlet.http.HttpSession;
 
 import by.epam.jwd.yakovlev.airline.command.Command;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 
-public class GotoPageAircraftModelsManagement implements Command{
+public class GotoPageAircraftModelsManagement extends Command{
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
-		CommandUtil util = CommandUtil.getINSTANCE();
 
 		HttpSession session = request.getSession();
 		
-		util.refreshAllAircraftModelsList(session);
+		refreshAllAircraftModelsList(session);
 		
 		return PageEnum.AIRCRAFT_MODELS_MANAGEMENT.getPageURL();
 	}

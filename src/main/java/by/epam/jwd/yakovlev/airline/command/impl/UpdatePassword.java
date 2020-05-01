@@ -17,10 +17,9 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandEmployeeFactory;
 import by.epam.jwd.yakovlev.airline.service.EmployeeService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class UpdatePassword implements Command{
+public class UpdatePassword extends Command{
 	
     private static final Logger LOGGER = Logger.getLogger(LoginUser.class);    
 
@@ -31,7 +30,6 @@ public class UpdatePassword implements Command{
 		HttpSession session = request.getSession();
 		Map<String, String[]> map = request.getParameterMap();
 		CommandEmployeeFactory factory = CommandEntityFactory.getInstance().getEmployeeFactory();
-		CommandUtil util = CommandUtil.getINSTANCE();
 		
 		Employee employee = null;
 		
@@ -47,6 +45,6 @@ public class UpdatePassword implements Command{
 					"Faile update password");
 		}
 				
-		return util.getNextPage(request.getSession()).getPageURL();
+		return getNextPage(request.getSession()).getPageURL();
 	}
 }

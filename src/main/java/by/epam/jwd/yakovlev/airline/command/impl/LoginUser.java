@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-public class LoginUser implements Command {
+public class LoginUser extends Command {
 
 	private static final Logger LOGGER = Logger.getLogger(LoginUser.class);
 

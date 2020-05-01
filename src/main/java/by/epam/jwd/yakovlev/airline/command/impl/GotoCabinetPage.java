@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import by.epam.jwd.yakovlev.airline.command.Command;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 
-public class GotoCabinetPage implements Command{
+public class GotoCabinetPage extends Command{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

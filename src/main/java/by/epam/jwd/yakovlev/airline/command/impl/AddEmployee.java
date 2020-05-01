@@ -18,10 +18,9 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandEmployeeFactory;
 import by.epam.jwd.yakovlev.airline.service.EmployeeService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class AddEmployee implements Command {
+public class AddEmployee extends Command {
 
 	private static final Logger LOGGER = Logger.getLogger(AddEmployee.class);
 
@@ -32,14 +31,13 @@ public class AddEmployee implements Command {
 		HttpSession session = request.getSession();
 		EmployeeService service = ServiceFactory.INSTANCE.getEmployeeService();
 		CommandEmployeeFactory factory = CommandEntityFactory.getInstance().getEmployeeFactory();
-		CommandUtil util = CommandUtil.getINSTANCE();
 
 		Employee employee = null;
 		
 		try {
 			employee = factory.create(map);
 			service.addEmployee(employee);
-			util.refreshAllEmployeesList(session);
+			refreshAllEmployeesList(session);
 			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), "Add success");
 		} catch (ServiceException | EntityFactoryException e) {
 			LOGGER.debug("Fail add an employee", e);

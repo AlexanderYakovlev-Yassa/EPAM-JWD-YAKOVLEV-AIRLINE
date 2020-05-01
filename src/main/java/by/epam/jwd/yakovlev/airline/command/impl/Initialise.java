@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class Initialise implements Command {
+public class Initialise extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(Initialise.class);
 

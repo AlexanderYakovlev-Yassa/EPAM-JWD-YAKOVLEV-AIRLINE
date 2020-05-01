@@ -9,7 +9,6 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandAircraftFactory;
 import by.epam.jwd.yakovlev.airline.service.AircraftService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.util.Map;
 
-public class DeleteAircraft implements Command {
+public class DeleteAircraft extends Command {
 	
 	private static final Logger LOGGER = Logger.getLogger(DeleteAircraft.class);
 
@@ -32,14 +31,13 @@ public class DeleteAircraft implements Command {
     	Map<String, String[]> map = request.getParameterMap();
 		AircraftService service = ServiceFactory.INSTANCE.getAircraftService();
 		CommandAircraftFactory factory = CommandEntityFactory.getInstance().getAircraftFactory();
-		CommandUtil util = CommandUtil.getINSTANCE();
 						
 		Aircraft aircraft = null;
 			
 		try {
 			aircraft = factory.create(map);
 			service.deleteAircraft(aircraft);
-			util.refreshAllAircraftsList(session);
+			refreshAllAircraftsList(session);
 			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(),
 					"The flight added successfully");
 		} catch (ServiceException | EntityFactoryException e) {

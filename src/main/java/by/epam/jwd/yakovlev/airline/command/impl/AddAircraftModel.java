@@ -20,7 +20,7 @@ import by.epam.jwd.yakovlev.airline.service.AircraftModelService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class AddAircraftModel implements Command{
+public class AddAircraftModel extends Command{
 	
 	private static final Logger LOGGER = Logger.getLogger(AddAircraftModel.class);
 

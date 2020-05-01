@@ -18,10 +18,9 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandDefaultEm
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandEmployeeFactory;
 import by.epam.jwd.yakovlev.airline.service.EmployeeService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class UpdateEmployee implements Command {
+public class UpdateEmployee extends Command {
 
 	private static final Logger LOGGER = Logger.getLogger(UpdateEmployee.class);
 	private static final EmployeeService SERVICE = ServiceFactory.INSTANCE.getEmployeeService();
@@ -32,7 +31,6 @@ public class UpdateEmployee implements Command {
 		Map<String, String[]> map = request.getParameterMap();
 		CommandEmployeeFactory factory = CommandEntityFactory.getInstance().getEmployeeFactory();		
 		HttpSession session = request.getSession();
-		CommandUtil util = CommandUtil.getINSTANCE();
 		
 		Employee employee = null;
 
@@ -40,14 +38,14 @@ public class UpdateEmployee implements Command {
 			employee = factory.create(map);
 			SERVICE.updateEmployee(employee);			
 			updateCurrentSessionEmployee(session);
-			util.refreshAllEmployeesList(session);
+			refreshAllEmployeesList(session);
 			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), "Update success");
 		} catch (ServiceException | EntityFactoryException e) {
 			LOGGER.debug("Fail update the employee info");
 			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Update fail");
 		}
 		
-		return util.getNextPage(session).getPageURL();
+		return getNextPage(session).getPageURL();
 	}
 
 	private void updateCurrentSessionEmployee(HttpSession session) {

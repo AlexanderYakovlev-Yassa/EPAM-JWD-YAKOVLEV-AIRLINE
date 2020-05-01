@@ -9,7 +9,6 @@ import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.impl.CommandAircraftFactory;
 import by.epam.jwd.yakovlev.airline.service.AircraftService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
-import by.epam.jwd.yakovlev.airline.util.CommandUtil;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.util.Map;
 
-public class AddAircraft implements Command {
+public class AddAircraft extends Command {
 	
 	private static final Logger LOGGER = Logger.getLogger(AddAircraft.class);
 
@@ -32,7 +31,6 @@ public class AddAircraft implements Command {
 		HttpSession session = request.getSession();
 		AircraftService service = ServiceFactory.INSTANCE.getAircraftService();
 		CommandAircraftFactory factory = CommandEntityFactory.getInstance().getAircraftFactory();
-		CommandUtil util = CommandUtil.getINSTANCE();
 
 		Aircraft aircraft = null;
 		
@@ -40,7 +38,7 @@ public class AddAircraft implements Command {
 			aircraft = factory.create(map);
 			service.addAircraft(aircraft);
 			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), "The aircrat was added successfully");
-            util.refreshAllAircraftsList(session);
+            refreshAllAircraftsList(session);
 		} catch (ServiceException | EntityFactoryException e) {
 			LOGGER.debug("Fail add the aircraft", e);
 			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Fail add aircraft.");

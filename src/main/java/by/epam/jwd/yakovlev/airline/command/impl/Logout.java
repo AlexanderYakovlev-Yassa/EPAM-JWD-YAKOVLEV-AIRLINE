@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-public class Logout implements Command {
+public class Logout extends Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
