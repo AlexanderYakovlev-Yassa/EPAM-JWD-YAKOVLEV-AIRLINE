@@ -55,6 +55,8 @@ public enum StringConstant {
     NEXT_PAGE ("next_page"),
     PREVIOUS_PAGE ("previous_page"),
     PAGE_KEY ("page"),
+    SELECTED_FLIGHT_KEY ("selected_flight"),
+    SELECTED_FLIGHT_CREW_KEY ("selected_flight_crew"),
     SUCCESS_MESSAGE_KEY ("success_message"),
     SYSTEM_ROLE_ID_KEY ("system_role_id"),
     SYSTEM_ROLE_NAME_KEY ("system_role_name"),
