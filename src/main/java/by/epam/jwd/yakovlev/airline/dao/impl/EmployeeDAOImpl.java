@@ -118,7 +118,7 @@ public class EmployeeDAOImpl extends AbstractDAO<Employee> implements EmployeeDA
 		String employeeFirstName = employee.getFirstName();
 		String employeeLastName = employee.getLastName();
 		String employeeSystemRoleId = String.valueOf(employee.getSystemRole().getSystemRoleID());
-		String employeeCrewRoleId = String.valueOf(employee.getSystemRole().getSystemRoleID());
+		String employeeCrewRoleId = String.valueOf(employee.getCrewRole().getCrewRoleID());
 		String employeeId = String.valueOf(employee.getId());
 		
 		String[] queryParameters = new String[6];
