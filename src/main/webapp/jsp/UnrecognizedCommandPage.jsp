@@ -28,7 +28,7 @@
     <div align="center">
         <h3 class="text-center text-primary pt-5"><fmt:message key="label.security_alert"/></h3>
         <br/><br/>
-        <h1 class="text-center text-primary pt-3"><fmt:message key="label.not_available_operation"/></h1>
+        <h1 class="text-center text-primary pt-3"><fmt:message key="label.unrecognized_command"/></h1>
         
     </div>
 

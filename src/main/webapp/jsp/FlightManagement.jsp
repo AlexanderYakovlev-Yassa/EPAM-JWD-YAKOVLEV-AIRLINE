@@ -29,31 +29,23 @@
 	<c:set var="current_page" value="flights_management" scope="session" />
 
 	<fmt:bundle basename="ui">
-		<%--HEADER--%>
 		<c:import url="Header.jsp" />
-
 
 		<div class="container">
 			<div class="row">
-				<%--0--%>
 				<div class="col-12" align="center">
-
 					<h3 class="text-center text-primary pt-5">
 						<fmt:message key="label.flight_management" />
 					</h3>
 				</div>
 			</div>
-			<%--0--%>
+			
 			<div class="container">
 				<div class="row">
-					<%--A--%>
 					<div class="col-12 card border-primary">
-					
 						<div class="table-wrapper-scroll-y my-custom-scrollbar">
-							<%--C--%>
-
 							<table  class="table table-hover table-striped table-bordered table-sm my-custom-scrollbar" 
-							cellspacing="0" width="100%">
+									cellspacing="0" width="100%">
 								<tr>
 									<th><fmt:message key="column.flight_departure_airport" /></th>
 									<th><fmt:message key="column.flight_destination_airport" /></th>
@@ -61,221 +53,186 @@
 									<th><fmt:message key="column.flight_landing_time" /></th>
 									<th><fmt:message key="column.flight_aircraft" /></th>
 								</tr>
-							<c:forEach var="elem" items="${sessionScope.all_flights_list}">								
+								<c:forEach var="elem" items="${sessionScope.all_flights_list}">								
 								
-								<tr onclick="flightsTabClick('current-flight-id', '${elem.flightID}',
-															'current-flight-departure-airport-id', '${elem.departureAirport.airportID}',
-															'current-flight-departure-airport-city', '${elem.departureAirport.airportCity}',
-															'current-flight-destination-airport-id', '${elem.destinationAirport.airportID}',
-															'current-flight-destination-airport-city', '${elem.destinationAirport.airportCity}',
-															'current-flight-departure-time', '<fmt:formatDate value="${elem.departureTime}" pattern="dd-MM-yyyy HH:mm" />',															
-															'current-flight-landing-time', '<fmt:formatDate value="${elem.landingTime}" pattern="dd-MM-yyyy HH:mm" />',
-															'current-flight-aircraft-id', '${elem.aircraft.aircraftID}',
-															'current-flight-aircraft', '${elem.aircraft.aircraftSideNumber}',
-															'${elem.aircraft.aircraftModel.aircraftModelName}'
-															)">
-									<td>${elem.departureAirport.airportCity}</td>	
-									<td>${elem.destinationAirport.airportCity}</td>	
-									<td><fmt:formatDate value="${elem.departureTime}" pattern="dd-MM-yyyy HH:mm" /></td>
-									<td><fmt:formatDate value="${elem.landingTime}" pattern="dd-MM-yyyy HH:mm" /></td>
-									<td>${elem.aircraft.aircraftModel.aircraftModelName}</td>
-								</tr>		
-													
-							</c:forEach>								
+									<tr onclick="flightsTabClick('current-flight-id', '${elem.flightID}',
+											'current-flight-departure-airport-id', '${elem.departureAirport.airportID}',
+											'current-flight-departure-airport-city', '${elem.departureAirport.airportCity}',
+											'current-flight-destination-airport-id', '${elem.destinationAirport.airportID}',
+											'current-flight-destination-airport-city', '${elem.destinationAirport.airportCity}',
+											'current-flight-departure-time', '<fmt:formatDate value="${elem.departureTime}" pattern="dd-MM-yyyy HH:mm" />',															
+											'current-flight-landing-time', '<fmt:formatDate value="${elem.landingTime}" pattern="dd-MM-yyyy HH:mm" />',
+											'current-flight-aircraft-id', '${elem.aircraft.aircraftID}',
+											'current-flight-aircraft', '${elem.aircraft.aircraftSideNumber}',
+											'${elem.aircraft.aircraftModel.aircraftModelName}'	)">
+										<td>${elem.departureAirport.airportCity}</td>	
+										<td>${elem.destinationAirport.airportCity}</td>	
+										<td><fmt:formatDate value="${elem.departureTime}" pattern="dd-MM-yyyy HH:mm" /></td>
+										<td><fmt:formatDate value="${elem.landingTime}" pattern="dd-MM-yyyy HH:mm" /></td>
+										<td>${elem.aircraft.aircraftModel.aircraftModelName}</td>
+									</tr>															
+								</c:forEach>								
 							</table>
-
 						</div>
-						<%--C--%>
 					</div>
-					<%--B1--%>
-				<div class="container">	
-				<div class="row">
-					<div class="col-12 card border-primary">
-						<%--B2--%>
-						<%--Card employee info--%>
-						<h4 class="text-center text-primary pt-5">
-							<fmt:message key="label.flight_info"/>
-						</h4>
-
-						<form id="add-aircraft-form" class="form" action="" method="post">
-							<%--Form--%>
-							<div class="container">
-								<div class="row">
-									<%--D--%>
-									<div class="col-md-6">
-										<%--D1--%>
-										<div class="card-body">
- 
- 											<div class="form-group">
-											<%--departure airport--%>
-											<label for="current-flight-departure-airport-city" class="text-primary"> 
-												<fmt:message key="label.flight_departure_airport" />
-											</label><br />
-
-											<div class="btn-group">
-												<button type="button" id="current-flight-departure-airport-city"
-													class="btn btn-outline-primary dropdown-toggle"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<fmt:message key="label.not_defined" />
-												</button>
-												<div class="dropdown-menu">
-													<c:forEach var="elem"
-														items="${sessionScope.all_airports_list}">
-														<a class="dropdown-item" href="#"
-															onclick="dropDownPick(
-															'current-flight-departure-airport-city', '${elem.airportCity}' ,
-															'current-flight-departure-airport-id', '${elem.airportID}')">
-															<c:out value="${elem.airportCity}"></c:out>
-														</a>
-													</c:forEach>
-												</div>												
-											</div><br/>
-											
-											<%--destination airport--%>
-											<label for="current-flight-destination-airport-city" class="text-primary"> 
-												<fmt:message key="label.flight_destination_airport" />
-											</label><br />
-
-											<div class="btn-group">
-												<button type="button" id="current-flight-destination-airport-city"
-													class="btn btn-outline-primary dropdown-toggle"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<fmt:message key="label.not_defined" />
-												</button>
-												<div class="dropdown-menu">
-													<c:forEach var="elem"
-														items="${sessionScope.all_airports_list}">
-														<a class="dropdown-item" href="#"
-															onclick="dropDownPick(
-															'current-flight-destination-airport-city', '${elem.airportCity}' ,
-															'current-flight-destination-airport-id', '${elem.airportID}')">
-															<c:out value="${elem.airportCity}"></c:out>
-														</a>
-													</c:forEach>
-												</div>												
+					
+					<div class="container">	
+						<div class="row">
+							<div class="col-12 card border-primary">
+								<h4 class="text-center text-primary pt-5">
+									<fmt:message key="label.flight_info"/>
+								</h4>
+								<form id="add-aircraft-form" class="form" action="" method="post">
+								
+									<div class="container">
+										<div class="row">									
+											<div class="col-md-6">
+												<div class="card-body"> 
+ 													<div class="form-group">
+														<label for="current-flight-departure-airport-city" class="text-primary"> 
+															<fmt:message key="label.flight_departure_airport" />
+														</label><br />
+														<div class="btn-group">
+															<button type="button" id="current-flight-departure-airport-city"
+																	class="btn btn-outline-primary dropdown-toggle"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">
+																<fmt:message key="label.not_defined" />
+															</button>
+															<div class="dropdown-menu">
+																<c:forEach var="elem"
+																		items="${sessionScope.all_airports_list}">
+																	<a class="dropdown-item" href="#"
+																		onclick="dropDownPick(
+																		'current-flight-departure-airport-city', '${elem.airportCity}' ,
+																		'current-flight-departure-airport-id', '${elem.airportID}')">
+																		<c:out value="${elem.airportCity}"></c:out>
+																	</a>
+																</c:forEach>
+															</div>												
+														</div><br/>
+														<label for="current-flight-destination-airport-city" class="text-primary"> 
+															<fmt:message key="label.flight_destination_airport" />
+														</label><br />
+														<div class="btn-group">
+															<button type="button" id="current-flight-destination-airport-city"
+																	class="btn btn-outline-primary dropdown-toggle"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">
+																<fmt:message key="label.not_defined" />
+															</button>
+															<div class="dropdown-menu">
+																<c:forEach var="elem"
+																		items="${sessionScope.all_airports_list}">
+																	<a class="dropdown-item" href="#"
+																		onclick="dropDownPick(
+																		'current-flight-destination-airport-city', '${elem.airportCity}' ,
+																		'current-flight-destination-airport-id', '${elem.airportID}')">
+																		<c:out value="${elem.airportCity}"></c:out>
+																	</a>
+																</c:forEach>
+															</div>												
+														</div>
+														<div>
+															<button type="submit" id="goto-airport-page"
+																class="btn btn-outline-primary"
+																name="command" value="goto_page_airports_management">
+																Airport management
+															</button>
+														</div><br/>
+														<label for="current-flight-aircraft" class="text-primary"> 
+															<fmt:message key="label.flight_aircraft" />
+														</label><br />
+														<div class="btn-group">
+															<button type="button" id="current-flight-aircraft"
+																	class="btn btn-outline-primary dropdown-toggle"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">
+																<fmt:message key="label.not_defined" />
+															</button>												
+															<div class="dropdown-menu">
+																<c:forEach var="elem"
+																			items="${sessionScope.all_aircrafts_list}">
+																	<a class="dropdown-item" href="#"
+																		onclick="dropDownPick(
+																		'current-flight-aircraft-id', '${elem.aircraftID}' ,
+																		'current-flight-aircraft-sideNumber', '${elem.aircraftSideNumber}',
+																		'current-flight-aircraft-model-name', '${elem.aircraftModel.aircraftModelName}'
+																		)">
+																		<c:out value="${elem.aircraftSideNumber}"></c:out>
+																		<c:out value="${elem.aircraftModel.aircraftModelName}"></c:out>
+																	</a>
+																</c:forEach>
+															</div>												
+														</div>
+													</div>
+													<input type="hidden" id="current-flight-id"
+															name="flight_id" />
+													<input type="hidden" id="current-flight-departure-airport-id"
+															name="flight_departure_airport_id" />
+													<input type="hidden" id="current-flight-destination-airport-id"
+															name="flight_destination_airport_id" />
+													<input type="hidden" id="current-flight-aircraft-id"
+															name="flight_aircraft_id" />
+												</div>
 											</div>
-											<div>
-												<button type="submit" id="goto-airport-page"
-													class="btn btn-outline-primary"
-													name="command" value="goto_page_airports_management">
-													Airport management
-												</button>
+											<div class="col-md-6">								
+												<div class="form-group"><br/>
+													<label for="current-flight-departure-time" class="text-primary"> 
+														<fmt:message key="label.flight_departure_time" />
+													</label><br /> 
+													<input type="text" name="flight_departure_time"
+															id="current-flight-departure-time"
+															class="form-control border-primary" />
+												</div>
+								
+												<div class="form-group">
+													<label for="current-flight-landing-time" class="text-primary"> 
+														<fmt:message key="label.flight_landing_time" />
+													</label><br /> 
+													<input type="text" name="flight_landing_time"
+															id="current-flight-landing-time"
+															class="form-control border-primary" />
+												</div>								
 											</div>
-											<br/>
-											<label for="current-flight-aircraft" class="text-primary"> 
-												<fmt:message key="label.flight_aircraft" />
-											</label><br />
-											<div class="btn-group">
-												<button type="button" id="current-flight-aircraft"
-													class="btn btn-outline-primary dropdown-toggle"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<fmt:message key="label.not_defined" />
-												</button>												
-												<div class="dropdown-menu">
-													<c:forEach var="elem"
-														items="${sessionScope.all_aircrafts_list}">
-														<a class="dropdown-item" href="#"
-															onclick="dropDownPick(
-															'current-flight-aircraft-id', '${elem.aircraftID}' ,
-															'current-flight-aircraft-sideNumber', '${elem.aircraftSideNumber}',
-															'current-flight-aircraft-model-name', '${elem.aircraftModel.aircraftModelName}'
-															)">
-															<c:out value="${elem.aircraftSideNumber}"></c:out>
-															<c:out value="${elem.aircraftModel.aircraftModelName}"></c:out>
-														</a>
-													</c:forEach>
-												</div>												
-											</div>
-
 										</div>
-											<input type="hidden" id="current-flight-id"
-													name="flight_id" />
-											<input type="hidden" id="current-flight-departure-airport-id"
-													name="flight_departure_airport_id" />
-											<input type="hidden" id="current-flight-destination-airport-id"
-													name="flight_destination_airport_id" />
-											<input type="hidden" id="current-flight-aircraft-id"
-													name="flight_aircraft_id" />
+									</div>
+									
+									<div class="container">
+										<div class="row">
+											<div class="col-md-12">
+												<h3 class="text-center">${sessionScope.success_message}</h3>
+												<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>
+											</div>
+										</div>
+										
+										<div class="container">
+											<div class="row">
+												<div class="col-md-12"><%--F--%>
+													<button type="submit" class="btn btn-outline-primary"
+															name="command" value="add_flight">
+														<fmt:message key="button.add" />
+													</button>
+													<button type="submit" class="btn btn-outline-primary"
+															name="command" value="update_flight">
+														<fmt:message key="button.update" />
+													</button>										
+													<button type="submit" class="btn btn-outline-primary"
+															name="command" value="delete_flight">
+														<fmt:message key="button.delete" />
+													</button>
+												</div>
+											</div>
 										</div>
 									</div>
-								<div class="col-md-6">
-								
-									<div class="form-group">
-										<%--aircraft model name--%>
-										<br/>
-										<label for="current-flight-departure-time" class="text-primary"> 
-												<fmt:message key="label.flight_departure_time" />
-										</label><br /> 
-										<input type="text" name="flight_departure_time"
-												id="current-flight-departure-time"
-												class="form-control border-primary" />
-									</div>
-								
-									<div class="form-group">
-										<%--aircraft model name--%>
-										
-										<label for="current-flight-landing-time" class="text-primary"> 
-												<fmt:message key="label.flight_landing_time" />
-										</label><br /> 
-										<input type="text" name="flight_landing_time"
-												id="current-flight-landing-time"
-												class="form-control border-primary" />
-									</div>
-								
-								</div>
-
-
-									<%--D2--%>
-								</div>
+								</form>
 							</div>
-							<%--D--%>
-							<div class="container">
-							<div class="row">
-									<div class="col-md-12">
-									<!-- WARNING MESSAGE -->
-									<h3 class="text-center">${sessionScope.success_message}</h3>
-									<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>									
-
-									</div>
-							</div>
-							<div class="container">
-								<div class="row">
-
-									<div class="col-md-12">
-										<%--F--%>
-										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="add_flight">
-											<fmt:message key="button.add" />
-										</button>
-										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="update_flight">
-											<fmt:message key="button.update" />
-										</button>										
-										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="delete_flight">
-											<fmt:message key="button.delete" />
-										</button>										
-										
-									</div>
-								</div>
-							</div>
-							</div>
-							<%--F--%>
-						</form>
+						</div>
 					</div>
-					</div>
-					</div>
-					<%--B2--%>
 				</div>
 			</div>
-			<%--A--%>
 		</div>
-
 		<c:import url="Footer.jsp" />
-
 	</fmt:bundle>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

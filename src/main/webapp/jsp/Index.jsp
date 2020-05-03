@@ -18,22 +18,15 @@
 
 <body>
 
-<c:set var="current_page" value="index" scope="session"/>
-
-<fmt:bundle basename="ui">
-
-    <%--HEADER--%>
-    <c:import url="Header.jsp"/>
-
-    <div align="center">
-        <h3 class="text-center text-primary pt-5"><fmt:message key="label.welcome"/></h3>
-        <img src="sources/images/them-picture.jpg" class="img-fluid" alt="Responsive image"/>
-        
-    </div>
-
-    <c:import url="Footer.jsp"/>
-
-</fmt:bundle>
+	<c:set var="current_page" value="index" scope="session"/>
+	<fmt:bundle basename="ui">
+    	<c:import url="Header.jsp"/>
+    	<div align="center">
+        	<h3 class="text-center text-primary pt-5"><fmt:message key="label.welcome"/></h3>
+        	<img src="sources/images/them-picture.jpg" class="img-fluid" alt="Responsive image"/>
+    	</div>
+    	<c:import url="Footer.jsp"/>
+	</fmt:bundle>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

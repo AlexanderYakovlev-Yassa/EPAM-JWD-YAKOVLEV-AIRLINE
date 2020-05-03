@@ -12,31 +12,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link rel="stylesheet" type="text/css"
-	href="sources/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="sources/css/main.css" />
-<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
-<link rel="icon" href="sources/images/logo-airline.png"
-	type="image/icon type" />
-<title>Select Crew</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="stylesheet" type="text/css"
+		href="sources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="sources/css/main.css" />
+	<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
+	<link rel="icon" href="sources/images/logo-airline.png"
+		type="image/icon type" />
+	<title>Select Crew</title>
 </head>
 
 <body>
-
 	<c:set var="current_page" value="flight_schedule" scope="session" />
-
-	<fmt:bundle basename="ui">
-	
-		<c:import url="Header.jsp" />
-		
+	<fmt:bundle basename="ui">	
+		<c:import url="Header.jsp" />		
 		<div class="container">
 			<div class="row">
-				<%--0--%>
 				<div class="col-12" align="center">
-
 					<h3 class="text-center text-primary pt-5">
 						<fmt:message key="label.flight_schedule" />
 					</h3>
@@ -44,20 +38,14 @@
 			</div>
 			<div class="container">
 				<div class="row">
-					<%--A--%>
 					<div class="col-12 card border-primary">
-
 						<div>
-
-							<table
-								class="table table-hover table-striped table-bordered table-sm">
-
+							<table class="table table-hover table-striped table-bordered table-sm">
 								<col width="90" />
 								<col width="90" />
 								<col width="70" />
 								<col width="70" />
 								<col width="100" />
-
 								<tr>
 									<th><fmt:message key="column.flight_departure_airport" /></th>
 									<th><fmt:message key="column.flight_destination_airport" /></th>
@@ -65,9 +53,7 @@
 									<th><fmt:message key="column.flight_landing_time" /></th>
 									<th><fmt:message key="column.flight_aircraft" /></th>
 								</tr>
-
 								<c:forEach var="elem" items="${sessionScope.all_flights_list}">
-
 									<tr>
 										<td>${elem.departureAirport.airportCity}</td>
 										<td>${elem.destinationAirport.airportCity}</td>
@@ -77,18 +63,14 @@
 												pattern="dd-MM-yyyy HH:mm" /></td>
 										<td>${elem.aircraft.aircraftModel.aircraftModelName}</td>
 									</tr>
-
 								</c:forEach>
-
 							</table>
 						</div>
 					</div>
 				</div>
 			</div>	
 		</div>
-
 		<c:import url="Footer.jsp" />
-
 	</fmt:bundle>
 	
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -104,5 +86,4 @@
 		crossorigin="anonymous"></script>
 
 </body>
-
 </html>

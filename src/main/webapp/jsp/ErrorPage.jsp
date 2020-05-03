@@ -26,27 +26,24 @@
 
 <body>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
 
-				<br/>
-				<h3>Request from
-					${pageContext.errorData.requestURI} is failed</h3>
-				<br/>
-				<h3>Servlet name:
-					${pageContext.errorData.servletName}</h3>
-				<br/>
-				<h3>Status code:
-					${pageContext.errorData.statusCode}</h3>
-				<br/>
-				<h3>Exception: ${pageContext.exception}</h3>
-				<br/>
-				<h3>Message from exception:
-					${pageContext.exception.message}</h3>
+	<c:set var="current_page" value="error" scope="session" />
+
+	<fmt:bundle basename="ui">
+		<c:import url="Header.jsp" />
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-12"><br/>
+					<h3>
+						<fmt:message key="message.server_problem" />
+					</h3><br/>								
+				</div>
 			</div>
 		</div>
-	</div>
+	
+	</fmt:bundle>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
