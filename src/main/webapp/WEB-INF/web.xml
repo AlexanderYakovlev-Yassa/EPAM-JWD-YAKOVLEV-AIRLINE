@@ -27,8 +27,8 @@
 	</error-page>
 	
 	<filter>
-		<filter-name>TestFilter</filter-name>
-		<filter-class>by.epam.jwd.yakovlev.airline.filter.TestFilter</filter-class>
+		<filter-name>LegalCommandFilter</filter-name>
+		<filter-class>by.epam.jwd.yakovlev.airline.filter.LegalCommandFilter</filter-class>
 	</filter>
 	
 	<filter>
@@ -50,15 +50,15 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>	
 	
+	<filter-mapping>
+		<filter-name>LegalCommandFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<filter>
 		<filter-name>MessageFilter</filter-name>
 		<filter-class>by.epam.jwd.yakovlev.airline.filter.MessageFilter</filter-class>
 	</filter>
-	
-	<filter-mapping>
-		<filter-name>TestFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 	
 	<filter-mapping>
 		<filter-name>SecurityFilter</filter-name>

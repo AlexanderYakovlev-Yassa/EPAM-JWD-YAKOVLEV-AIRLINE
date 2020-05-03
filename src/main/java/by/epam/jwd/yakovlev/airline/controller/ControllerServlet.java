@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 @WebServlet(name = "ControllerServlet", value = "/")
@@ -48,7 +49,6 @@ public class ControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		Command command = getCommand(request, response);
-		
 		request.getRequestDispatcher(command.execute(request, response)).forward(request, response);
 	}
 
@@ -64,18 +64,6 @@ public class ControllerServlet extends HttpServlet {
 		
 		String commandName = request.getParameter(StringConstant.COMMAND_KEY.getValue());
 		
-		if (commandName == null) {
-			return CommandEnum.INITIALISE_SESSION.getCommand();
-		}
-		
-		Command command;
-		
-		try {
-			command = CommandEnum.valueOf(commandName.toUpperCase()).getCommand();
-		} catch (IllegalArgumentException e) {
-			command = CommandEnum.GOTO_PAGE_UNRECOGNIZED_COMMAND.getCommand();
-		}
-		
-		return command;
+		return CommandEnum.valueOf(commandName.toUpperCase()).getCommand();
 	}
 }
