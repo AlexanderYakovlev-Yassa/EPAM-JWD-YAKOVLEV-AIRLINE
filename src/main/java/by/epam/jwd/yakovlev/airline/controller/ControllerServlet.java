@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -63,7 +64,21 @@ public class ControllerServlet extends HttpServlet {
 	private Command getCommand(HttpServletRequest request, HttpServletResponse response) {
 		
 		String commandName = request.getParameter(StringConstant.COMMAND_KEY.getValue());
+		HttpSession session = request.getSession();
+		Object user = session.getAttribute(StringConstant.CURRENT_SESSION_USER_KEY.getValue());
 		
-		return CommandEnum.valueOf(commandName.toUpperCase()).getCommand();
+		if (user == null) {
+			return CommandEnum.INITIALISE_SESSION.getCommand();
+		}
+		
+		Command command;
+		
+		try {
+			command = CommandEnum.valueOf(commandName.toUpperCase()).getCommand();
+		} catch (IllegalArgumentException e) {
+			command = CommandEnum.GOTO_PAGE_UNRECOGNIZED_COMMAND.getCommand();
+		}
+		
+		return command;
 	}
 }
