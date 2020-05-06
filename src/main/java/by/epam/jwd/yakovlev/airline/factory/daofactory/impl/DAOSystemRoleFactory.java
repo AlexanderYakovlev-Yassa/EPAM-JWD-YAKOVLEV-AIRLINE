@@ -1,8 +1,8 @@
 package by.epam.jwd.yakovlev.airline.factory.daofactory.impl;
 
 import by.epam.jwd.yakovlev.airline.entity.SystemRole;
+import by.epam.jwd.yakovlev.airline.exception.DaoFactoryException;
 import by.epam.jwd.yakovlev.airline.factory.daofactory.AbstractDAOFactory;
-import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,13 +10,11 @@ import java.sql.SQLException;
 public class DAOSystemRoleFactory extends AbstractDAOFactory<SystemRole> {
     
 	@Override
-	public SystemRole create(ResultSet resultSet) throws SQLException {
+	public SystemRole create(ResultSet resultSet) throws SQLException, DaoFactoryException {
 		
-		SystemRole systemRole = new SystemRole();
+		checkResultSetForNull(resultSet);
+		resultSet.first();
 
-        systemRole.setSystemRoleID(resultSet.getInt(StringConstant.SYSTEM_ROLE_ID_KEY.getValue()));
-        systemRole.setSystemRoleName(resultSet.getString(StringConstant.SYSTEM_ROLE_NAME_KEY.getValue()));
-
-        return systemRole;
+        return createSystemRole(resultSet);
 	}
 }
