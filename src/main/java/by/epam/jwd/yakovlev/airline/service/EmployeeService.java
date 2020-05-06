@@ -12,7 +12,6 @@ public interface EmployeeService {
     Optional<Employee> getEmployeeById(int Id) throws ServiceException;
     
     List<Employee> getAllEmployeesList() throws ServiceException;
-    List<Employee> getCrewByFlightID(int flightID) throws ServiceException;
     
 	boolean addEmployee(Employee employee) throws ServiceException;
 	boolean updatePassword(Employee employee, char[] password) throws ServiceException;
