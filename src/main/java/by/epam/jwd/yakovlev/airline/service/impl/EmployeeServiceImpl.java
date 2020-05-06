@@ -47,18 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			throw new ServiceException("Fail to get employee.", e);
 		}
 	}
-
-	@Override
-	public List<Employee> getCrewByFlightID(int flightID) throws ServiceException {
 	
-		try {
-			return EMPLOYEE_DAO.getCrewByFlightID(flightID);
-		} catch (DaoException e) {
-			LOGGER.warn("Fail to get employee", e);
-			throw new ServiceException("Fail to get employee.", e);
-		}
-	}
-
 	@Override
 	public boolean addEmployee(Employee employee) throws ServiceException {
 
