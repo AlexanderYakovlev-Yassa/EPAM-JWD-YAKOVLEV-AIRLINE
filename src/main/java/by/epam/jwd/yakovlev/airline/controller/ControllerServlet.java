@@ -1,6 +1,6 @@
 package by.epam.jwd.yakovlev.airline.controller;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.command.CommandEnum;
 import by.epam.jwd.yakovlev.airline.exception.AirlineDataBaseConnectionException;
 import by.epam.jwd.yakovlev.airline.pool.ConnectionsPool;
@@ -49,7 +49,7 @@ public class ControllerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Command command = getCommand(request, response);
+		AbstractCommand command = getCommand(request, response);
 		request.getRequestDispatcher(command.execute(request, response)).forward(request, response);
 	}
 
@@ -57,11 +57,11 @@ public class ControllerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Command command = getCommand(request, response);
+		AbstractCommand command = getCommand(request, response);
 		request.getRequestDispatcher(command.execute(request, response)).forward(request, response);
 	}	
 
-	private Command getCommand(HttpServletRequest request, HttpServletResponse response) {
+	private AbstractCommand getCommand(HttpServletRequest request, HttpServletResponse response) {
 		
 		String commandName = request.getParameter(StringConstant.COMMAND_KEY.getValue());
 		HttpSession session = request.getSession();
@@ -71,7 +71,7 @@ public class ControllerServlet extends HttpServlet {
 			return CommandEnum.INITIALISE_SESSION.getCommand();
 		}
 		
-		Command command;
+		AbstractCommand command;
 		
 		try {
 			command = CommandEnum.valueOf(commandName.toUpperCase()).getCommand();
