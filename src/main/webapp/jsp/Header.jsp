@@ -12,7 +12,12 @@
 
 <body>
 	<fmt:bundle basename="ui">
-		<div class="modal fade" id="alertMessage" role="dialog">
+	
+	
+	
+	
+	
+<%-- 		<div class="modal fade" id="alertMessage" role="dialog">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-body">
@@ -54,7 +59,12 @@
 					<div class="modal-footer"></div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
+		
+		
+		
+		
+		
 		<div><br/>
 		</div>
 		<div class="container">
@@ -64,7 +74,8 @@
 						alt="Responsive image" />
 				</div>
 				<div class="col-8 d-flex justify-content-end">
-					<div class="btn btn-link" onclick="clickOnUser()">
+					<!-- <div class="btn btn-link" onclick="clickOnUser()"> -->
+					<div class="btn btn-link" onclick="userNameOnClick()">
 						${sessionScope.current_session_user.getFirstName()}
 						${sessionScope.current_session_user.getLastName()}
 					</div>
@@ -93,15 +104,15 @@
 						</button>					
 						<button class="btn btn-outline-primary" type="submit"
 							name="command" value="manage_employees">
-							<fmt:message key="button.personell_management" />
+							<fmt:message key="button.personnel" />
 						</button>
 						<button class="btn btn-outline-primary" type="submit"
 							name="command" value="goto_page_aircraft_management">
 							<fmt:message key="button.aircrafts" />
 						</button>
 						<button class="btn btn-outline-primary" type="submit"
-							name="command" value="goto_page_cabinet">
-							<fmt:message key="button.user_cabinet" />
+							name="command" value="goto_page_airports_management">
+							<fmt:message key="label.airports" />
 						</button>
 						<button class="btn btn-outline-primary" type="submit"
 							name="command" value="goto_page_flights_management">
@@ -109,13 +120,33 @@
 						</button>
 						<button class="btn btn-outline-primary" type="submit"
 							name="command" value="goto_page_select_crew">
-							<fmt:message key="button.crew_selection" />
+							<fmt:message key="button.crews" />
 						</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</fmt:bundle>
+	<script>					
+	
+		function userNameOnClick(){						
+			let request = new XMLHttpRequest();							
+			request.onreadystatechange = function () {								
+				if (this.readyState == 4 && this.status == 200) {
+					refreshWindow(window, this);
+				}
+			} 								
+			request.open("POST", "", true);
+				request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				request.send("command=goto_page_login");
+		}	
+		
+		function refreshWindow(window, request) {
+			window.document.open();
+			window.document.write(request.response);
+			window.document.close();
+		}
+	</script>
 </body>
 
 </html>
