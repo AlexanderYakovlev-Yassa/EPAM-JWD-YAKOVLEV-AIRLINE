@@ -89,15 +89,14 @@
 											<div class="col-md-6">
 												<div class="card-body"> 
  													<div class="form-group">
-														<label for="current-flight-departure-airport-city" class="text-primary"> 
-															<fmt:message key="label.flight_departure_airport" />
-														</label><br />
+														
+														<a class="text-primary"><fmt:message key="label.flight_departure_airport" />:</a>
+														<a><em id="current-flight-departure-airport-city"><fmt:message key="label.not_defined" /></em></a>														
 														<div class="btn-group">
-															<button type="button" id="current-flight-departure-airport-city"
+															<button type="button" 
 																	class="btn btn-outline-primary dropdown-toggle"
 																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">
-																<fmt:message key="label.not_defined" />
+																	aria-expanded="false">																
 															</button>
 															<div class="dropdown-menu">
 																<c:forEach var="elem"
@@ -111,15 +110,13 @@
 																</c:forEach>
 															</div>												
 														</div><br/>
-														<label for="current-flight-destination-airport-city" class="text-primary"> 
-															<fmt:message key="label.flight_destination_airport" />
-														</label><br />
+														<a class="text-primary"><fmt:message key="label.flight_destination_airport" />:</a>
+														<a><em id="current-flight-destination-airport-city"><fmt:message key="label.not_defined" /></em></a>
 														<div class="btn-group">
-															<button type="button" id="current-flight-destination-airport-city"
+															<button type="button" 
 																	class="btn btn-outline-primary dropdown-toggle"
 																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">
-																<fmt:message key="label.not_defined" />
+																	aria-expanded="false">																
 															</button>
 															<div class="dropdown-menu">
 																<c:forEach var="elem"
@@ -132,23 +129,14 @@
 																	</a>
 																</c:forEach>
 															</div>												
-														</div>
-														<div>
-															<button type="submit" id="goto-airport-page"
-																class="btn btn-outline-primary"
-																name="command" value="goto_page_airports_management">
-																Airport management
-															</button>
-														</div><br/>
-														<label for="current-flight-aircraft" class="text-primary"> 
-															<fmt:message key="label.flight_aircraft" />
-														</label><br />
+														</div><br/>														
+														<a class="text-primary"><fmt:message key="label.flight_aircraft" />:</a>
+														<a><em id="current-flight-aircraft"><fmt:message key="label.not_defined" /></em></a>
 														<div class="btn-group">
-															<button type="button" id="current-flight-aircraft"
+															<button type="button"
 																	class="btn btn-outline-primary dropdown-toggle"
 																	data-toggle="dropdown" aria-haspopup="true"
 																	aria-expanded="false">
-																<fmt:message key="label.not_defined" />
 															</button>												
 															<div class="dropdown-menu">
 																<c:forEach var="elem"
@@ -178,18 +166,18 @@
 											</div>
 											<div class="col-md-6">								
 												<div class="form-group"><br/>
-													<label for="current-flight-departure-time" class="text-primary"> 
-														<fmt:message key="label.flight_departure_time" />
-													</label><br /> 
+													<a class="text-primary"> 
+														<fmt:message key="label.flight_departure_time" />:
+													</a> 
 													<input type="text" name="flight_departure_time"
 															id="current-flight-departure-time"
 															class="form-control border-primary" />
 												</div>
 								
 												<div class="form-group">
-													<label for="current-flight-landing-time" class="text-primary"> 
-														<fmt:message key="label.flight_landing_time" />
-													</label><br /> 
+													<a class="text-primary"> 
+														<fmt:message key="label.flight_landing_time" />:
+													<a/> 
 													<input type="text" name="flight_landing_time"
 															id="current-flight-landing-time"
 															class="form-control border-primary" />
