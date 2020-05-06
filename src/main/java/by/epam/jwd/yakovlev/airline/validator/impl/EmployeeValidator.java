@@ -5,7 +5,6 @@ import by.epam.jwd.yakovlev.airline.exception.ValidatorException;
 import by.epam.jwd.yakovlev.airline.validator.AbstractValidator;
 
 public class EmployeeValidator extends AbstractValidator{
-
 	
 	public void check(Employee employee) throws ValidatorException {
 		

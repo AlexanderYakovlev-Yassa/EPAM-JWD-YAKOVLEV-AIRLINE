@@ -4,8 +4,7 @@ import by.epam.jwd.yakovlev.airline.entity.Flight;
 import by.epam.jwd.yakovlev.airline.exception.ValidatorException;
 import by.epam.jwd.yakovlev.airline.validator.AbstractValidator;
 
-public class FlightValidator extends AbstractValidator{
-	
+public class FlightValidator extends AbstractValidator{	
 	
 	public void check(Flight flight) throws ValidatorException {						
 		

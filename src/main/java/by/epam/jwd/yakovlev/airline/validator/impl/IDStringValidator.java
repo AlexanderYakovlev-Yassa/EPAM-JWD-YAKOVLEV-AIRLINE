@@ -4,7 +4,6 @@ import by.epam.jwd.yakovlev.airline.exception.ValidatorException;
 import by.epam.jwd.yakovlev.airline.validator.AbstractValidator;
 
 public class IDStringValidator extends AbstractValidator{
-
 	
 	public void check(String idString) throws ValidatorException {
 		

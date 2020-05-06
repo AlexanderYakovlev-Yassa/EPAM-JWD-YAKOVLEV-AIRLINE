@@ -6,7 +6,6 @@ import by.epam.jwd.yakovlev.airline.validator.AbstractValidator;
 
 public class AircraftModelValidator extends AbstractValidator{
 
-	//@Override
 	public void check(AircraftModel aircraftModel) throws ValidatorException {
 
 		checkNotNegativeInteger(aircraftModel.getAircraftModelID());
