@@ -16,7 +16,8 @@ public class CrewRoleDAOImpl extends AbstractDAO<CrewRole> implements CrewRoleDA
 		String query = SQLQuery.GET_ALL_CREW_ROLE.getQuery();
 		String[] queryParameters = null;
 		
-		List<CrewRole> crewRolesList = getEntitiesList(DAOFactoryEnum.CREW_ROLE, query, queryParameters);	
+		@SuppressWarnings("unchecked")
+		List<CrewRole> crewRolesList = (List<CrewRole>) getEntity(DAOFactoryEnum.CREW_ROLES_LIST, query, queryParameters);	
 		
 		return crewRolesList;
 	}
@@ -27,7 +28,9 @@ public class CrewRoleDAOImpl extends AbstractDAO<CrewRole> implements CrewRoleDA
 		String query = SQLQuery.GET_CREW_ROLE_BY_ID.getQuery();
 		String[] queryParameter = { String.valueOf(ID) };
 		
-		return getEntity(DAOFactoryEnum.CREW_ROLE, query, queryParameter);
+		CrewRole crewRole = getEntity(DAOFactoryEnum.CREW_ROLE, query, queryParameter);
+		
+		return crewRole != null ? Optional.of(crewRole) : Optional.empty();
 	}
 
 	@Override

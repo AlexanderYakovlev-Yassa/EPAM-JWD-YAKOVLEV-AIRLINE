@@ -16,7 +16,8 @@ public class AircraftDAOImpl extends AbstractDAO<Aircraft> implements AircraftDA
 		String query = SQLQuery.GET_ALL_AIRCRAFTS.getQuery();
 		String[] queryParameters = null;
 		
-		List<Aircraft> aircraftList = getEntitiesList(DAOFactoryEnum.AIRCRAFT, query, queryParameters);	
+		@SuppressWarnings("unchecked")
+		List<Aircraft> aircraftList = (List<Aircraft>) getEntity(DAOFactoryEnum.AIRCRAFTS_LIST, query, queryParameters);	
 		
 		return aircraftList;
 	}
@@ -40,7 +41,9 @@ public class AircraftDAOImpl extends AbstractDAO<Aircraft> implements AircraftDA
 		String query = SQLQuery.GET_AIRCRAFT_BY_ID.getQuery();
 		String[] queryParameters = {String.valueOf(aircraftID)};
 		
-		return getEntity(DAOFactoryEnum.AIRCRAFT, query, queryParameters);
+		Aircraft aircraft = getEntity(DAOFactoryEnum.AIRCRAFT, query, queryParameters);
+		
+		return aircraft != null ? Optional.of(aircraft) : Optional.empty();
 	}
 
 	@Override

@@ -10,13 +10,15 @@ import java.util.List;
 import java.util.Optional;
 public class AircraftModelDAOImpl extends AbstractDAO<AircraftModel> implements AircraftModelDAO {
 
+	
 	@Override
 	public List<AircraftModel> getAllAircraftModelsList() throws DaoException {		
 		
 		  String query = SQLQuery.GET_ALL_AIRCRAFT_MODELS.getQuery(); String[]
 		  queryParameters = null;
 		  
-		  List<AircraftModel> aircraftModelsList = getEntitiesList(DAOFactoryEnum.AIRCRAFT_MODEL, query, queryParameters);
+		  @SuppressWarnings("unchecked")
+		  List<AircraftModel> aircraftModelsList = (List<AircraftModel>) getEntity(DAOFactoryEnum.AIRCRAFT_MODELS_LIST, query, queryParameters);
 		  
 		return aircraftModelsList;
 	}
@@ -74,8 +76,10 @@ public class AircraftModelDAOImpl extends AbstractDAO<AircraftModel> implements 
 	public Optional<AircraftModel> getAircraftModelByID(int id) throws DaoException {
 
 		String query = SQLQuery.GET_AIRCRAFT_MODEL_BY_ID.getQuery();
-		String[] queryParameters = { String.valueOf(id) };	
+		String[] queryParameters = { String.valueOf(id) };
+		
+		AircraftModel aircraftModel = getEntity(DAOFactoryEnum.AIRCRAFT_MODEL, query,	queryParameters);
 
-		return getEntity(DAOFactoryEnum.AIRCRAFT_MODEL, query,	queryParameters);
+		return aircraftModel != null ? Optional.of(aircraftModel) : Optional.empty();
 	}
 }

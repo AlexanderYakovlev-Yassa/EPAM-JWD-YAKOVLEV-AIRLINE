@@ -59,8 +59,10 @@ public class AirportDAOImpl extends AbstractDAO<Airport> implements AirportDAO {
 		
 		String query = SQLQuery.GET_AIRPORT_BY_ID.getQuery();
 		String[] queryParameters = { String.valueOf(airportID) };
+		
+		Airport airport = getEntity(DAOFactoryEnum.AIRPORT, query, queryParameters);
 
-		return getEntity(DAOFactoryEnum.AIRPORT, query, queryParameters);
+		return airport != null ? Optional.of(airport) : Optional.empty();
 	}
 
 	@Override
@@ -69,7 +71,8 @@ public class AirportDAOImpl extends AbstractDAO<Airport> implements AirportDAO {
 		String query = SQLQuery.GET_ALL_AIRPORTS.getQuery();
 		String[] queryParameters = null;
 
-		List<Airport> airportList = getEntitiesList(DAOFactoryEnum.AIRPORT, query, queryParameters);
+		@SuppressWarnings("unchecked")
+		List<Airport> airportList = (List<Airport>) getEntity(DAOFactoryEnum.AIRPORTS_LIST, query, queryParameters);
 
 		return airportList;
 	}

@@ -23,25 +23,30 @@ public class EmployeeDAOImpl extends AbstractDAO<Employee> implements EmployeeDA
 		String query = SQLQuery.GET_EMPLOYEE_BY_ID.getQuery();
 		String[] queryParameters = { String.valueOf(id) };
 		
-		return getEntity(DAOFactoryEnum.EMPLOYEE, query, queryParameters);
+		Employee employee = getEntity(DAOFactoryEnum.EMPLOYEE, query, queryParameters);
+		
+		return employee != null ? Optional.of(employee) : Optional.empty();
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Employee> getAllEmployeesList() throws DaoException {
 
 		String query = SQLQuery.GET_ALL_EMPLOYEE.getQuery();
 		String[] queryParameters = null;
 		
-		return getEntitiesList(DAOFactoryEnum.EMPLOYEE, query, queryParameters);
+		
+		return (List<Employee>) getEntity(DAOFactoryEnum.EMPLOYEES_LIST, query, queryParameters);
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Employee> getCrewByFlightID(int flightID) throws DaoException {
 		
 		String query = SQLQuery.GET_CREW_BY_FLIGHT_ID.getQuery();
-		String[] queryParameters = { String.valueOf(flightID) };
+		String[] queryParameters = { String.valueOf(flightID) };		
 		
-		return getEntitiesList(DAOFactoryEnum.EMPLOYEE, query, queryParameters);
+		return (List<Employee>) getEntity(DAOFactoryEnum.EMPLOYEES_LIST, query, queryParameters);
 	}
 	
 	@Override
@@ -86,7 +91,9 @@ public class EmployeeDAOImpl extends AbstractDAO<Employee> implements EmployeeDA
 		String query = SQLQuery.GET_EMPLOYEE_BY_NICKNAME_AND_PASSWORD.getQuery();
 		String[] queryParameters = { nickname, password };
 		
-		return getEntity(DAOFactoryEnum.EMPLOYEE, query, queryParameters);
+		Employee employee = getEntity(DAOFactoryEnum.EMPLOYEE, query, queryParameters);
+		
+		return employee != null ? Optional.of(employee) : Optional.empty();
 	}
 	
 	@Override

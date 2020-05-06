@@ -22,8 +22,10 @@ public class FlightDAOImpl extends AbstractDAO<Flight> implements FlightDAO {
 		
 		String query = SQLQuery.GET_FLIGHT_BY_ID.getQuery();
 		String[] queryParameters = { String.valueOf(flightID) };
+		
+		Flight flight = getEntity(DAOFactoryEnum.FLIGHT, query, queryParameters);
 
-		return getEntity(DAOFactoryEnum.FLIGHT, query, queryParameters);
+		return flight != null ? Optional.of(flight) : Optional.empty();
 	}
 
 	@Override
@@ -90,11 +92,12 @@ public class FlightDAOImpl extends AbstractDAO<Flight> implements FlightDAO {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Flight> getAllFlightList() throws DaoException {
 
 		String query = SQLQuery.GET_ALL_FLIGHTS.getQuery();
 		String[] queryParameters = {};	
 
-		return getEntitiesList(DAOFactoryEnum.FLIGHT, query, queryParameters);
+		return (List<Flight>) getEntity(DAOFactoryEnum.FLIGHTS_LIST, query, queryParameters);
 	}
 }

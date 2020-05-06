@@ -11,14 +11,13 @@ import java.util.*;
 public class SystemRoleDAOImpl extends AbstractDAO<SystemRole> implements SystemRoleDAO {
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<SystemRole> getAllSystemRolesList() throws DaoException {
 
 		String query = SQLQuery.GET_ALL_SYSTEM_ROLES.getQuery();
-		String[] queryParameters = null;
+		String[] queryParameters = null;	
 		
-		List<SystemRole> systemRolesList = getEntitiesList(DAOFactoryEnum.SYSTEM_ROLE, query, queryParameters);	
-		
-		return systemRolesList;
+		return (List<SystemRole>) getEntity(DAOFactoryEnum.SYSTEM_ROLES_LIST, query, queryParameters);
 	}
 	
 	@Override
@@ -27,7 +26,9 @@ public class SystemRoleDAOImpl extends AbstractDAO<SystemRole> implements System
 		String query = SQLQuery.GET_SYSTEM_ROLE_BY_ID.getQuery();
 		String[] queryParameter = { String.valueOf(ID) };
 		
-		return getEntity(DAOFactoryEnum.SYSTEM_ROLE, query, queryParameter);
+		SystemRole systemRole = getEntity(DAOFactoryEnum.SYSTEM_ROLE, query, queryParameter);
+		
+		return systemRole != null ? Optional.of(systemRole) : Optional.empty();
 	}
 
 	@Override
