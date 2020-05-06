@@ -1,6 +1,6 @@
 package by.epam.jwd.yakovlev.airline.command.impl;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 import by.epam.jwd.yakovlev.airline.entity.Aircraft;
 import by.epam.jwd.yakovlev.airline.exception.EntityFactoryException;
@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.util.Map;
 
-public class DeleteAircraft extends Command {
+public class DeleteAircraft extends AbstractCommand {
 	
 	private static final Logger LOGGER = Logger.getLogger(DeleteAircraft.class);
 

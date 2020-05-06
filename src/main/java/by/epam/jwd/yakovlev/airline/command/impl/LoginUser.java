@@ -1,6 +1,6 @@
 package by.epam.jwd.yakovlev.airline.command.impl;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 import by.epam.jwd.yakovlev.airline.entity.Employee;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-public class LoginUser extends Command {
+public class LoginUser extends AbstractCommand {
 
 	private static final Logger LOGGER = Logger.getLogger(LoginUser.class);
 

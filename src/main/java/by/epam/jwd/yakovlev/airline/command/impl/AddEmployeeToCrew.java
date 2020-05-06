@@ -8,13 +8,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
 import by.epam.jwd.yakovlev.airline.service.CrewService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class AddEmployeeToCrew extends Command{
+public class AddEmployeeToCrew extends AbstractCommand{
 	
 	private static final Logger LOGGER = Logger.getLogger(AddEmployeeToCrew.class);
 
@@ -32,6 +32,7 @@ public class AddEmployeeToCrew extends Command{
 		
 		try {
 			crewService.addCrewMember(flightID, employeeID);
+			session.setAttribute(StringConstant.SUCCESS_MESSAGE_KEY.getValue(), "Member added to the crew successfully");
 		} catch (ServiceException e) {
 			LOGGER.debug("Fail get employee");
 			session.setAttribute(StringConstant.WARNING_MESSAGE_KEY.getValue(), "Fail add member to the crew");

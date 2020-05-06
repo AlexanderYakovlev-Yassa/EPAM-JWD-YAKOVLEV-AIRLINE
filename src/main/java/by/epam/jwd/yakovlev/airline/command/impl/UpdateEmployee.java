@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.entity.Employee;
 import by.epam.jwd.yakovlev.airline.exception.EntityFactoryException;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
@@ -20,7 +20,7 @@ import by.epam.jwd.yakovlev.airline.service.EmployeeService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class UpdateEmployee extends Command {
+public class UpdateEmployee extends AbstractCommand {
 
 	private static final Logger LOGGER = Logger.getLogger(UpdateEmployee.class);
 	private static final EmployeeService SERVICE = ServiceFactory.INSTANCE.getEmployeeService();

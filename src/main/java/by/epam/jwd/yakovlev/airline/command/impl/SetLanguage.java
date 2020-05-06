@@ -1,6 +1,6 @@
 package by.epam.jwd.yakovlev.airline.command.impl;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.command.LocalisationEnum;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class SetLanguage extends Command {
+public class SetLanguage extends AbstractCommand {
 
     private static final Logger LOGGER = Logger.getLogger(SetLanguage.class);
 

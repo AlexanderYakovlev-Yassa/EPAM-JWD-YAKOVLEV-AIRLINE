@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 
-public class GotoSelectCrewPage extends Command {
+public class GotoSelectCrewPage extends AbstractCommand {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

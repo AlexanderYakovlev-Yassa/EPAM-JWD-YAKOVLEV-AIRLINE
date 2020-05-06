@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 import by.epam.jwd.yakovlev.airline.entity.AircraftModel;
 import by.epam.jwd.yakovlev.airline.exception.EntityFactoryException;
@@ -20,7 +20,7 @@ import by.epam.jwd.yakovlev.airline.service.AircraftModelService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class DeleteAircraftModel extends Command{
+public class DeleteAircraftModel extends AbstractCommand{
 	
 	private static final Logger LOGGER = Logger.getLogger(DeleteAircraftModel.class);
     

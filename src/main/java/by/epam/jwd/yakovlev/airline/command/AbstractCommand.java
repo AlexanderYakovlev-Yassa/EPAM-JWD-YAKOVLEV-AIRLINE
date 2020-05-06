@@ -6,13 +6,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import by.epam.jwd.yakovlev.airline.entity.Employee;
+import by.epam.jwd.yakovlev.airline.entity.Crew;
 import by.epam.jwd.yakovlev.airline.entity.Flight;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
 import by.epam.jwd.yakovlev.airline.service.AircraftModelService;
 import by.epam.jwd.yakovlev.airline.service.AircraftService;
 import by.epam.jwd.yakovlev.airline.service.AirportService;
 import by.epam.jwd.yakovlev.airline.service.CrewRoleService;
+import by.epam.jwd.yakovlev.airline.service.CrewService;
 import by.epam.jwd.yakovlev.airline.service.EmployeeService;
 import by.epam.jwd.yakovlev.airline.service.FlightService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
@@ -20,11 +21,10 @@ import by.epam.jwd.yakovlev.airline.service.SystemRoleService;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 import java.io.IOException;
-import java.util.List;
 
-public abstract class Command {
+public abstract class AbstractCommand {
 	
-	private static final Logger LOGGER = Logger.getLogger(Command.class);
+	private static final Logger LOGGER = Logger.getLogger(AbstractCommand.class);
 	private static final int ZERO = 0;	
 	
 	private EmployeeService employeeService = ServiceFactory.INSTANCE.getEmployeeService();
@@ -34,6 +34,7 @@ public abstract class Command {
 	private AircraftModelService aircraftModelService = ServiceFactory.INSTANCE.getAircraftModelService();
 	private SystemRoleService systemRoleService = ServiceFactory.INSTANCE.getSystemRoleService();
 	private CrewRoleService crewRoleService = ServiceFactory.INSTANCE.getCrewRoleService();
+	private CrewService crewService = ServiceFactory.INSTANCE.getCrewService();
 
     public abstract String execute(HttpServletRequest request, HttpServletResponse response) throws IOException;
     
@@ -136,7 +137,7 @@ public abstract class Command {
 			Flight selectedFlight = (Flight) session.getAttribute(StringConstant.SELECTED_FLIGHT_KEY.getValue());
 			if (selectedFlight != null) {
 				try {
-					List<Employee> crew = employeeService.getCrewByFlightID(selectedFlight.getFlightID());
+					Crew crew = crewService.getCrewByFlightID(selectedFlight.getFlightID());
 					session.setAttribute(StringConstant.SELECTED_FLIGHT_CREW_KEY.getValue(), crew);
 				} catch (ServiceException e) {
 					LOGGER.debug("Fail get crew");

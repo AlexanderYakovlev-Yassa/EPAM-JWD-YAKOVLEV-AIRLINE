@@ -7,13 +7,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.exception.ServiceException;
 import by.epam.jwd.yakovlev.airline.service.FlightService;
 import by.epam.jwd.yakovlev.airline.service.ServiceFactory;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
-public class SelectFlightByID extends Command{
+public class SelectFlightByID extends AbstractCommand{
 	
 	private static final Logger LOGGER = Logger.getLogger(SelectFlightByID.class);
 

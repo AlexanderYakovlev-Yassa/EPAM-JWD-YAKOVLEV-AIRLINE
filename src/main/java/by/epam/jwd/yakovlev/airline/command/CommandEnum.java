@@ -23,6 +23,7 @@ public enum CommandEnum {
     GOTO_PAGE_FLIGHT_SCHEDULE (new GotoPageFlightSchedule(), 3),
     GOTO_PAGE_UNRECOGNIZED_COMMAND (new GotoPageUnrecognizedCommand(), 3),
     GOTO_PAGE_SELECT_CREW (new GotoSelectCrewPage(), 1),
+    GOTO_PAGE_LOGIN (new GotoPageLogin(), 3),
     HOME (new Home(), 3),
     INITIALISE_SESSION (new Initialise(), 3),
     LOGIN_USER (new LoginUser(), 3),
@@ -37,15 +38,15 @@ public enum CommandEnum {
     UPDATE_AIRCRAFT_MODEL (new UpdateAircraftModel(), 0),
     UPDATE_FLIGHT (new UpdateFlight(), 0);
 
-    Command command;
+    AbstractCommand command;
     int securityIndex;
 
-    CommandEnum(Command command, int securityIndex) {
+    CommandEnum(AbstractCommand command, int securityIndex) {
         this.command = command;
         this.securityIndex = securityIndex;
     }
 
-    public Command getCommand() {
+    public AbstractCommand getCommand() {
         return command;
     }
     

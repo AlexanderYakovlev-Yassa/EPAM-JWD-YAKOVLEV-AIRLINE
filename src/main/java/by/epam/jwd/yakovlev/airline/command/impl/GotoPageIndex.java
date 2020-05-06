@@ -5,10 +5,10 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 
-public class GotoPageIndex extends Command{
+public class GotoPageIndex extends AbstractCommand{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

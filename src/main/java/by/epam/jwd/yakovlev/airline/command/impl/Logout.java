@@ -1,6 +1,6 @@
 package by.epam.jwd.yakovlev.airline.command.impl;
 
-import by.epam.jwd.yakovlev.airline.command.Command;
+import by.epam.jwd.yakovlev.airline.command.AbstractCommand;
 import by.epam.jwd.yakovlev.airline.command.PageEnum;
 import by.epam.jwd.yakovlev.airline.entity.Employee;
 import by.epam.jwd.yakovlev.airline.factory.commandfactory.CommandEntityFactory;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-public class Logout extends Command {
+public class Logout extends AbstractCommand {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
