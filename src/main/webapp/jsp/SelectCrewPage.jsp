@@ -32,6 +32,122 @@
 		<%--HEADER--%>
 		<c:import url="Header.jsp" />
 
+ 		<div class="modal fade" id="modal-window-add-member-to-crew" role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+        				<h5 id="title-of-modal-window" class="modal-title text-center text-primary">
+        					<fmt:message key="modal.adding_member_to_the_crew"/>
+        				</h5>
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+      				</div>
+					<div class="modal-body">
+							<div id="message-of-add-modal-window">
+								<a class="text-primary"><fmt:message key="modal.adding_member" /></a><br/>
+								<a><em id="adding-employee-first-name"></em></a>
+								<a> </a>
+								<a><em id="adding-employee-last-name"></em></a>
+								<a> </a>
+								<a><em id="adding-employee-crew-role"></em></a><br/>
+								<a class="text-primary"><fmt:message key="modal.to_the_crew" /></a><br/>
+								<a><em>
+									${selected_flight.departureAirport.airportCity} --> ${selected_flight.destinationAirport.airportCity}
+								</em></a><br/>
+								<a><em>
+								<fmt:formatDate value="${selected_flight.departureTime}" pattern="dd-MM-yyyy HH:mm" /> ... 
+								<fmt:formatDate value="${selected_flight.landingTime}" pattern="dd-MM-yyyy HH:mm" />
+								</em></a><br/>
+							</div>													
+					</div>
+					<div class="modal-footer">
+						<div id="buttons-of-modal-window" class="float-right">
+								<button id="add_button" class="btn btn-outline-primary">
+									<fmt:message key="button.add" />					
+								</button>
+								<button class="btn btn-outline-primary" data-dismiss="modal">
+									<fmt:message key="button.close" />
+								</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="modal fade" id="modal-window-remove-member-from-crew" role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+        				<h5 id="title-of-modal-window" class="modal-title text-center text-primary">
+        					<fmt:message key="modal.removing_member_from_the_crew"/>
+        				</h5>
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+      				</div>
+					<div class="modal-body">
+							<div id="message-of-remove-modal-window">
+								<a class="text-primary"><fmt:message key="modal.remove_member" /></a><br/>
+								<a><em id="removing-employee-first-name"></em></a>
+								<a> </a>
+								<a><em id="removing-employee-last-name"></em></a>
+								<a> </a>
+								<a><em id="removing-employee-crew-role"></em></a><br/>
+								<a class="text-primary"><fmt:message key="modal.from_the_crew" /></a><br/>
+								<a><em>
+									${selected_flight.departureAirport.airportCity} --> ${selected_flight.destinationAirport.airportCity}
+								</em></a><br/>
+								<a><em>
+								<fmt:formatDate value="${selected_flight.departureTime}" pattern="dd-MM-yyyy HH:mm" /> ... 
+								<fmt:formatDate value="${selected_flight.landingTime}" pattern="dd-MM-yyyy HH:mm" />
+								</em></a><br/>
+							</div>													
+					</div>
+					<div class="modal-footer">
+						<div id="buttons-of-modal-window" class="float-right">
+								<button id="remove-button" class="btn btn-outline-primary">
+									<fmt:message key="button.remove_member" />
+								</button>
+								<button class="btn btn-outline-primary" data-dismiss="modal">
+									<fmt:message key="button.close" />
+								</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="modal-window-status-operation-message" role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+        				<h5 id="title-of-modal-window" class="modal-title text-center text-primary">
+        					<fmt:message key="modal.operation_message"/>
+        				</h5>
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+      				</div>
+					<div class="modal-body">
+							<div id="message-of-remove-modal-window">								
+								<h5>${sessionScope.warning_message}</h5>
+								<h5>${sessionScope.success_message}</h5>
+							</div>													
+					</div>
+					<div class="modal-footer">
+						<div id="buttons-of-modal-window" class="float-right">
+							<button class="btn btn-outline-primary" data-dismiss="modal">
+								<fmt:message key="button.close" />
+							</button>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 		<div class="container">
 			<div class="row">
@@ -164,7 +280,6 @@
 								<c:forEach var="elem" items="${sessionScope.all_employee_list}">
 
 									<tr onclick="addEmployeeToCrew('${elem.id}',
-									 '${sessionScope.selected_flight.flightID}',
 									 	'${elem.firstName}',
 									  	'${elem.lastName}',
 									  	'${elem.crewRole.crewRoleName}')">
@@ -191,10 +306,9 @@
 								</tr>
 
 								<c:forEach var="elem"
-									items="${sessionScope.selected_flight_crew}">
+									items="${sessionScope.selected_flight_crew.crewMembersList}">
 
-									<tr onclick="removeCrewMember('${elem.id}', 
-										'${sessionScope.selected_flight.flightID}',
+									<tr onclick="removeEmployeeFromCrew('${elem.id}',
 									 	'${elem.firstName}',
 									  	'${elem.lastName}',
 									  	'${elem.crewRole.crewRoleName}')">
@@ -217,53 +331,62 @@
 
 	</fmt:bundle>
 	<script>
-		function removeCrewMember(employeeID, flightID, name, lastName, role){	
-			
-			var confirmAnswer = confirm("Are you sure you want to remove\n " 
-					+ name + " " + lastName + " " + role + "\n" 
-					+ "from the crew of the flight \n"
-					+ '${selected_flight.departureAirport.airportCity}'
-					+ "-" + '${selected_flight.destinationAirport.airportCity}'
-					+ " " + '<fmt:formatDate value="${selected_flight.departureTime}" pattern="dd-MM-yyyy HH:mm" />' 
-					+ " ... " + '<fmt:formatDate value="${selected_flight.landingTime}"	pattern="dd-MM-yyyy HH:mm" />' );
-			if (confirmAnswer) {
-			let request = new XMLHttpRequest();							
-			request.onreadystatechange = function () {								
-				if (this.readyState == 4 && this.status == 200) {									
-					refreshWindow(window, this);
-				}
-			} 								
-			request.open("POST", "", true);
-				request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				request.send("command=remove_crew_member"
-								+ "&employee_id=" + employeeID
-								+ "&flight_id=" + flightID);
-			}
-		}					
 	
-		function addEmployeeToCrew(employeeID, flightID, name, lastName, role){	
+	message();
+	
+		function message() {
 			
-			var confirmAnswer = confirm("Are you sure you want to add\n " 
-					+ name + " " + lastName + " " + role + "\n" 
-					+ "to the crew of the flight \n"
-					+ '${selected_flight.departureAirport.airportCity}'
-					+ "-" + '${selected_flight.destinationAirport.airportCity}'
-					+ " " + '<fmt:formatDate value="${selected_flight.departureTime}" pattern="dd-MM-yyyy HH:mm" />' 
-					+ " ... " + '<fmt:formatDate value="${selected_flight.landingTime}"	pattern="dd-MM-yyyy HH:mm" />' );
-			if (confirmAnswer) {
+			var warningMessage = '${sessionScope.warning_message}';
+			var successMessage = '${sessionScope.success_message}';
+			
+			if ((warningMessage == "") && (successMessage == "")) {
+				return;
+			}
+			
+			$("#modal-window-status-operation-message").modal('show');
+		}
+	
+		 function addEmployeeToCrew(employeeID, firstName, lastName, crewRole){
+			
+			document.getElementById('adding-employee-first-name').innerHTML = firstName;
+			document.getElementById('adding-employee-last-name').innerHTML = lastName;
+			document.getElementById('adding-employee-crew-role').innerHTML = crewRole;
+			
+			$("#modal-window-add-member-to-crew").modal('show');
+
+			$('#add_button').on('click', function() {
+					executeCommand('add_employee_to_crew', employeeID, '${selected_flight.flightID}');
+				  	$('#modal-window-add-member-to-crew').modal('hide');
+			});
+		} 
+		
+		function removeEmployeeFromCrew(employeeID, firstName, lastName, crewRole){
+			
+			document.getElementById('removing-employee-first-name').innerHTML = firstName;
+			document.getElementById('removing-employee-last-name').innerHTML = lastName;
+			document.getElementById('removing-employee-crew-role').innerHTML = crewRole;
+			
+			$("#modal-window-remove-member-from-crew").modal('show');
+			
+			$('#remove-button').on('click', function() {
+					executeCommand('remove_crew_member', employeeID, '${selected_flight.flightID}');
+				  	$('#modal-window-remove-member-from-crew').modal('hide');
+			});
+		}
+		
+		function executeCommand(command, employeeID, flightID){	
+			
 			let request = new XMLHttpRequest();							
 			request.onreadystatechange = function () {								
-				if (this.readyState == 4 && this.status == 200) {									
+				if (this.readyState == 4 && this.status == 200) {
 					refreshWindow(window, this);
 				}
-			} 								
+			}
+						
 			request.open("POST", "", true);
 				request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				request.send("command=add_employee_to_crew"
-								+ "&employee_id=" + employeeID
-								+ "&flight_id=" + flightID);
+				request.send("command=" + command + "&employee_id=" + employeeID + "&flight_id=" + flightID);
 		}
-		}						
 	
 		function flightTabOnClick(flightID){						
 			let request = new XMLHttpRequest();							
@@ -275,7 +398,7 @@
 			request.open("POST", "", true);
 				request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				request.send("command=select_flight_by_id&flight_id=" + flightID);
-		}	
+		}
 		
 		function refreshWindow(window, request) {
 			window.document.open();
