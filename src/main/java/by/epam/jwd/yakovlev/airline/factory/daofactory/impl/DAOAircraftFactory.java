@@ -15,6 +15,6 @@ public class DAOAircraftFactory extends AbstractDAOFactory<Aircraft>{
 		checkResultSetForNull(resultSet);
 		resultSet.first();
 		
-		return create(resultSet);
+		return createAircraft(resultSet);
 	}	
 }

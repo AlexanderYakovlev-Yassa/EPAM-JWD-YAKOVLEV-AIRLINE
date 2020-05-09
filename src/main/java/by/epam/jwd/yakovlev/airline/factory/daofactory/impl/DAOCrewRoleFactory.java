@@ -14,6 +14,6 @@ public class DAOCrewRoleFactory extends AbstractDAOFactory<CrewRole> {
 		checkResultSetForNull(resultSet);
 		resultSet.first();
 
-        return create(resultSet);
+        return createCrewRole(resultSet);
 	}
 }
