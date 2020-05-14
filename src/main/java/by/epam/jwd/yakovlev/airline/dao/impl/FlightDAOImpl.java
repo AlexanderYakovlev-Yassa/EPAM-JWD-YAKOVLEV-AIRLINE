@@ -1,6 +1,7 @@
 package by.epam.jwd.yakovlev.airline.dao.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,5 +100,35 @@ public class FlightDAOImpl extends AbstractDAO<Flight> implements FlightDAO {
 		String[] queryParameters = {};	
 
 		return (List<Flight>) getEntity(DAOFactoryEnum.FLIGHTS_LIST, query, queryParameters);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Flight> getFlightsListBetweenDates(Date firstDate, Date secondDate) throws DaoException {
+		
+		String query = SQLQuery.GET_FLIGHTS_BETWEEN_DATES.getQuery();
+		String firstDateString = DATE_FORMAT.format(firstDate);
+		String secondDateString = DATE_FORMAT.format(secondDate);
+		String[] queryParameters = { firstDateString, secondDateString };	
+
+		return (List<Flight>) getEntity(DAOFactoryEnum.FLIGHTS_LIST, query, queryParameters);
+	}
+
+	@Override
+	public Optional<Flight> getYoungestFlight() throws DaoException {
+		
+		String query = SQLQuery.GET_YOUNGEST_FLIGHT.getQuery();
+		String[] queryParameters = {};
+		
+		return Optional.of(getEntity(DAOFactoryEnum.FLIGHT, query, queryParameters));
+	}
+
+	@Override
+	public Optional<Flight> getOldestFlight() throws DaoException {
+		
+		String query = SQLQuery.GET_OLDEST_FLIGHT.getQuery();
+		String[] queryParameters = {};
+		
+		return Optional.of(getEntity(DAOFactoryEnum.FLIGHT, query, queryParameters));
 	}
 }
