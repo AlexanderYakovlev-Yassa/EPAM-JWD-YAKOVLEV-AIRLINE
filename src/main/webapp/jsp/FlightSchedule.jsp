@@ -27,7 +27,7 @@
 <body>
 	<c:set var="current_page" value="flight_schedule" scope="session" />
 	<fmt:bundle basename="ui">	
-		<c:import url="Header.jsp" />		
+		<%@ include file="Header.jsp" %> 		
 		<div class="container">
 			<div class="row">
 				<div class="col-12" align="center">

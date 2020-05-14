@@ -30,8 +30,7 @@
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>
-		<c:import url="Header.jsp" />
-
+		<%@ include file="Header.jsp" %> 
 
 		<div class="container">
 			<div class="row">

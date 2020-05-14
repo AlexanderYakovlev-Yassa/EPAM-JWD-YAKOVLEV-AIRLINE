@@ -30,7 +30,7 @@
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>
-		<c:import url="Header.jsp" />
+		<%@ include file="Header.jsp" %> 
 
  		<div class="modal fade" id="modal-window-add-member-to-crew" role="dialog">
 			<div class="modal-dialog modal-dialog-centered">
@@ -150,64 +150,15 @@
 
 
 		<div class="container">
-			<div class="row">
-				<%--0--%>
+ 			<div class="row">
+				
 				<div class="col-12" align="center">
 
 					<h3 class="text-center text-primary pt-5">
-						<fmt:message key="label.select_flight" />
+						<fmt:message key="label.crew_selection" />
 					</h3>
 				</div>
 			</div>
-
-
-
-			<%--0--%>
-			<div class="container">
-				<div class="row">
-					<%--A--%>
-					<div class="col-12 card border-primary">
-
-						<div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-							<table
-								class="table table-hover table-striped table-bordered table-sm my-custom-scrollbar">
-
-								<col width="90" />
-								<col width="90" />
-								<col width="70" />
-								<col width="70" />
-								<col width="100" />
-
-								<tr>
-									<th><fmt:message key="column.flight_departure_airport" /></th>
-									<th><fmt:message key="column.flight_destination_airport" /></th>
-									<th><fmt:message key="column.flight_departure_time" /></th>
-									<th><fmt:message key="column.flight_landing_time" /></th>
-									<th><fmt:message key="column.flight_aircraft" /></th>
-								</tr>
-
-								<c:forEach var="elem" items="${sessionScope.all_flights_list}">
-
-									<tr onclick="flightTabOnClick('${elem.flightID}')">
-										<td>${elem.departureAirport.airportCity}</td>
-										<td>${elem.destinationAirport.airportCity}</td>
-										<td><fmt:formatDate value="${elem.departureTime}"
-												pattern="dd-MM-yyyy HH:mm" /></td>
-										<td><fmt:formatDate value="${elem.landingTime}"
-												pattern="dd-MM-yyyy HH:mm" /></td>
-										<td>${elem.aircraft.aircraftModel.aircraftModelName}</td>
-									</tr>
-
-								</c:forEach>
-
-							</table>
-						</div>
-
-						<%--C--%>
-					</div>
-				</div>
-				<%--B1--%>
 
 				<div class="conteiner">
 					<div class="row">
@@ -241,7 +192,12 @@
 								<br />
 							</div>
 						</div>
-						<div class="col-6">							
+						<div class="col-6"><br/>
+							<form action="" method="post">
+							<button type="submit" class="btn btn-outline-primary" name="command" value="goto_page_select_flight"">
+								<fmt:message key="button.select_flight" />
+							</button>
+							</form>					
 						</div>
 					</div>
 				</div>
@@ -330,6 +286,7 @@
 		<c:import url="Footer.jsp" />
 
 	</fmt:bundle>
+	
 	<script>
 	
 	message();
@@ -398,6 +355,18 @@
 			request.open("POST", "", true);
 				request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				request.send("command=select_flight_by_id&flight_id=" + flightID);
+		}
+		
+		function selectFlight(){						
+			let request = new XMLHttpRequest();							
+			request.onreadystatechange = function () {								
+				if (this.readyState == 4 && this.status == 200) {
+					refreshWindow(window, this);
+				}
+			} 								
+			request.open("POST", "", true);
+				request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				request.send("command=goto_page_select_flight&previous_page=select_crew");
 		}
 		
 		function refreshWindow(window, request) {

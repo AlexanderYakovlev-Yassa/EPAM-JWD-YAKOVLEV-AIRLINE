@@ -9,8 +9,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="sources/css/maket.css">
     <link rel="stylesheet" type="text/css" href="sources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="sources/css/maket.css">
     <link rel="icon" href="sources/images/logo-airline.png" type="image/icon type">
     <script type="text/javascript" src="sources/js/AllPageScript.js"></script>
     <title>Airline</title>
@@ -19,13 +19,13 @@
 <body>
 
 	<c:set var="current_page" value="index" scope="session"/>
-	<fmt:bundle basename="ui">
-    	<c:import url="Header.jsp"/>
+	<fmt:bundle basename="ui">    	
+    	<%@ include file="Header.jsp" %>
     	<div align="center">
         	<h3 class="text-center text-primary pt-5"><fmt:message key="label.welcome"/></h3>
         	<img src="sources/images/them-picture.jpg" class="img-fluid" alt="Responsive image"/>
-    	</div>
-    	<c:import url="Footer.jsp"/>
+    	</div>    	
+    	<%@ include file="Footer.jsp" %> 
 	</fmt:bundle>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

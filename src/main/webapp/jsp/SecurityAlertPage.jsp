@@ -23,7 +23,7 @@
 <fmt:bundle basename="ui">
 
     <%--HEADER--%>
-    <c:import url="Header.jsp"/>
+    <%@ include file="Header.jsp" %>
 
     <div align="center">
         <h3 class="text-center text-primary pt-5"><fmt:message key="label.security_alert"/></h3>

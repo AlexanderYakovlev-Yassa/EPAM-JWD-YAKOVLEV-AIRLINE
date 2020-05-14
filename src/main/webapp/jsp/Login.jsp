@@ -22,7 +22,7 @@
 <fmt:bundle basename="ui">
 
     <%--HEADER--%>
-    <c:import url="Header.jsp"/>
+    <%@ include file="Header.jsp" %> 
 		<br/>
 		<div class="container">
 			<div class="row">
