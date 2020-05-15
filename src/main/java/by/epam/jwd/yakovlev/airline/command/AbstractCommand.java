@@ -21,12 +21,14 @@ import by.epam.jwd.yakovlev.airline.service.SystemRoleService;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public abstract class AbstractCommand {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(AbstractCommand.class);
-	private static final int ZERO = 0;	
-	
+	private static final int ZERO = 0;
+
 	private EmployeeService employeeService = ServiceFactory.INSTANCE.getEmployeeService();
 	private FlightService flightService = ServiceFactory.INSTANCE.getFlightService();
 	private AirportService airportService = ServiceFactory.INSTANCE.getAirportService();
@@ -36,9 +38,9 @@ public abstract class AbstractCommand {
 	private CrewRoleService crewRoleService = ServiceFactory.INSTANCE.getCrewRoleService();
 	private CrewService crewService = ServiceFactory.INSTANCE.getCrewService();
 
-    public abstract String execute(HttpServletRequest request, HttpServletResponse response) throws IOException;
-    
-    public PageEnum getNextPage(HttpSession session) {
+	public abstract String execute(HttpServletRequest request, HttpServletResponse response) throws IOException;
+
+	protected PageEnum getNextPage(HttpSession session) {
 
 		try {
 			return PageEnum
@@ -48,91 +50,96 @@ public abstract class AbstractCommand {
 		}
 	}
 
-	public void refreshAllEmployeesList(HttpSession session) {
+	protected void refreshAllEmployeesList(HttpSession session) {
 
 		if (session == null) {
 			return;
 		}
-		
+
 		try {
-			session.setAttribute(StringConstant.ALL_EMPLOYEE_LIST_KEY.getValue(), employeeService.getAllEmployeesList());
+			session.setAttribute(StringConstant.ALL_EMPLOYEE_LIST_KEY.getValue(),
+					employeeService.getAllEmployeesList());
 		} catch (ServiceException e) {
 			LOGGER.debug("Fail refresh all employees list", e);
 		}
 	}
-	
-	public void refreshAllFlightsList(HttpSession session) {
+
+	protected void refreshAllFlightsList(HttpSession session) {
 
 		if (session == null) {
 			return;
 		}
-		
+
 		try {
 			session.setAttribute(StringConstant.ALL_FLIGHTS_LIST_KEY.getValue(), flightService.getAllFlightsList());
 		} catch (ServiceException e) {
 			LOGGER.debug("Fail refresh all flights list", e);
 		}
 	}
-	
-	public void refreshAllAircraftsList(HttpSession session) {
+
+	protected void refreshAllAircraftsList(HttpSession session) {
 
 		if (session == null) {
 			return;
 		}
-		
+
 		try {
-			session.setAttribute(StringConstant.ALL_AIRCRAFTS_LIST_KEY.getValue(), aircraftService.getAllAircraftsList());
+			session.setAttribute(StringConstant.ALL_AIRCRAFTS_LIST_KEY.getValue(),
+					aircraftService.getAllAircraftsList());
 		} catch (ServiceException e) {
 			LOGGER.debug("Fail refresh all aircrafts list", e);
 		}
 	}
-	
-	public void refreshAllAircraftModelsList(HttpSession session) {
+
+	protected void refreshAllAircraftModelsList(HttpSession session) {
 
 		if (session == null) {
 			return;
 		}
-		
+
 		try {
-			session.setAttribute(StringConstant.ALL_AIRCRAFT_MODELS_LIST_KEY.getValue(), aircraftModelService.getAllAircraftModelsList());
+			session.setAttribute(StringConstant.ALL_AIRCRAFT_MODELS_LIST_KEY.getValue(),
+					aircraftModelService.getAllAircraftModelsList());
 		} catch (ServiceException e) {
 			LOGGER.debug("Fail refresh all aircraft modls list", e);
 		}
 	}
-	
-	public void refreshAllAirportsList(HttpSession session) {
+
+	protected void refreshAllAirportsList(HttpSession session) {
 
 		if (session == null) {
 			return;
 		}
-		
+
 		try {
 			session.setAttribute(StringConstant.ALL_AIRPORTS_LIST_KEY.getValue(), airportService.getAllAirportsList());
 		} catch (ServiceException e) {
 			LOGGER.debug("Fail refresh all aircrafts list", e);
 		}
 	}
-	
-	public void refreshAllRolesList(HttpSession session) {
+
+	protected void refreshAllRolesList(HttpSession session) {
 
 		if (session == null) {
 			return;
 		}
-		
+
 		try {
-			session.setAttribute(StringConstant.ALL_SYSTEM_ROLE_LIST_KEY.getValue(), systemRoleService.getAllSystemRolesList());
-			session.setAttribute(StringConstant.ALL_CREW_ROLE_LIST_KEY.getValue(), crewRoleService.getAllCrewRolesList());
+			session.setAttribute(StringConstant.ALL_SYSTEM_ROLE_LIST_KEY.getValue(),
+					systemRoleService.getAllSystemRolesList());
+			session.setAttribute(StringConstant.ALL_CREW_ROLE_LIST_KEY.getValue(),
+					crewRoleService.getAllCrewRolesList());
 		} catch (ServiceException e) {
 			LOGGER.debug("Fail refresh all role lists", e);
 		}
 	}
-	
-	public void refreshSelectedFlightCrew(HttpSession session) {
+
+	protected void refreshSelectedFlightCrew(HttpSession session) {
 
 		if (session == null) {
 			return;
 		}
-		
+
 		if (session.getAttribute(StringConstant.SELECTED_FLIGHT_KEY.getValue()) != null) {
 			Flight selectedFlight = (Flight) session.getAttribute(StringConstant.SELECTED_FLIGHT_KEY.getValue());
 			if (selectedFlight != null) {
@@ -145,21 +152,56 @@ public abstract class AbstractCommand {
 			}
 		}
 	}
-	
-	public int parseStringToIntOrElseZero(String intString) {
-		
+
+	protected int parseStringToIntOrElseZero(String intString) {
+
 		int integer = ZERO;
-		
+
 		if (intString == null) {
 			return integer;
 		}
-		
+
 		try {
 			integer = Integer.parseInt(intString);
 		} catch (NumberFormatException e) {
 			integer = ZERO;
 		}
-		
+
 		return integer;
+	}
+
+	protected void refreshTimePeriod(HttpSession session) {
+
+		Object firstDateObject = session.getAttribute(StringConstant.FIRST_SELECTED_DATE.getValue());
+		Object secondDateObject = session.getAttribute(StringConstant.SECOND_SELECTED_DATE.getValue());
+
+		if (firstDateObject != null && secondDateObject != null) {
+			return;
+		}
+
+		selectDefaultTimePeriod(session);
+	}
+
+	protected void selectDefaultTimePeriod(HttpSession session) {
+
+		Date today = (new GregorianCalendar()).getTime();
+
+		Date firstDate;
+		Date secondDate;
+		Flight youngestFlight = null;
+		Flight oldestFlight = null;
+
+		try {
+			youngestFlight = flightService.getYoungestFlight().orElse(null);
+			oldestFlight = flightService.getOldestFlight().orElse(null);
+		} catch (ServiceException e) {
+			LOGGER.debug("Fail get joungest of oldest flight");
+		}
+
+		firstDate = youngestFlight != null ? youngestFlight.getDepartureTime() : today;
+		secondDate = oldestFlight != null ? oldestFlight.getDepartureTime() : today;
+
+		session.setAttribute(StringConstant.FIRST_SELECTED_DATE.getValue(), firstDate);
+		session.setAttribute(StringConstant.SECOND_SELECTED_DATE.getValue(), secondDate);
 	}
 }

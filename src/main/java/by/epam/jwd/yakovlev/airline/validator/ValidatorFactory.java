@@ -15,6 +15,7 @@ public class ValidatorFactory {
 	private SystemRoleValidator systemRoleValidator = new SystemRoleValidator();
 	private IDValidator idValidator = new IDValidator();
 	private FlightValidator flightValidator = new FlightValidator();
+	private DateTimeValidator dateTimeValidator = new DateTimeValidator();			
 	
 	private ValidatorFactory() {
 		
@@ -66,5 +67,9 @@ public class ValidatorFactory {
 
 	public FlightValidator getFlightValidator() {
 		return flightValidator;
+	}
+
+	public DateTimeValidator getDateTimeValidator() {
+		return dateTimeValidator;
 	}
 }

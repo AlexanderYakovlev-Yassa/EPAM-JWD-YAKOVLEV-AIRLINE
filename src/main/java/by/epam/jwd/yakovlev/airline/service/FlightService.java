@@ -1,5 +1,6 @@
 package by.epam.jwd.yakovlev.airline.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,9 @@ public interface FlightService {
 	boolean updateFlight(Flight flight) throws ServiceException;
 	
 	Optional<Flight> getFlightByID(int flightID) throws ServiceException;
-	
+	Optional<Flight> getYoungestFlight() throws ServiceException;
+	Optional<Flight> getOldestFlight() throws ServiceException;
+		
 	List<Flight> getAllFlightsList() throws ServiceException;
+	List<Flight> getFlightsListBetweenDates(Date firstDate, Date secondDate) throws ServiceException;
 }

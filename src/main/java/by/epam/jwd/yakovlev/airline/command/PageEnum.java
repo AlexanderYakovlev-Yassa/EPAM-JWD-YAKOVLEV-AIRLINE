@@ -16,6 +16,7 @@ public enum PageEnum {
     FLIGHT_SCHEDULE ("/jsp/FlightSchedule.jsp"),
     SECURITY_ALERT_PAGE ("/jsp/SecurityAlertPage.jsp"),
     SELECT_CREW ("/jsp/SelectCrewPage.jsp"),
+    SELECT_FLIGHT ("/jsp/SelectFlight.jsp"),
     UNRECOGNIZED_COMMAND_PAGE ("/jsp/UnrecognizedCommandPage.jsp");
 
     private String pageURL;
