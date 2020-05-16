@@ -21,6 +21,8 @@ import by.epam.jwd.yakovlev.airline.service.SystemRoleService;
 import by.epam.jwd.yakovlev.airline.util.StringConstant;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -28,6 +30,8 @@ public abstract class AbstractCommand {
 
 	private static final Logger LOGGER = Logger.getLogger(AbstractCommand.class);
 	private static final int ZERO = 0;
+	private static final SimpleDateFormat DATE_SHORT_FORMAT = 
+			new SimpleDateFormat(StringConstant.DATE_TIME_SHORT_FORMAT.getValue());
 
 	private EmployeeService employeeService = ServiceFactory.INSTANCE.getEmployeeService();
 	private FlightService flightService = ServiceFactory.INSTANCE.getFlightService();
@@ -203,5 +207,14 @@ public abstract class AbstractCommand {
 
 		session.setAttribute(StringConstant.FIRST_SELECTED_DATE.getValue(), firstDate);
 		session.setAttribute(StringConstant.SECOND_SELECTED_DATE.getValue(), secondDate);
+	}
+
+	protected Date parseStringToDate(String string) {
+
+		try {
+			return DATE_SHORT_FORMAT.parse(string);
+		} catch (ParseException e) {
+			return null;
+		}
 	}
 }
