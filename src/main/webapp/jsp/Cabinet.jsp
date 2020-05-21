@@ -20,7 +20,7 @@
 
 	<c:set var="current_page" value="cabinet" scope="session"/>
 	<fmt:bundle basename="ui">
-    	<c:import url="Header.jsp"/>
+    	<%@ include file="Header.jsp" %>
     	<div align="center">
         	<h3 class="text-center text-primary pt-5">
         		<fmt:message key="label.cabinet"/>

@@ -1,3 +1,3 @@
         <div class="footer-copyright text-center py-3">
-            <a>FOOTER</a>
+            <a class="text text-primary">Java web development training. Alexander Yakovlev.</a>
         </div>

@@ -1,31 +1,27 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="ctg" uri="customtags"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<fmt:setLocale value="${sessionScope.localisation}" />
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link rel="stylesheet" type="text/css"
-	href="sources/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="sources/css/main.css" />
-<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
-<link rel="icon" href="sources/images/logo-airline.png"
-	type="image/icon type" />
-<title>Select Crew</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="stylesheet" type="text/css"
+		href="sources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="sources/css/main.css" />
+	<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
+	<link rel="icon" href="sources/images/logo-airline.png"
+		type="image/icon type" />
+	<title>Select Crew</title>
 </head>
 
 <body>
-
+	<fmt:setLocale value="${sessionScope.localisation}" />
 	<c:set var="current_page" value="select_crew" scope="session" />
 
 	<fmt:bundle basename="ui">
@@ -258,21 +254,7 @@
 
 	</fmt:bundle>
 	
-	<script>
-	
-	message();
-	
-		function message() {
-			
-			var warningMessage = '${sessionScope.warning_message}';
-			var successMessage = '${sessionScope.success_message}';
-			
-			if ((warningMessage == "") && (successMessage == "")) {
-				return;
-			}
-			
-			$("#modal-window-status-operation-message").modal('show');
-		}
+	<script>	
 	
 		 function addEmployeeToCrew(employeeID, firstName, lastName, crewRole){
 			
@@ -345,6 +327,7 @@
 			window.document.write(request.response);
 			window.document.close();
 		}
+		
 	</script>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

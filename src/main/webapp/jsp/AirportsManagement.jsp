@@ -24,13 +24,14 @@
 	<title>Airports</title>
 </head>
 
-<body>
+<body onload="message()">
 
 	<c:set var="current_page" value="airport_management" scope="request" />
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>
-		<%@ include file="Header.jsp" %> 
+		<%@ include file="Header.jsp" %>
+		<%@ include file="ModalWindowStatusOperationMessage.jsp" %> 
 
 		<div class="container">
 			<div class="row">
@@ -69,9 +70,7 @@
 							</table>
 
 						</div>
-						<%--C--%>
 					</div>
-					<%--B1--%>
 
 					<div class="col-5 card border-primary">
 						<%--B2--%>
@@ -103,21 +102,8 @@
 											</div>
 										</div>
 									</div>
-								
-
-
-									<%--D2--%>
 								</div>
-							</div>
-							<%--D--%>
-							<div class="container">
-							<div class="row">
-									<div class="col-md-12">
-									<!-- WARNING MESSAGE -->
-									<h3 class="text-center">${sessionScope.success_message}</h3>
-									<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>
-									</div>
-							</div>
+							</div>							
 							<div class="container">
 								<div class="row">
 
@@ -138,7 +124,6 @@
 										
 									</div>
 								</div>
-							</div>
 							</div>
 							<%--F--%>
 						</form>

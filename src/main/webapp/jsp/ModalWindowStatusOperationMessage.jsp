@@ -25,3 +25,17 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+		
+		function message() {
+			var warningMessage = '${sessionScope.warning_message}';
+			var successMessage = '${sessionScope.success_message}';
+			
+			if ((warningMessage == "") && (successMessage == "")) {
+				return;
+			}
+			
+			$("#modal-window-status-operation-message").modal('show');
+		}
+		</script>

@@ -24,13 +24,14 @@
 	<title>Employee</title>
 </head>
 
-<body>
+<body onload="message()">
 
 	<c:set var="current_page" value="aircraft_models_management" scope="session" />
 
 	<fmt:bundle basename="ui">
 		<%--HEADER--%>
 		<%@ include file="Header.jsp" %> 
+		<%@ include file="ModalWindowStatusOperationMessage.jsp" %> 
 		<div class="container">
 			<div class="row">
 				<%--0--%>
@@ -121,16 +122,8 @@
 
 									<%--D2--%>
 								</div>
-							</div>
-							<%--D--%>
-							<div class="container">
-							<div class="row">
-									<div class="col-md-12">
-									<!-- WARNING MESSAGE -->
-									<h3 class="text-center">${sessionScope.success_message}</h3>
-									<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>
-									</div>
-							</div>
+							</div><br/><br/>
+							
 							<div class="container">
 								<div class="row">
 

@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ctg" uri="customtags"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<fmt:setLocale value="${sessionScope.localisation}" />
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<link rel="stylesheet" type="text/css" href="sources/css/main.css" />
-	<link rel="stylesheet" type="text/css"
-		href="sources/css/bootstrap.min.css" />
-	<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
-	<link rel="icon" href="sources/images/logo-airline.png"
-		type="image/icon type" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="stylesheet" type="text/css" href="sources/css/bootstrap.min.css" />
+	<link rel="icon" href="sources/images/logo-airline.png" type="image/icon type" />
 	<title>Flight Manager</title>
 </head>
 
-<body>
+<body onload="message()">
 
+	<fmt:setLocale value="${sessionScope.localisation}" />
 	<c:set var="current_page" value="flights_management" scope="session" />
 
 	<fmt:bundle basename="ui">
-		<%@ include file="Header.jsp" %> 
+	
+		<%@ include file="Header.jsp" %>
+		<%@ include file="ModalWindowStatusOperationMessage.jsp" %> 		
 
 		<div class="container">
 			<div class="row">
@@ -185,18 +178,9 @@
 											</div>
 										</div>
 									</div>
-									
-									<div class="container">
-										<div class="row">
-											<div class="col-md-12">
-												<h3 class="text-center">${sessionScope.success_message}</h3>
-												<h3 class="text-danger text-center">${sessionScope.warning_message}</h3>
-											</div>
-										</div>
-										
 										<div class="container">
 											<div class="row">
-												<div class="col-md-12"><%--F--%>
+												<div class="col-md-12">
 													<button type="submit" class="btn btn-outline-primary"
 															name="command" value="add_flight">
 														<fmt:message key="button.add" />
@@ -208,11 +192,11 @@
 													<button type="submit" class="btn btn-outline-primary"
 															name="command" value="delete_flight">
 														<fmt:message key="button.delete" />
-													</button>
+													</button><br/><br/>
 												</div>
 											</div>
 										</div>
-									</div>
+									
 								</form>
 							</div>
 						</div>
@@ -220,9 +204,10 @@
 				</div>
 			</div>
 		</div>
-		<c:import url="Footer.jsp" />
+		<%@ include file="Footer.jsp" %>
 	</fmt:bundle>
-
+	
+	
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 		crossorigin="anonymous"></script>
