@@ -184,7 +184,8 @@ public enum SQLQuery {
 			+ "JOIN `aircraft` D "
 			+ "ON A.`flight_aircraft_id` = D.`aircraft_id` "
 			+ "JOIN `aircraft_model` E "
-			+ "ON D.`aircraft_model_id` = E.`aircraft_model_id`;"),
+			+ "ON D.`aircraft_model_id` = E.`aircraft_model_id` "
+			+ "ORDER BY flight_departure_time;"),
 	GET_FLIGHTS_BETWEEN_DATES ("SELECT A.`flight_id`, "
 			+ "A.`flight_departure_time` flight_departure_time, "
 			+ "A.`flight_landing_time` flight_landing_time, "
