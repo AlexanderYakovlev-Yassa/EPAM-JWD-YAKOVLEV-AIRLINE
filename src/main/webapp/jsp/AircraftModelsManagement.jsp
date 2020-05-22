@@ -142,7 +142,7 @@
 											<fmt:message key="button.delete" />
 										</button>										
 										
-									</div>
+									</div><br/><br/>
 								</div>
 							</div>
 							</div>

@@ -19,7 +19,6 @@
 	<link rel="stylesheet" type="text/css"
 		href="sources/css/bootstrap.min.css" />
 	<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
-	<!-- <script type="text/javascript" src="sources/js/EmployeePageScript.js"></script> -->
 	<link rel="icon" href="sources/images/logo-airline.png"
 		type="image/icon type" />
 	<title>Employee</title>
@@ -30,13 +29,11 @@
 	<c:set var="current_page" value="employee" scope="session" />
 
 	<fmt:bundle basename="ui">
-		<%--HEADER--%>
 		<%@ include file="Header.jsp" %> 
 		<%@ include file="ModalWindowStatusOperationMessage.jsp" %>
 		
 		<div class="container">
 			<div class="row">
-				<%--0--%>
 				<div class="col-12" align="center">
 
 					<h3 class="text-center text-primary pt-5">
@@ -44,47 +41,35 @@
 					</h3>
 				</div>
 			</div>
-			<%--0--%>
 			<div class="container">
 				<div class="row">
-					<%--A--%>
 					<div class="col-4 card border-primary">
-						<%--B1--%>
 						<h4 class="text-center text-primary pt-5">
 							<fmt:message key="label.employee_list" />
 						</h4>
 						<div class="overflow-auto" style="heigth: 200px">
-							<%--C--%>
 
 							<ctg:populate-employee-table
 								columns="employee_first_name employee_last_name crew_role_name"
 								styleClass="table table-hover" />
 
 						</div>
-						<%--C--%>
 					</div>
-					<%--B1--%>
 
 					<div class="col-8 card border-primary">
-						<%--B2--%>
-						<%--Card employee info--%>
 						<h4 class="text-center text-primary pt-5">
 							<fmt:message key="label.employee_info" />
 						</h4>
 
 						<form id="manage-employee-form" class="form" action="" method="post">
-							<%--Form--%>
 							<div class="container">
 								<div class="row">
-									<%--D--%>
 									<div class="col-md-6">
-										<%--D1--%>
 										<div class="card-body">
 											<input type="hidden" name="page" value="employee"/>
                                             
 
 											<div class="form-group">
-												<%--login name--%>
 												<label for="current-employee-nickname" class="text-primary">
 													<fmt:message key="label.user_nickname" />
 												</label><br /> <input type="text" name="employee_nickname"
@@ -93,7 +78,6 @@
 											</div>
 
 											<div class="form-group">
-												<%--first name--%>
 												<label for="current-employee-first-name"
 													class="text-primary"> <fmt:message
 														key="label.user_first_name" />
@@ -103,7 +87,6 @@
 											</div>
 
 											<div class="form-group">
-												<%--last name--%>
 												<label for="current-employee-last-name" class="text-primary">
 													<fmt:message key="label.user_last_name" />
 												</label><br /> <input type="text" name="employee_last_name"
@@ -112,12 +95,9 @@
 											</div>
 										</div>
 									</div>
-									<%--D1--%>
 									<div class="col-md-6">
-										<%--D2--%>
 										<br />
 										<div class="form-group">
-											<%--system role--%>
 											<label for="current-employee-system-role-name"
 												class="text-primary"> <fmt:message
 													key="label.system_role" />
@@ -148,7 +128,6 @@
 										</div>
 
 										<div class="form-group">
-											<%--system role--%>
 											<label for="current-employee-crew-role-name"
 												class="text-primary"> <fmt:message
 													key="label.system_role" />
@@ -187,9 +166,6 @@
 										</div>
 
 									</div>
-
-
-									<%--D2--%>
 								</div>
 							</div><br/><br/>				
 							
@@ -197,7 +173,6 @@
 							<div class="container">
 								<div class="row">
 									<div class="col-md-12">
-										<%--F--%>
 										<button type="submit" class="btn btn-outline-primary"
 											name="command" value="add_employee">
 											<fmt:message key="button.add" />
@@ -217,13 +192,10 @@
 									</div>
 								</div>
 							</div>
-							<%--F--%>
 						</form>
 					</div>
-					<%--B2--%>
 				</div>
 			</div>
-			<%--A--%>
 		</div>
 
 		<c:import url="Footer.jsp" />
