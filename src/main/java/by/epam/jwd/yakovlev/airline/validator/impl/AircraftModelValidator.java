@@ -9,6 +9,7 @@ public class AircraftModelValidator extends AbstractValidator{
 	public void check(AircraftModel aircraftModel) throws ValidatorException {
 
 		checkNotNegativeInteger(aircraftModel.getAircraftModelID());
-		checkNotNegativeInteger(aircraftModel.getAircraftModelCapacity());		
+		checkNotNegativeInteger(aircraftModel.getAircraftModelCapacity());
+		checkNullOrEmptyString(aircraftModel.getAircraftModelName());
 	}
 }
