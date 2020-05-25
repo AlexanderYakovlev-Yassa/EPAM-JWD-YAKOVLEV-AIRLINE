@@ -131,4 +131,15 @@ public class FlightDAOImpl extends AbstractDAO<Flight> implements FlightDAO {
 		
 		return Optional.of(getEntity(DAOFactoryEnum.FLIGHT, query, queryParameters));
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Flight> getFlightsListByEmployeeID(int employeeID) throws DaoException {
+		
+		String query = SQLQuery.GET_FLIGHTS_BY_EMPLOYEE_ID.getQuery();
+		String employeeIDString = String.valueOf(employeeID);
+		String[] queryParameters = { employeeIDString };	
+
+		return (List<Flight>) getEntity(DAOFactoryEnum.FLIGHTS_LIST, query, queryParameters);
+	}
 }

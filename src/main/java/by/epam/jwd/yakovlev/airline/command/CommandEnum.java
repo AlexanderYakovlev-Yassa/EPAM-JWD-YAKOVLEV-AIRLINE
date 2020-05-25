@@ -20,6 +20,7 @@ public enum CommandEnum {
     GOTO_PAGE_AIRCRAFT_MODELS_MANAGEMENT (new GotoPageAircraftModelsManagement(), 0),
     GOTO_PAGE_AIRPORTS_MANAGEMENT (new GotoPageAirportsManagement(), 0),
     GOTO_PAGE_FLIGHTS_MANAGEMENT (new GotoPageFlightsManagement(), 0),
+    GOTO_PAGE_EMPLOYEE_FLIGHTS_SCHEDULE (new GotoPageEmployeeFlightsSchedule(), 0),
     GOTO_PAGE_FLIGHT_SCHEDULE (new GotoPageFlightSchedule(), 3),
     GOTO_PAGE_UNRECOGNIZED_COMMAND (new GotoPageUnrecognizedCommand(), 3),
     GOTO_PAGE_SELECT_CREW (new GotoSelectCrewPage(), 1),

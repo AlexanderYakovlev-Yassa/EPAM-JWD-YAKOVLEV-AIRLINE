@@ -19,4 +19,5 @@ public interface FlightDAO {
 	
 	List<Flight> getAllFlightList() throws DaoException;
 	List<Flight> getFlightsListBetweenDates(Date firstDate, Date secondDate) throws DaoException;
+	List<Flight> getFlightsListByEmployeeID(int employeeID) throws DaoException;
 }

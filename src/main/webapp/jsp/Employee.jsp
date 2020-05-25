@@ -174,6 +174,10 @@
 								<div class="row">
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-outline-primary"
+											name="command" value="goto_page_employee_flights_schedule">
+											<fmt:message key="button.showw_flights" />
+										</button>
+										<button type="submit" class="btn btn-outline-primary"
 											name="command" value="add_employee">
 											<fmt:message key="button.add" />
 										</button>

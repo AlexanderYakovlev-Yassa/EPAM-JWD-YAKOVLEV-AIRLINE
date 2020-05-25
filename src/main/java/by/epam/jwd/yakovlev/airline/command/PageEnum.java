@@ -5,6 +5,7 @@ public enum PageEnum {
     INDEX ("/jsp/Index.jsp"),
     LOGIN ("/jsp/Login.jsp"),
     REGISTRATION ("/jsp/Registration.jsp"),
+    EMPLOYEE_FLIGHTS_SCHEDULE ("/jsp/EmployeeFlights.jsp"),
     ERROR ("/jsp/ErrorPage.jsp"),
     REGISTRATION_SUCCESS ("/jsp/RegistrationSuccess.jsp"),
     EMPLOYEE ("/jsp/Employee.jsp"),

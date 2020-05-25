@@ -139,4 +139,15 @@ public class FlightServiceImpl implements FlightService {
 			throw new ServiceException("Fail get the oldest flight", e);
 		}
 	}
+
+	@Override
+	public List<Flight> getFlightsListByEmployeeID(int employeeID) throws ServiceException {
+		
+		try {
+			return FLIGHT_DAO.getFlightsListByEmployeeID(employeeID);
+		} catch (DaoException e) {
+			LOGGER.debug("Fail get the oldest flight", e);
+			throw new ServiceException("Fail get the oldest flight", e);
+		}
+	}
 }

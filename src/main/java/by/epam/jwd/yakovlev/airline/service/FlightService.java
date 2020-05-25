@@ -78,4 +78,12 @@ public interface FlightService {
      * @return list of flights which are in the selected range
      */
 	List<Flight> getFlightsListBetweenDates(Date firstDate, Date secondDate) throws ServiceException;
+	
+	/**
+     * Returns the list of all flights which contain an employee 
+     * 
+     * @param employeeID - ID of employee
+     * @return list of all flights which contain an employee
+     */
+	List<Flight> getFlightsListByEmployeeID(int employeeID) throws ServiceException;
 }
