@@ -16,8 +16,7 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<link rel="stylesheet" type="text/css" href="sources/css/maket.css" />
-	<link rel="stylesheet" type="text/css"
-		href="sources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="sources/css/bootstrap.min.css" />
 	<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
 	<link rel="icon" href="sources/images/logo-airline.png"
 		type="image/icon type" />
@@ -31,172 +30,51 @@
 	<fmt:bundle basename="ui">
 		<%@ include file="Header.jsp" %> 
 		<%@ include file="ModalWindowStatusOperationMessage.jsp" %>
-		
-		<div class="container">
-			<div class="row">
-				<div class="col-12" align="center">
+		<%@ include file="ModalWindowOperationWithEmployee.jsp" %>			
 
 					<h3 class="text-center text-primary pt-5">
 						<fmt:message key="label.personell_management" />
-					</h3>
-				</div>
-			</div>
+					</h3>				
+
 			<div class="container">
 				<div class="row">
-					<div class="col-4 card border-primary">
+					
+					<div class="col-12 card border-primary">
 						<h4 class="text-center text-primary pt-5">
 							<fmt:message key="label.employee_list" />
 						</h4>
-						<div class="overflow-auto" style="heigth: 200px">
+						
+						<div class="table-wrapper-scroll-y my-custom-scrollbar">
 
-							<ctg:populate-employee-table
-								columns="employee_first_name employee_last_name crew_role_name"
-								styleClass="table table-hover" />
+							<table
+								class="table table-hover table-striped table-bordered table-sm my-custom-scrollbar">
 
+								<tr>
+									<th><fmt:message key="column.first_name" /></th>
+									<th><fmt:message key="column.last_name" /></th>
+									<th><fmt:message key="column.crew_role" /></th>
+								</tr>
+
+								<c:forEach var="elem" items="${sessionScope.all_employee_list}">
+
+									<tr onclick="showModalOperationWithEmployee('${elem.id}',
+										'${elem.nickname}',
+									 	'${elem.firstName}',
+									  	'${elem.lastName}',
+									  	'${elem.systemRole.systemRoleID}',
+									  	'${elem.systemRole.systemRoleName}',
+									  	'${elem.crewRole.crewRoleID}',
+									  	'${elem.crewRole.crewRoleName}')">
+										<td>${elem.firstName}</td>
+										<td>${elem.lastName}</td>
+										<td>${elem.crewRole.crewRoleName}</td>
+									</tr>
+
+								</c:forEach>
+
+							</table>
 						</div>
-					</div>
-
-					<div class="col-8 card border-primary">
-						<h4 class="text-center text-primary pt-5">
-							<fmt:message key="label.employee_info" />
-						</h4>
-
-						<form id="manage-employee-form" class="form" action="" method="post">
-							<div class="container">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="card-body">
-											<input type="hidden" name="page" value="employee"/>
-                                            
-
-											<div class="form-group">
-												<label for="current-employee-nickname" class="text-primary">
-													<fmt:message key="label.user_nickname" />
-												</label><br /> <input type="text" name="employee_nickname"
-													id="current-employee-nickname"
-													class="form-control border-primary" />
-											</div>
-
-											<div class="form-group">
-												<label for="current-employee-first-name"
-													class="text-primary"> <fmt:message
-														key="label.user_first_name" />
-												</label><br /> <input type="text" name="employee_first_name"
-													id="current-employee-first-name"
-													class="form-control border-primary" />
-											</div>
-
-											<div class="form-group">
-												<label for="current-employee-last-name" class="text-primary">
-													<fmt:message key="label.user_last_name" />
-												</label><br /> <input type="text" name="employee_last_name"
-													id="current-employee-last-name"
-													class="form-control border-primary" />
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<br />
-										<div class="form-group">
-											<label for="current-employee-system-role-name"
-												class="text-primary"> <fmt:message
-													key="label.system_role" />
-											</label><br />
-
-
-											<div class="btn-group">
-												<button type="button" id="current-employee-system-role-name"
-													class="btn btn-outline-primary dropdown-toggle"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false"><fmt:message key="label.not_defined" /></button>
-												<div class="dropdown-menu">
-													<c:forEach var="elem"
-														items="${sessionScope.all_system_role_list}">
-														<a class="dropdown-item" href="#"
-															onclick="dropDownPick(
-															'current-employee-system-role-name', '${elem.systemRoleName}' ,
-															'current-employee-system-role-id', '${elem.systemRoleID}')">
-															<c:out value="${elem.systemRoleName}">
-															</c:out>
-														</a>
-													</c:forEach>
-												</div>
-												<input type="hidden" id="current-employee-system-role-id"
-													name="system_role_id" />
-											</div>
-
-										</div>
-
-										<div class="form-group">
-											<label for="current-employee-crew-role-name"
-												class="text-primary"> <fmt:message
-													key="label.system_role" />
-											</label><br />
-
-											<div class="btn-group">
-												<button type="button" id="current-employee-crew-role-name"
-													class="btn btn-outline-primary dropdown-toggle"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false"><fmt:message key="label.not_defined" /></button>
-												<div class="dropdown-menu">
-													<c:forEach var="elem"
-														items="${sessionScope.all_crew_role_list}">
-														<a class="dropdown-item" href="#"
-															onclick="dropDownPick(
-															'current-employee-crew-role-name', '${elem.crewRoleName}',
-															'current-employee-crew-role-id', '${elem.crewRoleID}')">
-															<c:out value="${elem.crewRoleName}">
-															</c:out>
-														</a>
-													</c:forEach>
-												</div>
-												<input type="hidden" id="current-employee-crew-role-id"
-													name="crew_role_id" />
-											</div>
-
-										</div>
-										<div class="form-group">
-											<input type="hidden" id="current-employee-id"
-													name="employee_id" />
-											<label for="employee-password" class="text-primary">
-												<fmt:message key="label.password" />
-											</label><br /> 
-											<input type="password" name="employee_password"
-												id="employee-password" class="form-control border-primary" />
-										</div>
-
-									</div>
-								</div>
-							</div><br/><br/>				
-							
-							
-							<div class="container">
-								<div class="row">
-									<div class="col-md-12">
-										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="goto_page_employee_flights_schedule">
-											<fmt:message key="button.showw_flights" />
-										</button>
-										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="add_employee">
-											<fmt:message key="button.add" />
-										</button>
-										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="update_employee">
-											<fmt:message key="button.update" />
-										</button>
-										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="change_password">
-											<fmt:message key="button.update_password" />
-										</button>
-										<button type="submit" class="btn btn-outline-primary"
-											name="command" value="delete_employee">
-											<fmt:message key="button.delete" />
-										</button>
-									</div>
-								</div>
-							</div>
-						</form>
+						
 					</div>
 				</div>
 			</div>
@@ -206,6 +84,21 @@
 
 	</fmt:bundle>
 
+	<script>
+		function showModalOperationWithEmployee(id, nickname, firstName, lastName, systemRoleID, systemRoleName, crewRoleID, crewRoleName) {			
+			
+			document.getElementById("current-employee-id").setAttribute("value", id);
+			document.getElementById("current-employee-nickname").setAttribute("value", nickname);
+			document.getElementById("current-employee-first-name").setAttribute("value", firstName);
+			document.getElementById("current-employee-last-name").setAttribute("value", lastName);
+			document.getElementById("current-employee-system-role-name").innerHTML = systemRoleName;
+		    document.getElementById("current-employee-system-role-id").setAttribute("value", systemRoleID);
+		    document.getElementById("current-employee-crew-role-name").innerHTML = crewRoleName;
+		    document.getElementById("current-employee-crew-role-id").setAttribute("value", crewRoleID);
+		    
+			$("#modal-window-operation-with-employee").modal('show');
+		}
+	</script>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 		crossorigin="anonymous"></script>
