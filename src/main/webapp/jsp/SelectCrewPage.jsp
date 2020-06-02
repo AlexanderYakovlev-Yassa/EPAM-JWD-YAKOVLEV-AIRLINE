@@ -3,22 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
 <html>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<link rel="stylesheet" type="text/css"
-		href="sources/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="sources/css/main.css" />
-	<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
-	<link rel="icon" href="sources/images/logo-airline.png"
-		type="image/icon type" />
-	<title>Select Crew</title>
-</head>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<link rel="stylesheet" type="text/css" href="sources/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="sources/css/main.css" />
+		<script type="text/javascript" src="sources/js/AllPageScript.js"></script>
+		<link rel="icon" href="sources/images/logo-airline.png"	type="image/icon type" />
+		<title>Select Crew</title>
+	</head>
 
 <body>
 	<fmt:setLocale value="${sessionScope.localisation}" />
