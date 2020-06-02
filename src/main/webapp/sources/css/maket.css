@@ -1,0 +1,39 @@
+.red-text {
+    color: red;
+}
+
+.maket-border {
+    border-width: thick;
+}
+
+.logo-img {
+    background-image: url("images/logo-airline-100.png");
+    height: 100px;
+    width: 300px;
+}
+
+.main-them {
+    background-image: url("images/them-picture-light.jpg");
+}
+
+.bg {
+    /* The image used */
+    background-image: url("images/them-picture-light.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+th {
+    height: 30px;
+    width: 100px;
+}
+
+.p0 {
+	color: red;
+}
