@@ -19,3 +19,9 @@ out/
 
 #star uml
 *.mdj
+
+doc/
+DataBase/
+not_git/
+test/
+#webapp/
